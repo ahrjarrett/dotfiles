@@ -8,7 +8,7 @@ set shiftwidth=2
 set expandtab
 set tabstop=2
 set autoindent
-
+set noerrorbells visualbell t_vb= "turn off annoying bells
 syntax enable
 colorscheme default
 

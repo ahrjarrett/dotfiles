@@ -11,6 +11,9 @@ alias chrome="open /Applications/Google\ Chrome.app"
 alias pomo="ding in 25m"
 alias pi="ssh pi@192.168.1.27"
 
+echo "HUSTLE."
 export PS1='>> '
 
 
+export PATH="$HOME/.jenv/bin:$PATH"
+eval "$(jenv init -)"
