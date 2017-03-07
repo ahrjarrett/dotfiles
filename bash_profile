@@ -15,7 +15,7 @@ echo "HUSTLE."
 export PS1='>> '
 
 #export PATH="$HOME/.jenv/bin:$PATH"
-export PATH="/$HOME/scripts/:$PATH"
+export PATH="$HOME/scripts:$PATH"
 
 eval "$(jenv init -)"
 
