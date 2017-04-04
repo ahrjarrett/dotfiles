@@ -5,11 +5,11 @@ alias showit="defaults write com.apple.finder AppleShowAllFiles -bool TRUE && ki
 alias hideit="defaults write com.apple.finder AppleShowAllFiles -bool FALSE && killall Finder"
 alias bashit="vim ~/.bash_profile"
 alias vimmit="vim ~/.vimrc"
+alias tmuxit="vim ~/.tmux.conf"
 alias ga="git add -A"
 alias gs="git status"
 alias chrome="open /Applications/Google\ Chrome.app"
 alias pomo="ding in 25m"
-#alias pi="ssh pi@192.168.1.27"
 
 echo "HUSTLE."
 export PS1='>> '
