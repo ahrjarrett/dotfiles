@@ -5,7 +5,7 @@
 You should not put any user code in this function besides modifying the variable
 values."
   (setq-default
-   ;; Custom config:
+   ;; JS FORMATTING ;;
    js2-basic-offset 2
    js-indent-level 2
    ;; Base distribution to use. This is a layer contained in the directory ;; `+distribution'. For now available distributions are `spacemacs-base';; or `spacemacs'. (default 'spacemacs)
@@ -59,10 +59,15 @@ values."
    ;; wrapped in a layer. If you need some configuration for these
    ;; packages, then consider creating a layer. You can also put the
    ;; configuration in `dotspacemacs/user-config'.
+
+   ;; Ensure that MELPA packages aren’t deleted and reinstalled every time you evaluation this config file by putting them here:
    dotspacemacs-additional-packages '()
+
    ;; A list of packages that cannot be updated.
    dotspacemacs-frozen-packages '()
+
    dotspacemacs-excluded-packages '(org-projectile)
+
    ;; Defines the behaviour of Spacemacs when installing packages.
    ;; Possible values are `used-only', `used-but-keep-unused' and `all'.
    ;; `used-only' installs only explicitly used packages and uninstall any
@@ -109,7 +114,7 @@ values."
    ;; directory. A string value must be a path to an image format supported
    ;; by your Emacs build.
    ;; If the value is nil then no banner is displayed. (default 'official)
-   dotspacemacs-startup-banner 'random
+   dotspacemacs-startup-banner 002
    ;; List of items to show in startup buffer or an association list of
    ;; the form `(list-type . list-size)`. If nil then it is disabled.
    ;; Possible values for list-type are:
@@ -304,18 +309,21 @@ This is the place where most of your configurations should be done. Unless it is
 explicitly specified that a variable should be set before a package is loaded,
 you should place your code here."
 
-  (setq org-bullets-bullet-list '("■" "◆" "▲" "▶"))
-  (setq org-dir "~/Desktop/stuff/org/")
+  (setq org-bullets-bullet-list '("◉ " "○" "▲" "▶ "))
+  (setq org-ellipsis "  ⤵ ")
 
-  (setq org-directory "~/Desktop/stuff/org")
+  (setq org-dir "~/Desktop/stuff/org/")
+  (setq todos-file (concat org-dir "TODOS.org"))
+
+  (setq org-directory org-dir)
   (setq org-capture-templates
         ;; entry says you're going to create an org node with a headline which can then be added to an org-file; could also be checkitem, and more
-        '(("t" "Todo Item" entry
-           (file+headline "~/Desktop/stuff/org/TODOs.org" "Todo Items")
-           "* %?\n%T" :prepend t))
-        )
-
-  )
+        '(("t"                    ; hotkey
+           "Todo Item"            ; name
+           entry                  ; type
+           (file+headline todos-file "Todo Items")
+           "* %?\n%T" :prepend t) ; template
+          )))
 
 ;; Do not write anything past this comment. This is where Emacs will
 ;; auto-generate custom variable definitions.
