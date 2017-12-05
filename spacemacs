@@ -333,7 +333,7 @@ you should place your code here."
           ;; "Appointment"
           ;; entry (file+headline appts-file "Appointments [Google Calendar]"))
           ;;)
-        )
+        ))
   )
 
 ;; Do not write anything past this comment. This is where Emacs will
