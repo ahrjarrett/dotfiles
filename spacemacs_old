@@ -8,7 +8,9 @@ values."
    ;; Custom config:
    js2-basic-offset 2
    js-indent-level 2
-   ;; Base distribution to use. This is a layer contained in the directory ;; `+distribution'. For now available distributions are `spacemacs-base';; or `spacemacs'. (default 'spacemacs)
+   ;; Base distribution to use. This is a layer contained in the directory
+   ;; `+distribution'. For now available distributions are `spacemacs-base'
+   ;; or `spacemacs'. (default 'spacemacs)
    dotspacemacs-distribution 'spacemacs
    ;; Lazy installation of layers (i.e. layers are installed only when a file
    ;; with a supported type is opened). Possible values are `all', `unused'
@@ -43,7 +45,6 @@ values."
      markdown
      org
      (org :variables
-          ;;org-projectile-file "~/Desktop/stuff/org/TODOs.org"
           org-enable-bootstrap-support t
           org-enable-reveal-js-support t)
      scheme
@@ -62,7 +63,8 @@ values."
    dotspacemacs-additional-packages '()
    ;; A list of packages that cannot be updated.
    dotspacemacs-frozen-packages '()
-   dotspacemacs-excluded-packages '(org-projectile)
+   ;; A list of packages that will not be installed and loaded.
+   dotspacemacs-excluded-packages '()
    ;; Defines the behaviour of Spacemacs when installing packages.
    ;; Possible values are `used-only', `used-but-keep-unused' and `all'.
    ;; `used-only' installs only explicitly used packages and uninstall any
@@ -70,7 +72,7 @@ values."
    ;; `used-but-keep-unused' installs only the used packages but won't uninstall
    ;; them if they become unused. `all' installs *all* packages supported by
    ;; Spacemacs and never uninstall them. (default is `used-only')
-   dotspacemacs-install-packages 'used-but-keep-unused))
+   dotspacemacs-install-packages 'used-only))
 
 (defun dotspacemacs/init ()
   "Initialization function.
@@ -303,19 +305,7 @@ layers configuration.
 This is the place where most of your configurations should be done. Unless it is
 explicitly specified that a variable should be set before a package is loaded,
 you should place your code here."
-
-  (setq org-bullets-bullet-list '("■" "◆" "▲" "▶"))
-  (setq org-dir "~/Desktop/stuff/org/")
-
-  (setq org-directory "~/Desktop/stuff/org")
-  (setq org-capture-templates
-        ;; entry says you're going to create an org node with a headline which can then be added to an org-file; could also be checkitem, and more
-        '(("t" "Todo Item" entry
-           (file+headline "~/Desktop/stuff/org/TODOs.org" "Todo Items")
-           "* %?\n%T" :prepend t))
-        )
-
-  )
+  (setq org-directory "~/Desktop/stuff/org"))
 
 ;; Do not write anything past this comment. This is where Emacs will
 ;; auto-generate custom variable definitions.
