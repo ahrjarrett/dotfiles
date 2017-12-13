@@ -5,8 +5,6 @@
 You should not put any user code in this function besides modifying the variable
 values."
   (setq-default
-   js2-basic-offset 2
-   js-indent-level 2
    ;; Base distribution to use. This is a layer contained in the directory
    ;; `+distribution'. For now available distributions are `spacemacs-base'
    ;; or `spacemacs'. (default 'spacemacs)
@@ -44,6 +42,13 @@ values."
           org-enable-github-support t
           org-enable-bootstrap-support t
           org-enable-reveal-js-support t)
+     (react :variables
+            js-2-basic-offset 2
+            css-indent-offset 2
+            web-mode-markup-indent-offset 2
+            web-mode-css-indent-offset 2
+            web-mode-code-indent-offset 2
+            web-mode-attr-indent-offset 2)
      scheme
      (shell :variables
             shell-default-height 30
