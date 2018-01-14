@@ -1,2 +1,4 @@
-.DS_Store
-*.swp
+.spacemacs.d/*
+!.spacemacs.d/configuration.org
+!.spacemacs.d/init.el
+
