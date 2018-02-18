@@ -1,4 +1,13 @@
 # path
+## nvm
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+
+## Setting PATH for Python 3.6
+## The original version is saved in .bash_profile.pysave
+PATH="/Library/Frameworks/Python.framework/Versions/3.6/bin:${PATH}"
+export PATH
 
 # title / prompt
 case $TERM in
@@ -22,6 +31,10 @@ fi
 
 echo "HUSTLE."
 
+# os x config
+defaults write com.apple.finder _FXShowPosixPathInTitle -bool true
+
+# aliases
 alias ll="ls -alF"
 alias pd="pwd"
 alias c="clear"
@@ -33,8 +46,3 @@ alias gs="git status"
 alias chrome="open /Applications/Google\ Chrome.app"
 alias pomo="ding in 25m"
 alias emacs="/usr/local/Cellar/emacs/25.3/Emacs.app/Contents/MacOS/Emacs -nw"
-
-# nvm
-export NVM_DIR="$HOME/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
-[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
