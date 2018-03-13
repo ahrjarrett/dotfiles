@@ -1,0 +1,27 @@
+# Excluded URLs and keys
+
+https?://mail.google.com/* ?jk
+https?://github.com/* ?
+
+# Custom key mappings
+## emacs
+map <c-n> scrollDown
+map <c-p> scrollUp
+map <c-s> enterFindMode
+
+## my own stuff
+map < moveTabLeft
+map > moveTabRight
+unmap r
+
+## search engines
+map z Vomnibar.activate keyword=zz
+map Z Vomnibar.activateInNewTab keyword=zz
+map r Vomnibar.activate keyword=oo
+map R Vomnibar.activateInNewTab keyword=oo
+
+# Custom search engines
+w: https://www.wikipedia.org/w/index.php?title=Special:Search&search=%s Wikipedia
+zz: http://admin.austin.ownlocal.com/businesses?query=%s Business ID:
+oo: http://admin.austin.ownlocal.com/publishers/1/ads/%s Order ID:
+y: https://www.youtube.com/results?search_query=%s Youtube
