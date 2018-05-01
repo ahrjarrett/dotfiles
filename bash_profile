@@ -6,7 +6,7 @@ export NVM_DIR="$HOME/.nvm"
 
 ## Setting PATH for Python 3.6
 ## The original version is saved in .bash_profile.pysave
-PATH="/Library/Frameworks/Python.framework/Versions/3.6/bin:${PATH}"
+PATH="/Library/Frameworks/Python.framework/Versions/3.6/bin:${PATH}":"$PATH:/usr/local/smlnj/bin"
 export PATH
 
 # title / prompt
@@ -45,4 +45,17 @@ alias ga="git add -A"
 alias gs="git status"
 alias chrome="open /Applications/Google\ Chrome.app"
 alias pomo="ding in 25m"
-alias emacs="open /Applications/Emacs.app"
+# alias emacs="open /Applications/Emacs.app"
+
+e() {
+  open -a Emacs --args "$@"
+}
+
+# opam configuration
+test -r /Users/aj/.opam/opam-init/init.sh && . /Users/aj/.opam/opam-init/init.sh > /dev/null 2> /dev/null || true
+
+# MacPorts Installer addition on 2018-04-23_at_16:41:55: adding an appropriate PATH variable for use with MacPorts.
+# export PATH="/opt/local/bin:/opt/local/sbin:$PATH"
+# Finished adapting your PATH environment variable for use with MacPorts.
+
+export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"
