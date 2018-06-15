@@ -25,3 +25,6 @@ w: https://www.wikipedia.org/w/index.php?title=Special:Search&search=%s Wikipedi
 zz: http://admin.austin.ownlocal.com/businesses?query=%s Business ID:
 oo: http://admin.austin.ownlocal.com/publishers/1/ads/%s Order ID:
 y: https://www.youtube.com/results?search_query=%s Youtube
+af: http://adforge.ownlocal.com/admin/businesses/%s AdForge
+id: http://admin.austin.ownlocal.com/businesses/%s MP ID
+
