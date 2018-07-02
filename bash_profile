@@ -31,6 +31,9 @@ fi
 
 echo "HUSTLE."
 
+# chrome
+defaults write com.google.Chrome AppleEnableSwipeNavigateWithScrolls -bool FALSE
+
 # os x config
 defaults write com.apple.finder _FXShowPosixPathInTitle -bool true
 
