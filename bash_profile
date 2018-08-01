@@ -1,14 +1,3 @@
-# path
-## nvm
-export NVM_DIR="$HOME/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
-[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
-
-## Setting PATH for Python 3.6
-## The original version is saved in .bash_profile.pysave
-PATH="/Library/Frameworks/Python.framework/Versions/3.6/bin:${PATH}":"$PATH:/usr/local/smlnj/bin"
-export PATH
-
 # title / prompt
 case $TERM in
     xterm*)
@@ -29,7 +18,8 @@ elif [ "$(uname -s)" = "Linux" ]; then
     alias ls="ls --color"
 fi
 
-echo "HUSTLE."
+# chrome
+defaults write com.google.Chrome AppleEnableSwipeNavigateWithScrolls -bool FALSE
 
 # os x config
 defaults write com.apple.finder _FXShowPosixPathInTitle -bool true
@@ -44,18 +34,13 @@ alias bashit="vim ~/.bash_profile"
 alias ga="git add -A"
 alias gs="git status"
 alias chrome="open /Applications/Google\ Chrome.app"
-alias pomo="ding in 25m"
-# alias emacs="open /Applications/Emacs.app"
 
-e() {
-  open -a Emacs --args "$@"
+curlpurge() {
+  curl -XPURGE -H 'Fastly-Soft-Purge: 1' "$@"
 }
 
-# opam configuration
-test -r /Users/aj/.opam/opam-init/init.sh && . /Users/aj/.opam/opam-init/init.sh > /dev/null 2> /dev/null || true
-
-# MacPorts Installer addition on 2018-04-23_at_16:41:55: adding an appropriate PATH variable for use with MacPorts.
-# export PATH="/opt/local/bin:/opt/local/sbin:$PATH"
-# Finished adapting your PATH environment variable for use with MacPorts.
-
-export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"
+# copies the timestamp in UTC to os x clipboard:
+utc() {
+  local utctime=TZ=":UTC" date +"%T" | pbcopy
+  TZ=":UTC" date +"%T"
+}
