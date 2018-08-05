@@ -21,9 +21,6 @@ fi
 # chrome
 defaults write com.google.Chrome AppleEnableSwipeNavigateWithScrolls -bool FALSE
 
-# chrome
-defaults write com.google.Chrome AppleEnableSwipeNavigateWithScrolls -bool FALSE
-
 # os x config
 defaults write com.apple.finder _FXShowPosixPathInTitle -bool true
 
@@ -39,7 +36,7 @@ alias gs="git status"
 alias chrome="open /Applications/Google\ Chrome.app"
 
 curlpurge() {
-  curl -XPURGE -H 'Fastly-Soft-Purge: 1' "$@"
+  curl -XPURGE -H 'Fastly-Soft-Purge: 1' "$@" | jsome
 }
 
 # copies the timestamp in UTC to os x clipboard:
