@@ -41,6 +41,6 @@ curlpurge() {
 
 # copies the timestamp in UTC to os x clipboard:
 utc() {
-  local utctime=TZ=":UTC" date +"%T" | pbcopy
+  TZ=":UTC" date +"%T" | pbcopy
   TZ=":UTC" date +"%T"
 }
