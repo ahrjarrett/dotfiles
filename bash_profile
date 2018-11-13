@@ -1,13 +1,17 @@
+# path
+export PATH="$HOME/.npm-global/bin:$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:/Applications/Postgres.app/Contents/Versions/9.4/bin:$PATH"
+
 # title / prompt
 case $TERM in
     xterm*)
-        PS1="\[\033]0;\u@\h \w\007\]\[\033[01;33m\][\[\033[00m\]\[\033[01;32m\]\u@\h\[\033[00m\] \[\033[01;31m\]\w\[\033[00m\]\[\033[01;33m\]]\[\033[00m\]\n\[\033[01;31m\]$ \[\033[00m\]"
+        PS1="\[\033]0;\u@\h \w\007\]\[\033[01;33m\][\[\033[00m\]\[\033[01;32m\]\u@\h\[\033[00m\] \[\033[01;31m\]\w\[\033[00m\]\[\033[01;33m\]]\[\033[00m\]\n\[\033[01;31m\]λ \[\033[00m\]"
         ;;
     *)
-        PS1="\[\033[01;33m\][\[\033[00m\]\[\033[01;32m\]\u@\h\[\033[00m\] \[\033[01;31m\]\w\[\033[00m\]\[\033[01;33m\]]\[\033[00m\]\n\[\033[01;31m\]$ \[\033[00m\]"
+        PS1="\[\033[01;33m\][\[\033[00m\]\[\033[01;32m\]\u@\h\[\033[00m\] \[\033[01;31m\]\w\[\033[00m\]\[\033[01;33m\]]\[\033[00m\]\n\[\033[01;31m\]λ \[\033[00m\]"
         ;;
 esac
 
+# export PS1="𝝺 "
 # ls colors by platform
 if [ "$(uname -s)" = "Darwin" ]; then
     export CLICOLOR=1
@@ -17,9 +21,6 @@ elif [ "$(uname -s)" = "Linux" ]; then
     export LS_COLORS="di=1;31:ln=1;93:so=1;35:pi=1;35:ex=1;36:bd=1;35:cd=1;35:su=1;35:sg=1;35:tw=1;35:ow=1;35:"
     alias ls="ls --color"
 fi
-
-# chrome
-defaults write com.google.Chrome AppleEnableSwipeNavigateWithScrolls -bool FALSE
 
 # os x config
 defaults write com.apple.finder _FXShowPosixPathInTitle -bool true
@@ -34,13 +35,24 @@ alias bashit="vim ~/.bash_profile"
 alias ga="git add -A"
 alias gs="git status"
 alias chrome="open /Applications/Google\ Chrome.app"
+alias pomo="ding in 25m"
 
-curlpurge() {
-  curl -XPURGE -H 'Fastly-Soft-Purge: 1' "$@" | jsome
+# ssh
+alias thegrepper="ssh root@159.65.76.75"
+alias projection="ssh projection@172.16.1.101" # P
+alias marketplace="ssh jarrett@10.0.2.104"
+
+# emacs
+export EMACS_HOME=${HOME}/.emacs.d
+export EMACS_INIT=init.el
+
+emax() {
+  open -a Emacs --args --no-splash --fullheight "$@"
 }
 
-# copies the timestamp in UTC to os x clipboard:
-utc() {
-  TZ=":UTC" date +"%T" | pbcopy
-  TZ=":UTC" date +"%T"
-}
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+
+# opam configuration
+test -r /Users/aj/.opam/opam-init/init.sh && . /Users/aj/.opam/opam-init/init.sh > /dev/null 2> /dev/null || true
