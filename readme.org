@@ -8,21 +8,21 @@
 
 ** TODO Clean up files
 
-[ ] Go through Documents & Downloads folder
-[ ] Go through Library/Contacts folder
-[ ] Big files like videos, tutorials & audio recordings go to Drive, Dropbox
-[ ] Notes & org-mode files go to Dropbox
-[ ] Documents, designs & current reading list go to iCloud
-[ ] $HOME folder, miscellaneous config files go to iCloud
-[ ] Copy .env files for bkwds, AWS apps, DigitalOcean & Pineneedles to iCloud dir
-[ ] eBook library goes to bitbucket
+- [ ] Go through Documents & Downloads folder
+- [ ] Go through Library/Contacts folder
+- [ ] Big files like videos, tutorials & audio recordings go to Drive, Dropbox
+- [ ] Notes & org-mode files go to Dropbox
+- [ ] Documents, designs & current reading list go to iCloud
+- [ ] $HOME folder, miscellaneous config files go to iCloud
+- [ ] Copy .env files for bkwds, AWS apps, DigitalOcean & Pineneedles to iCloud dir
+- [ ] eBook library goes to bitbucket
 
 ** TODO Clean up projects
 
-[ ] Make sure you've committed and push all branches of active projects
-[ ] Make sure there are no orphans without remotes that you care about
-[ ] .env files! Double check that you got them all.
-[ ] Go through ~stuff~ directory, ugh -- /don't be a packrat/
+- [ ] Make sure you've committed and push all branches of active projects
+- [ ] Make sure there are no orphans without remotes that you care about
+- [ ] .env files! Double check that you got them all.
+- [ ] Go through ~stuff~ directory, ugh -- /don't be a packrat/
   
 ** TODO Backup dotfiles_stash
 
@@ -70,31 +70,31 @@ It's basically a sitemap for everything configurable in Chrome. From there I acc
    
 *** TODO Get Chrome Baseline Usable
 
-[ ] Install Vimium, upload ~vimium-settings.json~ file
-[ ] Log into Google accounts
-[ ] Check installed extensions against list below
-[ ] Import your bookmarks (or dare to start fresh?)
-[ ] Add custom Styler files (see section below)
-[ ] (Optional) Go through flags list
+- [ ] Install Vimium, upload ~vimium-settings.json~ file
+- [ ] Log into Google accounts
+- [ ] Check installed extensions against list below
+- [ ] Import your bookmarks (or dare to start fresh?)
+- [ ] Add custom Styler files (see section below)
+- [ ] (Optional) Go through flags list
 
 *** TODO Extension List
 
 Go to [[chrome://extensions]] to see and configure your extensions
 
-[ ] JSONView -- /Configure:/ Allow incognito; Extension Options: Add dark theme
-[ ] Module Linker (for Github packages)
-[ ] Extension Icon React Developer Tools
-[ ] Styler Classic 
-[ ] React DevTools
-[ ] Redux DevTools -- /Configure:/ Allow access to file URLs = interactive debugging
-[ ] Vimium -- /Configure:/ See Vimium section
-[ ] +Open Multiple URLs+
-[ ] +Rearrange Tabs+
-[ ] +Reason Tools+
-[ ] +Surfingkeys+ -- /like a more powerful Vimium, with a steeper learning curve/
-[ ] +Yesware+
-[ ] +New Tab Redirect+ -- /Old redirect:/ [[chrome-extension://icpgjfneehieebagbmdbhnlpiopdcmna/options.html]]
-[ ] +Google Docs Offline+ -- /creeped me out/
+- [ ] JSONView -- /Configure:/ Allow incognito; Extension Options: Add dark theme
+- [ ] Module Linker (for Github packages)
+- [ ] Extension Icon React Developer Tools
+- [ ] Styler Classic 
+- [ ] React DevTools
+- [ ] Redux DevTools -- /Configure:/ Allow access to file URLs = interactive debugging
+- [ ] Vimium -- /Configure:/ See Vimium section
+- [ ] +Open Multiple URLs+
+- [ ] +Rearrange Tabs+
+- [ ] +Reason Tools+
+- [ ] +Surfingkeys+ -- /like a more powerful Vimium, with a steeper learning curve/
+- [ ] +Yesware+
+- [ ] +New Tab Redirect+ -- /Old redirect:/ [[chrome-extension://icpgjfneehieebagbmdbhnlpiopdcmna/options.html]]
+- [ ] +Google Docs Offline+ -- /creeped me out/
 
 
 *** TODO Chrome Settings
@@ -137,18 +137,18 @@ Here are some I like to turn on. User beware, read what they do first, etc etc.
 
 ** TODO Install OS X Apps
 
-[ ] Chrome (Vimum)
-[ ] Spectacle
-[ ] Dropbox
-[ ] Slack
-[ ] Spotify
-[ ] Keycastr
-[ ] Emacs (copy in iCloud if borked)
-[ ] VS Code
-[ ] VLC
-[ ] Sketch
-[ ] The Unarchiver
-[ ] Sequel Pro
+- [ ] Chrome (Vimum)
+- [ ] Spectacle
+- [ ] Dropbox
+- [ ] Slack
+- [ ] Spotify
+- [ ] Keycastr
+- [ ] Emacs (copy in iCloud if borked)
+- [ ] VS Code
+- [ ] VLC
+- [ ] Sketch
+- [ ] The Unarchiver
+- [ ] Sequel Pro
 
 ** TODO Install dotfiles & configure shell
 
