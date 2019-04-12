@@ -1,0 +1,38 @@
+{
+  "settingsVersion": "1.64.5",
+  "exclusionRules": [
+    {
+      "pattern": "http://play.typeracer.com/",
+      "passKeys": ""
+    },
+    {
+      "pattern": "https?://people.ischool.berkeley.edu/*",
+      "passKeys": ""
+    },
+    {
+      "pattern": "https?://mail.google.com/*",
+      "passKeys": ""
+    },
+    {
+      "pattern": "https?://ownlocal.freshdesk.com/*",
+      "passKeys": "jkhlgGzduryivVaceoOT[]m`nNHLtxXW?"
+    }
+  ],
+  "filterLinkHints": false,
+  "waitForEnterForFilteredHints": true,
+  "hideHud": false,
+  "keyMappings": "# Ctrl key\nmap <c-n> scrollDown\nmap <c-p> scrollUp\nmap <c-s> enterFindMode\nmap <c-P> togglePinTab\nmap <c-m> toggleMuteTab\n\n# Command mode\nmap < moveTabLeft\nmap > moveTabRight\n\n# Search engines\nmap z Vomnibar.activate keyword=bizuuid\nmap Z Vomnibar.activate keyword=bizid\nmap a Vomnibar.activate keyword=aduuid\nmap A Vomnibar.activateInNewTab keyword=afbizuuid",
+  "linkHintCharacters": "sadfjklewcmpgh",
+  "linkHintNumbers": "0123456789",
+  "newTabUrl": "about:newtab",
+  "nextPatterns": "next,more,newer,>,›,→,»,≫,>>",
+  "previousPatterns": "prev,previous,back,older,<,‹,←,«,≪,<<",
+  "regexFindMode": false,
+  "ignoreKeyboardLayout": false,
+  "scrollStepSize": 60,
+  "smoothScroll": true,
+  "grabBackFocus": false,
+  "searchEngines": "# Work searches\nbizuuid: http://admin.austin.ownlocal.com/businesses?query=%s [MP] Business UUID:\naduuid: http://admin.austin.ownlocal.com/publishers/1/ads/%s [MP] Ad UUID:\nbizid: http://admin.austin.ownlocal.com/businesses/%s [MP] Business Short ID:\nafbizuuid: http://adforge.ownlocal.com/admin/businesses/%s [AF] Business UUID:\n\n# Others\nw: https://www.wikipedia.org/w/index.php?title=Special:Search&search=%s Wikipedia\ny: https://www.youtube.com/results?search_query=%s Youtube\ngm: https://www.google.com/maps?q=%s Google maps",
+  "searchUrl": "https://www.google.com/search?q=",
+  "userDefinedLinkHintCss": "div > .vimiumHintMarker {\n/* linkhint boxes */\nbackground: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#FFF785),\n  color-stop(100%,#FFC542));\nborder: 1px solid #E3BE23;\n}\n\ndiv > .vimiumHintMarker span {\n/* linkhint text */\ncolor: black;\nfont-weight: bold;\nfont-size: 10pt;\n}\n\ndiv > .vimiumHintMarker > .matchingCharacter {\n}"
+}
