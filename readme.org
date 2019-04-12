@@ -1,0 +1,154 @@
+#+TITLE: Computer Wipedown Checklist
+#+AUTHOR: Andrew Jarrett
+#+EMAIL:ahrjarrett@gmail.com
+#+DATE: 04/11/2019
+
+
+* Preflight Checklist
+
+** TODO Clean up files
+
+- [ ] Go through Documents & Downloads folder
+- [ ] Go through Library/Contacts folder
+- [ ] Big files like videos, tutorials & audio recordings go to Drive, Dropbox
+- [ ] Notes & org-mode files go to Dropbox
+- [ ] Documents, designs & current reading list go to iCloud
+- [ ] $HOME folder, miscellaneous config files go to iCloud
+- [ ] Copy .env files for bkwds, AWS apps, DigitalOcean & Pineneedles to iCloud dir
+- [ ] eBook library goes to bitbucket
+
+** TODO Clean up projects
+
+- [ ] Make sure you've committed and push all branches of active projects
+- [ ] Make sure there are no orphans without remotes that you care about
+- [ ] .env files! Double check that you got them all.
+- [ ] Go through ~stuff~ directory, ugh -- /don't be a packrat/
+  
+** TODO Backup dotfiles_stash
+
+Make a quick sweep and grab what you can.
+
+Add to iCloud at ~./$HOME/dotfiles_stash~ via Finder with copy/pasta.
+  
+
+** TODO Reformat the damn thang
+
+*** TODO Wipe 'er
+
+** TODO Install Chrome & configure browser
+
+*** Tips & Tricks
+
+*Tip:* If you're ever looking to configure Chrome, [[chrome://chrome-urls]] is my favorite place to start.
+
+It's basically a sitemap for everything configurable in Chrome. From there I access links like these:
+
+1. [[chrome://bookmarks]]
+2. [[chrome://flags]] -- /super neat stuff Chrome will do, if you know to ask/
+3. [[chrome://network-errors]]
+4. [[chrome://omnibox]]
+5. [[chrome://signin-internals]]
+6. [[chrome://site-engagement]] -- /basically a report card of which sites waste your time/
+7. [[chrome://user-actions]] -- /keep this open and it will log of your actions in the background. cool./
+8. chrome://quit -- /alt-f4 turns on god mode/
+
+   
+*** TODO Get Chrome Baseline Usable
+
+- [ ] Install Vimium, upload ~vimium-settings.json~ file
+- [ ] Log into Google accounts
+- [ ] Check installed extensions against list below
+- [ ] Import your bookmarks (or dare to start fresh?)
+- [ ] Add custom Styler files (see section below)
+- [ ] (Optional) Go through flags list
+
+*** TODO Extension List
+
+Go to [[chrome://extensions]] to see and configure your extensions
+
+- [ ] JSONView -- /Configure:/ Allow incognito; Extension Options: Add dark theme
+- [ ] Module Linker (for Github packages)
+- [ ] Extension Icon React Developer Tools
+- [ ] Styler Classic 
+- [ ] React DevTools
+- [ ] Redux DevTools -- /Configure:/ Allow access to file URLs = interactive debugging
+- [ ] Vimium -- /Configure:/ See Vimium section
+- [ ] +Open Multiple URLs+
+- [ ] +Rearrange Tabs+
+- [ ] +Reason Tools+
+- [ ] +Surfingkeys+ -- /like a more powerful Vimium, with a steeper learning curve/
+- [ ] +Yesware+
+- [ ] +New Tab Redirect+ -- /Old redirect:/ [[chrome-extension://icpgjfneehieebagbmdbhnlpiopdcmna/options.html]]
+- [ ] +Google Docs Offline+ -- /creeped me out/
+
+
+*** TODO Chrome Settings
+
+**** Customize URL Bar Queries
+
+*Shortcut:* 
+
+1. In Chrome do ~Cmd + ,\~  or navigate to [[chrome://settings]] 
+2. then search for "Manage Search Engines"
+
+*My Custom Queries:*
+
+| Search engine          | Keyword | Query URL                                            |
+|------------------------+---------+------------------------------------------------------|
+| Chrome Pages           | chr     | chrome://%s                                          |
+| deselectOmnibox        | q       | javascript:                                          |
+| deselectOmnibox        | z       | javascript:                                          |
+| Drive Images           | img     | https://drive.google.com/drive/u/0/search?q=%s       |
+| GitHub                 | gh      | https://github.com/search?q=%s&ref=opensearch        |
+| MarketPlace            | zz      | http://admin.austin.ownlocal.com/businesses?query=%s |
+| marketplace ad search  | oo      | https://louismagdaleno.com/?q=%s                     |
+| marketplace biz search | bz      | http://admin.austin.ownlocal.com/businesses/%s       |
+| Chrome Pages           | chr     | chrome://%s                                          |
+  
+
+*** Flags
+
+[[chrome://flags]]
+
+Here are some I like to turn on. User beware, read what they do first, etc etc.
+
+| Latest stable JavaScript features            | #disable-javascript-harmony-shipping | Enabled |
+| 3D software rasterizer                       | #disable-software-rasterizer         | Enable  |
+| Debugging for packed apps                    | #debug-packed-apps                   | Enabled |
+| Hardware-accelerated video decode            | #disable-accelerated-video-decode    | Enabled |
+| Creation of app shims for hosted apps on Mac | #disable-hosted-app-shim-creation    | Enabled |
+
+
+
+** TODO Install OS X Apps
+
+- [ ] Chrome (Vimum)
+- [ ] Spectacle
+- [ ] Dropbox
+- [ ] Slack
+- [ ] Spotify
+- [ ] Keycastr
+- [ ] Emacs (copy in iCloud if borked)
+- [ ] VS Code
+- [ ] VLC
+- [ ] Sketch
+- [ ] The Unarchiver
+- [ ] Sequel Pro
+
+** TODO Install dotfiles & configure shell
+
+https://github.com/ahrjarrett/dotfiles
+
+iCloud Backup: ~iCloud/$HOME/dotfiles_stash~
+
+
+
+* 
+
+* Random Configs
+
+Config secrets don't live on Github, they live at:
+
+=/Users/aj/Library/Mobile Documents/com~apple~CloudDocs=
+
+In a file called ~random-configs.org~, or something obnoxious like that.
