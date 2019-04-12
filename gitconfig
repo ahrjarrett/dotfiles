@@ -3,8 +3,8 @@
 	name = Andrew Jarrett
 [core]
 	excludesfile = /Users/aj/.gitignore_global
-	editor = emacs
 [alias]
 	graph = log --graph --oneline
 	co = checkout
-
+[color]
+	ui = true
