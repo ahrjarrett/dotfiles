@@ -1,0 +1,6 @@
+//registry.npmjs.org/:_authToken=<BACKUP_ON_ICLOUD_DOTFILES_STASH>
+init-license=MIT
+save-exact=true
+username=ahrjarrett
+email=ahrjarrett@gmail.com
+scripts-prepend-node-path=true

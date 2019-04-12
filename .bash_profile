@@ -1,5 +1,6 @@
 # path
-export PATH="$HOME/.npm-global/bin:$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:/Applications/Postgres.app/Contents/Versions/9.4/bin:$PATH"
+export PATH="$HOME/.rbenv/bin:$HOME/.npm-global/bin:$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:/usr/local/sbin:$PATH"
+
 
 # title / prompt
 case $TERM in
@@ -36,11 +37,20 @@ alias ga="git add -A"
 alias gs="git status"
 alias chrome="open /Applications/Google\ Chrome.app"
 alias pomo="ding in 25m"
+alias chrome_debug="/Applications/Google\ Chrome.app/Contents/MacOS/Google\ Chrome --remote-debugging-port=9222"
 
 # ssh
 alias thegrepper="ssh root@159.65.76.75"
 alias projection="ssh projection@172.16.1.101" # P
-alias marketplace="ssh jarrett@10.0.2.104"
+# alias marketplace="ssh jarrett@10.0.1.206"
+alias marketplace="ssh jarrett@marketplace9.prod"
+alias cashdash1="cd ~/.ssh && ssh -i cashdash.pem ec2-user@10.21.2.170"
+alias cashdashcelery="cd ~/.ssh && ssh -i cashdash.pem ec2-user@10.21.4.92"
+
+# postgres
+alias pg_start="launchctl load ~/Library/LaunchAgents/homebrew.mxcl.postgresql.plist"
+alias pg_stop="launchctl unload ~/Library/LaunchAgents/homebrew.mxcl.postgresql.plist"
+
 
 # emacs
 export EMACS_HOME=${HOME}/.emacs.d
@@ -50,9 +60,20 @@ emax() {
   open -a Emacs --args --no-splash --fullheight "$@"
 }
 
-export NVM_DIR="$HOME/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
-[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+curlpurge() {
+  curl -XPURGE -H 'Fastly-Soft-Purge: 1' $1
+}
 
-# opam configuration
-test -r /Users/aj/.opam/opam-init/init.sh && . /Users/aj/.opam/opam-init/init.sh > /dev/null 2> /dev/null || true
+curlN() {
+  for ((i=1;i<=$1;i++));
+  do curl -XPURGE -H 'Fastly-Soft-Purge: 1' $2;
+  sleep 1;
+  done
+}
+
+# export NVM_DIR="$HOME/.nvm"
+# [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+# [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+
+
+eval "$(rbenv init -)"
