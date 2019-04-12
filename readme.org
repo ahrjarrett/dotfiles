@@ -3,6 +3,7 @@
 #+EMAIL:ahrjarrett@gmail.com
 #+DATE: 04/11/2019
 
+Or, my notes on how to turn a 4-hour grind into a 1-hour workflow.
 
 * Preflight Checklist
 
