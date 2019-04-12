@@ -8,21 +8,21 @@
 
 ** TODO Clean up files
 
-- [ ] Go through Documents & Downloads folder
-- [ ] Go through Library/Contacts folder
-- [ ] Big files like videos, tutorials & audio recordings go to Drive, Dropbox
-- [ ] Notes & org-mode files go to Dropbox
-- [ ] Documents, designs & current reading list go to iCloud
-- [ ] $HOME folder, miscellaneous config files go to iCloud
-- [ ] Copy .env files for bkwds, AWS apps, DigitalOcean & Pineneedles to iCloud dir
-- [ ] eBook library goes to bitbucket
+[ ] Go through Documents & Downloads folder
+[ ] Go through Library/Contacts folder
+[ ] Big files like videos, tutorials & audio recordings go to Drive, Dropbox
+[ ] Notes & org-mode files go to Dropbox
+[ ] Documents, designs & current reading list go to iCloud
+[ ] $HOME folder, miscellaneous config files go to iCloud
+[ ] Copy .env files for bkwds, AWS apps, DigitalOcean & Pineneedles to iCloud dir
+[ ] eBook library goes to bitbucket
 
 ** TODO Clean up projects
 
-- [ ] Make sure you've committed and push all branches of active projects
-- [ ] Make sure there are no orphans without remotes that you care about
-- [ ] .env files! Double check that you got them all.
-- [ ] Go through ~stuff~ directory, ugh -- /don't be a packrat/
+[ ] Make sure you've committed and push all branches of active projects
+[ ] Make sure there are no orphans without remotes that you care about
+[ ] .env files! Double check that you got them all.
+[ ] Go through ~stuff~ directory, ugh -- /don't be a packrat/
   
 ** TODO Backup dotfiles_stash
 
@@ -31,11 +31,26 @@ Make a quick sweep and grab what you can.
 Add to iCloud at ~./$HOME/dotfiles_stash~ via Finder with copy/pasta.
   
 
-** TODO Reformat the damn thang
 
-*** TODO Wipe 'er
+* Reformat that puppy!
 
-** TODO Install Chrome & configure browser
+This article seems like what I want: a no fuss, no recovery option for reformatting:
+
+https://mac-how-to.gadgethacks.com/how-to/reformat-mac-os-x-without-recovery-disc-drive-0155591/
+
+** TODO Add docs on best practices, some quick dos and don'ts
+
+
+- What can be automated?
+
+- What kinds of OS X scripts are out there that will do all of this for me?
+
+- I tried Thoughtbot's developer install and there was too much magic. Need to configure my own.
+
+
+* Reinstall Checklist
+
+** TODO Install & Configure Chrome
 
 *** Tips & Tricks
 
@@ -55,31 +70,31 @@ It's basically a sitemap for everything configurable in Chrome. From there I acc
    
 *** TODO Get Chrome Baseline Usable
 
-- [ ] Install Vimium, upload ~vimium-settings.json~ file
-- [ ] Log into Google accounts
-- [ ] Check installed extensions against list below
-- [ ] Import your bookmarks (or dare to start fresh?)
-- [ ] Add custom Styler files (see section below)
-- [ ] (Optional) Go through flags list
+[ ] Install Vimium, upload ~vimium-settings.json~ file
+[ ] Log into Google accounts
+[ ] Check installed extensions against list below
+[ ] Import your bookmarks (or dare to start fresh?)
+[ ] Add custom Styler files (see section below)
+[ ] (Optional) Go through flags list
 
 *** TODO Extension List
 
 Go to [[chrome://extensions]] to see and configure your extensions
 
-- [ ] JSONView -- /Configure:/ Allow incognito; Extension Options: Add dark theme
-- [ ] Module Linker (for Github packages)
-- [ ] Extension Icon React Developer Tools
-- [ ] Styler Classic 
-- [ ] React DevTools
-- [ ] Redux DevTools -- /Configure:/ Allow access to file URLs = interactive debugging
-- [ ] Vimium -- /Configure:/ See Vimium section
-- [ ] +Open Multiple URLs+
-- [ ] +Rearrange Tabs+
-- [ ] +Reason Tools+
-- [ ] +Surfingkeys+ -- /like a more powerful Vimium, with a steeper learning curve/
-- [ ] +Yesware+
-- [ ] +New Tab Redirect+ -- /Old redirect:/ [[chrome-extension://icpgjfneehieebagbmdbhnlpiopdcmna/options.html]]
-- [ ] +Google Docs Offline+ -- /creeped me out/
+[ ] JSONView -- /Configure:/ Allow incognito; Extension Options: Add dark theme
+[ ] Module Linker (for Github packages)
+[ ] Extension Icon React Developer Tools
+[ ] Styler Classic 
+[ ] React DevTools
+[ ] Redux DevTools -- /Configure:/ Allow access to file URLs = interactive debugging
+[ ] Vimium -- /Configure:/ See Vimium section
+[ ] +Open Multiple URLs+
+[ ] +Rearrange Tabs+
+[ ] +Reason Tools+
+[ ] +Surfingkeys+ -- /like a more powerful Vimium, with a steeper learning curve/
+[ ] +Yesware+
+[ ] +New Tab Redirect+ -- /Old redirect:/ [[chrome-extension://icpgjfneehieebagbmdbhnlpiopdcmna/options.html]]
+[ ] +Google Docs Offline+ -- /creeped me out/
 
 
 *** TODO Chrome Settings
@@ -106,7 +121,7 @@ Go to [[chrome://extensions]] to see and configure your extensions
 | Chrome Pages           | chr     | chrome://%s                                          |
   
 
-*** Flags
+*** Flags (Experimental)
 
 [[chrome://flags]]
 
@@ -122,28 +137,26 @@ Here are some I like to turn on. User beware, read what they do first, etc etc.
 
 ** TODO Install OS X Apps
 
-- [ ] Chrome (Vimum)
-- [ ] Spectacle
-- [ ] Dropbox
-- [ ] Slack
-- [ ] Spotify
-- [ ] Keycastr
-- [ ] Emacs (copy in iCloud if borked)
-- [ ] VS Code
-- [ ] VLC
-- [ ] Sketch
-- [ ] The Unarchiver
-- [ ] Sequel Pro
+[ ] Chrome (Vimum)
+[ ] Spectacle
+[ ] Dropbox
+[ ] Slack
+[ ] Spotify
+[ ] Keycastr
+[ ] Emacs (copy in iCloud if borked)
+[ ] VS Code
+[ ] VLC
+[ ] Sketch
+[ ] The Unarchiver
+[ ] Sequel Pro
 
 ** TODO Install dotfiles & configure shell
 
-https://github.com/ahrjarrett/dotfiles
-
-iCloud Backup: ~iCloud/$HOME/dotfiles_stash~
-
+1. Instll these: https://github.com/ahrjarrett/dotfiles
+2. Check iCloud Backup if need be: ~iCloud/$HOME/dotfiles_stash~
 
 
-* 
+
 
 * Random Configs
 
