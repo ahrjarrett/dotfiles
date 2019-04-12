@@ -94,7 +94,7 @@ Go to [[chrome://extensions]] to see and configure your extensions
 - [ ] +Reason Tools+
 - [ ] +Surfingkeys+ -- /like a more powerful Vimium, with a steeper learning curve/
 - [ ] +Yesware+
-- [ ] +New Tab Redirect+ -- /Old redirect:/ [[chrome-extension://icpgjfneehieebagbmdbhnlpiopdcmna/options.html]]
+- [ ] +New Tab Redirect+ -- /Old redirect:/ [[chrome-extension://dbepggeogbaibhgnhhndojpepiihcmeb/pages/options.html]]
 - [ ] +Google Docs Offline+ -- /creeped me out/
 
 
