@@ -138,18 +138,18 @@ Here are some I like to turn on. User beware, read what they do first, etc etc.
 
 ** TODO Install OS X Apps
 
-- [ ] Chrome (Vimum)
-- [ ] Spectacle
-- [ ] Dropbox
-- [ ] Slack
-- [ ] Spotify
-- [ ] Keycastr
-- [ ] Emacs (copy in iCloud if borked)
-- [ ] VS Code
-- [ ] VLC
-- [ ] Sketch
-- [ ] The Unarchiver
-- [ ] Sequel Pro
+- [ ] Chrome [[https://www.google.com/chrome/b][Download]]
+- [ ] Spectacle [[https://www.spectacleapp.com/][Download]]
+- [ ] Dropbox [[https://www.dropbox.com/install][Download]]
+- [ ] Slack [[https://slack.com/downloads/mac][Download]]
+- [ ] Spotify [[https://www.spotify.com/download][Download]]
+- [ ] Keycastr [[https://github.com/keycastr/keycastr][Download]]
+- [ ] Emacs (copy from iCloud if borked)
+- [ ] VS Code [[https://code.visualstudio.com/docs/?dv=osx][Download]]
+- [ ] VLC [[https://www.videolan.org/vlc/][Download]]
+- [ ] Sketch [[https://www.sketch.com/get/][Download]]
+- [ ] The Unarchiver [[https://theunarchiver.com/][Download]]
+- [ ] Sequel Pro [[https://sequelpro.com/download][Download]]
 
 ** TODO Install dotfiles & configure shell
 
