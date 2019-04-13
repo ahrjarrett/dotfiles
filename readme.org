@@ -5,20 +5,21 @@
 
 My notes, scripts and dotfiles for setting up my dev environment on a new computer or a fresh OS X install.
 
-- Fresh machine? See [[https://github.com/ahrjarrett/dotfiles#instructions][Instructions]].
-- Reformatting? See [[https://github.com/ahrjarrett/dotfiles#preflight-checklist][Preflight Checklist]].
-- Here's a nice guide on [[https://mac-how-to.gadgethacks.com/how-to/reformat-mac-os-x-without-recovery-disc-drive-0155591/][erasing and reinstalling OS X]].
+- Fresh machine? Read the [[https://github.com/ahrjarrett/dotfiles#installation][Instructions]]
+- Reformatting? See my [[https://github.com/ahrjarrett/dotfiles#preflight-checklist][Preflight Checklist]]
+- Here's a nice guide on [[https://mac-how-to.gadgethacks.com/how-to/reformat-mac-os-x-without-recovery-disc-drive-0155591/][erasing your disk & reinstalling OS X]]
 
 * How it works
 
-Upon bootstrap, every file and folder in this repo is symlinked to your home directory.
+Upon bootstrap, every file and folder inside this repo is symlinked to your home directory.
 
-Exceptions:
+_A file is *excluded** if_:
+1. It's an ~.org~ or ~.md~ file (documentation)
+2. It lives inside the ~/.excludes~ directory (files you install manually go here)
+3. It lives inside the ~/.scripts~ directory
+4. It's something you'd probably add to a ~/.gitignore~ file (for example ~/.DS_Store~)
 
-1. It's an ~.org~ or ~/.md~ file (documentation)
-2. It lives inside the ~/.excludes~ directory (things desktop wallpaper go here)
-3. It lives inside the ~/.scripts~ directory (the bootstrap file calls scripts in here)
-4. It's something you'd typically add to a ~/.gitignore~ file (for example ~/.DS_Store~)
+See [[https://github.com/ahrjarrett/dotfiles/blob/master/bootstrap.exclude.sh#L5][excluded files regex]] to alter this behavior.
 
 * Installation
 
@@ -26,15 +27,17 @@ Exceptions:
 2. /Read the scripts/. You could catch on fire, your mom would be disappointed, etc. etc.
 3. When you're ready run ~sh bootstrap.exclude.sh~
 
-That's it! See the Postinstall Checklist below if something went wrong or you need a more thorough configuration.
+That's it! 
 
-*Note:* It's worth mentioning that ~scripts/brew_install.sh~ /forces/ all GUI application installations. Meaning if an app already exists in the Applications folder, it will be removed and reinstalled.
+*Debugging:* See the [[https://github.com/ahrjarrett/dotfiles#postinstall-checklist][Postinstall Checklist]] below if something goes wrong (or if you're looking for a more advanced configuration).
+
+*Note_:* It's worth mentioning that ~scripts/brew_install.sh~ /forces/ GUI app installations. Meaning if an app already exists in your Applications folder, _it will be removed and reinstalled_.
 
 * Preflight Checklist
 
-Reformatting your machine? Do these things first:
+Reformatting your machine? Do this first:
 
-** TODO Clean up files
+** TODO 1. Clean up files
 
 - [ ] Go through Documents & Downloads folder
 - [ ] Go through Library/Contacts folder
@@ -45,28 +48,28 @@ Reformatting your machine? Do these things first:
 - [ ] Copy .env files for bkwds, AWS apps, DigitalOcean & Pineneedles to iCloud dir
 - [ ] eBook library goes to bitbucket
 
-** TODO Clean up projects
+** TODO 2. Clean up projects
 
 - [ ] Make sure you've committed and push all branches of active projects
-- [ ] Make sure there are no orphans without remotes that you care about
-- [ ] .env files! Double check that you got them all.
-- [ ] Go through ~stuff~ directory, ugh -- /don't be a packrat/
+- [ ] Make sure there are no orphans without remotes that you might care about
+- [ ] ~.env files~! Double check that you got them all.
+- [ ] Go through project directory (~stuff~, ~code~), and ugh -- /don't be a packrat/
   
-** TODO Backup dotfiles_stash
+** TODO 3. Backup dotfiles_stash
 
 Make a quick sweep and grab what you can.
 
-Add to iCloud at ~./$HOME/dotfiles_stash~ via Finder with copy/pasta.
+Copy/pasta what you find to an iCloud folder named ~dotfiles_stash~ 
 
 
 * Postinstall Checklist
 
-So you just ran the scripts. Here's some stuff you might consider next:
+You just ran the bootstrap script. Cool. Here's some stuff you might consider next:
 
 ** TODO Configure Chrome
 
    
-*** TODO Import Google Profile
+*** TODO 1. Import Google Profile
 
 - [ ] Log into Google account(s)
 - [ ] Run through list of required extensions below
@@ -75,7 +78,7 @@ So you just ran the scripts. Here's some stuff you might consider next:
 - [ ] Add custom Styler files from [[marketplace_customizations][https://github.com/ahrjarrett/marketplace-customizations]] repo
 - [ ] [Optional] Go through tips & tricks section
 
-*** TODO Install Extensions
+*** TODO 2. Install Extensions
 
 Visit [[chrome://extensions]] to see and configure your extensions
 
@@ -95,7 +98,7 @@ Visit [[chrome://extensions]] to see and configure your extensions
 - [ ] +Google Docs Offline+ -- /creeped me out/
 
 
-*** TODO Chrome Settings
+*** TODO 3. Customize Search Engines
 
 **** Customize URL Bar Queries
 
@@ -119,26 +122,26 @@ Visit [[chrome://extensions]] to see and configure your extensions
 | Chrome Pages           | chr     | chrome://%s                                          |
   
 
-*** Tips & Tricks
+*** 4. Tips & Tricks
 
-*Tip:* If you're ever looking to configure Chrome, [[chrome://chrome-urls]] is my favorite place to start.
+*Tip:* If you're looking to configure Chrome, [[chrome://chrome-urls]] is my favorite place to start.
 
 It's basically a sitemap for everything configurable in Chrome. From there I access links like these:
 
-1. [[chrome://bookmarks]]
-2. [[chrome://flags]] -- /super neat stuff Chrome will do, if you know to ask/
-3. [[chrome://network-errors]]
-4. [[chrome://omnibox]]
-5. [[chrome://signin-internals]]
-6. [[chrome://site-engagement]] -- /basically a report card of which sites waste your time/
-7. [[chrome://user-actions]] -- /keep this open and it will log of your actions in the background. cool./
-8. chrome://quit -- /alt-f4 turns on god mode/
+- [[chrome://bookmarks]]
+- [[chrome://flags]] -- /Chrome will do some really neat stuff if you know to ask it to/
+- [[chrome://network-errors]]
+- [[chrome://omnibox]]
+- [[chrome://signin-internals]]
+- [[chrome://site-engagement]] -- /basically a report card of all the sites that waste your time/
+- [[chrome://user-actions]] -- /keep this open and it will log of your actions in the background. cool./
+- chrome://quit -- /alt-f4 turns on god mode/
 
 **** Flags (Experimental)
 
 [[chrome://flags]]
 
-Here are some I like to turn on. User beware, read what they do first, etc etc.
+Here are some I like to turn on. Read what they do first, etc etc.
 
 | Latest stable JavaScript features            | #disable-javascript-harmony-shipping | Enabled |
 | 3D software rasterizer                       | #disable-software-rasterizer         | Enable  |
@@ -146,13 +149,14 @@ Here are some I like to turn on. User beware, read what they do first, etc etc.
 | Hardware-accelerated video decode            | #disable-accelerated-video-decode    | Enabled |
 | Creation of app shims for hosted apps on Mac | #disable-hosted-app-shim-creation    | Enabled |
 
+If you're really feeling adventurous, check out [[https://www.google.com/chrome/canary/][Chrome Canary]]
 
 
-** DONE Install OS X Apps
+** DONE ~DEFUNCT~ - Install OS X Apps
 
-This step is no longer done manually. If you ran ~bootstrap.sh~ then all of these apps were installed for you.
+You already did this when you bootstraped. This step is no longer done manually.
 
-If the bootstrap failed you'll want to double check that each of these were installed:
+However if the bootstrap failed you'll want to double check which of these failed to install:
 
 - [x] Chrome [[https://www.google.com/chrome/b][Download]]
 - [x] Dropbox [[https://www.dropbox.com/install][Download]]
@@ -169,16 +173,14 @@ If the bootstrap failed you'll want to double check that each of these were inst
 
 ** DONE Symlink dotfiles & configure shell
 
-This step is no longer done manually. 
+You already did this when you bootstrapped. This step is no longer done manually. 
 
-If it turns out you're missing something from the dotfiles repo, check the iCloud backup you made before reformatting:
-
-~iCloud/$HOME/dotfiles_stash~
+If it turns out you're missing something from the dotfiles repo, check the iCloud backup you made in ~dotfiles_stash~:
 
 
 * Random configs + secrets
 
-None of my config secrets live on Github.
+Whoops, none of my config secrets live on Github.
 
-Check iCloud for a file called ~random-configs.org~, or something obnoxious like that.
+Check iCloud for a file called ~random-configs.org~ for VPN config and other SSH logins.
 
