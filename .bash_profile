@@ -77,3 +77,5 @@ curlN() {
 
 
 eval "$(rbenv init -)"
+
+# source "$HOME/"

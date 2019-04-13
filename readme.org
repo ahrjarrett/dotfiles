@@ -1,11 +1,38 @@
-#+TITLE: Computer Wipedown Checklist
+#+TITLE: my dotfiles
 #+AUTHOR: Andrew Jarrett
 #+EMAIL:ahrjarrett@gmail.com
 #+DATE: 04/11/2019
 
-Or, my notes on how to turn a 4-hour grind into a 1-hour workflow.
+My notes, scripts and dotfiles for setting up my dev environment on a new computer or a fresh OS X install.
+
+- Fresh machine? See [[https://github.com/ahrjarrett/dotfiles#instructions][Instructions]].
+- Reformatting? See [[https://github.com/ahrjarrett/dotfiles#preflight-checklist][Preflight Checklist]].
+- Here's a nice guide on [[https://mac-how-to.gadgethacks.com/how-to/reformat-mac-os-x-without-recovery-disc-drive-0155591/][erasing and reinstalling OS X]].
+
+* How it works
+
+Upon bootstrap, every file and folder in this repo is symlinked to your home directory.
+
+Exceptions:
+
+1. It's an ~.org~ or ~/.md~ file (documentation)
+2. It lives inside the ~/.excludes~ directory (things desktop wallpaper go here)
+3. It lives inside the ~/.scripts~ directory (the bootstrap file calls scripts in here)
+4. It's something you'd typically add to a ~/.gitignore~ file (for example ~/.DS_Store~)
+
+* Installation
+
+1. Clone this repo
+2. /Read the scripts/. You could catch on fire, your mom would be disappointed, etc. etc.
+3. When you're ready run ~sh bootstrap.exclude.sh~
+
+That's it! See the Postinstall Checklist below if something went wrong or you need a more thorough configuration.
+
+*Note:* It's worth mentioning that ~scripts/brew_install.sh~ /forces/ all GUI application installations. Meaning if an app already exists in the Applications folder, it will be removed and reinstalled.
 
 * Preflight Checklist
+
+Reformatting your machine? Do these things first:
 
 ** TODO Clean up files
 
@@ -30,57 +57,27 @@ Or, my notes on how to turn a 4-hour grind into a 1-hour workflow.
 Make a quick sweep and grab what you can.
 
 Add to iCloud at ~./$HOME/dotfiles_stash~ via Finder with copy/pasta.
-  
 
 
-* Reformat that puppy!
+* Postinstall Checklist
 
-This article seems like what I want: a no fuss, no recovery option for reformatting:
+So you just ran the scripts. Here's some stuff you might consider next:
 
-https://mac-how-to.gadgethacks.com/how-to/reformat-mac-os-x-without-recovery-disc-drive-0155591/
-
-** TODO Add docs on best practices, some quick dos and don'ts
-
-
-- What can be automated?
-
-- What kinds of OS X scripts are out there that will do all of this for me?
-
-- I tried Thoughtbot's developer install and there was too much magic. Need to configure my own.
-
-
-* Reinstall Checklist
-
-** TODO Install & Configure Chrome
-
-*** Tips & Tricks
-
-*Tip:* If you're ever looking to configure Chrome, [[chrome://chrome-urls]] is my favorite place to start.
-
-It's basically a sitemap for everything configurable in Chrome. From there I access links like these:
-
-1. [[chrome://bookmarks]]
-2. [[chrome://flags]] -- /super neat stuff Chrome will do, if you know to ask/
-3. [[chrome://network-errors]]
-4. [[chrome://omnibox]]
-5. [[chrome://signin-internals]]
-6. [[chrome://site-engagement]] -- /basically a report card of which sites waste your time/
-7. [[chrome://user-actions]] -- /keep this open and it will log of your actions in the background. cool./
-8. chrome://quit -- /alt-f4 turns on god mode/
+** TODO Configure Chrome
 
    
-*** TODO Get Chrome Baseline Usable
+*** TODO Import Google Profile
 
-- [ ] Install Vimium, upload ~vimium-settings.json~ file
-- [ ] Log into Google accounts
-- [ ] Check installed extensions against list below
+- [ ] Log into Google account(s)
+- [ ] Run through list of required extensions below
+- [ ] Upload ~vimium-settings.json~ file (~.exclude/chrome/vimium-options.json~)
 - [ ] Import your bookmarks (or dare to start fresh?)
-- [ ] Add custom Styler files (see section below)
-- [ ] (Optional) Go through flags list
+- [ ] Add custom Styler files from [[marketplace_customizations][https://github.com/ahrjarrett/marketplace-customizations]] repo
+- [ ] [Optional] Go through tips & tricks section
 
-*** TODO Extension List
+*** TODO Install Extensions
 
-Go to [[chrome://extensions]] to see and configure your extensions
+Visit [[chrome://extensions]] to see and configure your extensions
 
 - [ ] JSONView -- /Configure:/ Allow incognito; Extension Options: Add dark theme
 - [ ] Module Linker (for Github packages)
@@ -122,7 +119,22 @@ Go to [[chrome://extensions]] to see and configure your extensions
 | Chrome Pages           | chr     | chrome://%s                                          |
   
 
-*** Flags (Experimental)
+*** Tips & Tricks
+
+*Tip:* If you're ever looking to configure Chrome, [[chrome://chrome-urls]] is my favorite place to start.
+
+It's basically a sitemap for everything configurable in Chrome. From there I access links like these:
+
+1. [[chrome://bookmarks]]
+2. [[chrome://flags]] -- /super neat stuff Chrome will do, if you know to ask/
+3. [[chrome://network-errors]]
+4. [[chrome://omnibox]]
+5. [[chrome://signin-internals]]
+6. [[chrome://site-engagement]] -- /basically a report card of which sites waste your time/
+7. [[chrome://user-actions]] -- /keep this open and it will log of your actions in the background. cool./
+8. chrome://quit -- /alt-f4 turns on god mode/
+
+**** Flags (Experimental)
 
 [[chrome://flags]]
 
@@ -136,33 +148,37 @@ Here are some I like to turn on. User beware, read what they do first, etc etc.
 
 
 
-** TODO Install OS X Apps
+** DONE Install OS X Apps
 
-- [ ] Chrome [[https://www.google.com/chrome/b][Download]]
-- [ ] Spectacle [[https://www.spectacleapp.com/][Download]]
-- [ ] Dropbox [[https://www.dropbox.com/install][Download]]
-- [ ] Slack [[https://slack.com/downloads/mac][Download]]
-- [ ] Spotify [[https://www.spotify.com/download][Download]]
-- [ ] Keycastr [[https://github.com/keycastr/keycastr][Download]]
-- [ ] Emacs (copy from iCloud if borked)
-- [ ] VS Code [[https://code.visualstudio.com/docs/?dv=osx][Download]]
-- [ ] VLC [[https://www.videolan.org/vlc/][Download]]
-- [ ] Sketch [[https://www.sketch.com/get/][Download]]
-- [ ] The Unarchiver [[https://theunarchiver.com/][Download]]
-- [ ] Sequel Pro [[https://sequelpro.com/download][Download]]
+This step is no longer done manually. If you ran ~bootstrap.sh~ then all of these apps were installed for you.
 
-** TODO Install dotfiles & configure shell
+If the bootstrap failed you'll want to double check that each of these were installed:
 
-1. Instll these: https://github.com/ahrjarrett/dotfiles
-2. Check iCloud Backup if need be: ~iCloud/$HOME/dotfiles_stash~
+- [x] Chrome [[https://www.google.com/chrome/b][Download]]
+- [x] Dropbox [[https://www.dropbox.com/install][Download]]
+- [x] Emacs (copy from iCloud if borked)
+- [x] Keycastr [[https://github.com/keycastr/keycastr][Download]]
+- [x] Sequel Pro [[https://sequelpro.com/download][Download]]
+- [x] Sketch [[https://www.sketch.com/get/][Download]]
+- [x] Slack [[https://slack.com/downloads/mac][Download]]
+- [x] Spectacle [[https://www.spectacleapp.com/][Download]]
+- [x] Spotify [[https://www.spotify.com/download][Download]]
+- [x] The Unarchiver [[https://theunarchiver.com/][Download]]
+- [x] VLC [[https://www.videolan.org/vlc/][Download]]
+- [x] VS Code [[https://code.visualstudio.com/docs/?dv=osx][Download]]
+
+** DONE Symlink dotfiles & configure shell
+
+This step is no longer done manually. 
+
+If it turns out you're missing something from the dotfiles repo, check the iCloud backup you made before reformatting:
+
+~iCloud/$HOME/dotfiles_stash~
 
 
+* Random configs + secrets
 
+None of my config secrets live on Github.
 
-* Random Configs
+Check iCloud for a file called ~random-configs.org~, or something obnoxious like that.
 
-Config secrets don't live on Github, they live at:
-
-=/Users/aj/Library/Mobile Documents/com~apple~CloudDocs=
-
-In a file called ~random-configs.org~, or something obnoxious like that.
