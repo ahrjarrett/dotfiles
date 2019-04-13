@@ -88,8 +88,8 @@ osx_defaults () {
   fi
 }
 
-#init
-#link
-#install_tools
-#gen_github_ssh_key
+init
+link
+install_tools
+gen_github_ssh_key
 osx_defaults
