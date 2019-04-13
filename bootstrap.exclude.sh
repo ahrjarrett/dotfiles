@@ -23,7 +23,7 @@ link () {
     for file in $( ls -A | grep -vE "\.exclude*|\.DS_Store|\.git$|\.gitignore$|.*.md$|.*.org$" ) ; do
       if [[ "$file" = ".ssh_config" ]] ; then
         mkdir -p "$HOME/.ssh"
-        ln -sv "$PWD/.ssh_config" "$HOME/.ssh"
+        ln -sv "$PWD/.ssh_config" "$HOME/.ssh/config"
       else 
         ln -sv "$PWD/$file" "$HOME"
       fi
@@ -65,22 +65,31 @@ gen_github_ssh_key() {
 }
 
 install_tools () {
-	if [ $( echo "$OSTYPE" | grep "darwin" ) ] ; then
-		echo "\nThis utility will install useful utilities using Homebrew"
-		echo "Proceed? (Y/n)"
-    read -s -n 1 input
-    if [[ ("$input" = "y") || ("$input" = "Y") || ("$input" = "") ]] ; then
-			echo "Installing useful stuff using brew. This may take a while..."
-			sh brew.exclude.sh
-		else
-			echo "Brew installation cancelled by user"
-		fi
-	else
-		echo "Skipping installations using Homebrew because MacOS was not detected..."
-	fi
+  echo "\nThis utility will install useful utilities using Homebrew"
+  echo "Proceed? (Y/n)"
+  read -s -n 1 input
+  if [[ ("$input" = "y") || ("$input" = "Y") || ("$input" = "") ]] ; then
+    echo "Installing useful stuff using brew. This may take a while..."
+    sh brew.exclude.sh
+  else
+    echo "Brew installation cancelled by user"
+  fi
 }
 
-init
-link
-install_tools
-gen_github_ssh_key
+osx_defaults () {
+  echo "\nThis utility will set a bunch of OS X defaults for you. \n Please read osx.exclude.sh before running, as many settings are experimental!"
+  echo "Proceed? (Y/n)"
+  read -s -n 1 input
+  if [[ ("$input" = "y") || ("$input" = "Y") || ("$input" = "") ]] ; then
+    echo "Setting OS X defaults..."
+    sh osx.exclude.sh
+  else
+    echo "OS X defaults installation cancelled by user"
+  fi
+}
+
+#init
+#link
+#install_tools
+#gen_github_ssh_key
+osx_defaults
