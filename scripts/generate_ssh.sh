@@ -1,4 +1,6 @@
 #!/bin/sh
+
+EMAIL="ahrjarrett@gmail.com"
 PATH_TO_GITHUB_KEY="$HOME/.ssh/github"
 FILENAME_SSH_CONFIG="$HOME/.ssh/config"
 

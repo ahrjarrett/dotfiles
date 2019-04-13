@@ -1,6 +1,5 @@
 #!/bin/sh
 
-EMAIL="ahrjarrett@gmail.com"
 PROJECTS_DIR="$HOME/Desktop/code"
 DEFAULT_SHELL="fish"
 EXCLUDED_FILES="\.exclude*|scripts|\.DS_Store|\.git$|\.gitignore$|.*.md$|.*.org$"
@@ -45,11 +44,7 @@ generate_ssh() {
   fi
 }
 
-brew_install() {
-  brew install fish
-}
-
-brew_install2 () {
+brew_install () {
   echo "\nThis utility will install useful utilities using Homebrew"
   echo "Proceed? (Y/n)"
   read -s -n 1 input
@@ -89,5 +84,5 @@ init
 link
 brew_install
 configure_shell
-#generate_ssh
-#osx_defaults
+generate_ssh
+osx_defaults
