@@ -5,37 +5,37 @@
 
 My notes, scripts and dotfiles for setting up my dev environment on a new computer or a fresh OS X install.
 
+
 - Fresh machine? Read the [[https://github.com/ahrjarrett/dotfiles#installation][Instructions]]
 - Reformatting? See my [[https://github.com/ahrjarrett/dotfiles#preflight-checklist][Preflight Checklist]]
-- Here's a nice guide on [[https://mac-how-to.gadgethacks.com/how-to/reformat-mac-os-x-without-recovery-disc-drive-0155591/][erasing your disk & reinstalling OS X]]
+- Advanced usage? See the [[https://github.com/ahrjarrett/dotfiles#postinstall-checklist][Postinstall Checklist]]
 
 * What it sets up
 
 Tools:
 - [[https://brew.sh/][Homebrew]] for managing operating system libraries
-- [[https://github.com/ggreer/the_silver_searcher][[The Silver Searcher]] (aka ~ag~) for finding things in files
-- [[https://github.com/fish-shell/fish-shell][fish]] as your shell
-- [[https://github.com/jorgebucaran/fisher][fisher]] as package manager for your shell
-
-Languages:
-- [[https://docs.python.org/3/]][Python 3]]
-- [[https://nodejs.org][Node.js]], [[https://npmjs.com][npm]] and [[https://yarnpkg.com/en/][Yarn]] for running apps and installing JavaScript packages
-- [[https://www.ruby-lang.org/en/][Ruby]] stable and [[https://github.com/rbenv/rbenv]][rbenv]] for writing general-purpose code
-- [[https://www.postgresql.org/][Postgres]] and [[https://www.mysql.com/][MySQL]] for relational data
+- [[https://github.com/ggreer/the_silver_searcher][The Silver Searcher]] or ~ag~ for finding things in files
+- [[https://github.com/fish-shell/fish-shell][fish]] as your shell and [[https://github.com/jorgebucaran/fisher][fisher]] as its package manager
+- [[https://httpie.org/][HTTPie]] as a command line client for making REST requests
 
 Apps:
-- See the [[https://github.com/ahrjarrett/dotfiles#installed-os-x-apps][lits of applications]] this script installs
+- See the [[https://github.com/ahrjarrett/dotfiles#installed-os-x-apps][list of applications]] installed by this script
 
+Languages:
+- [[https://docs.python.org/3/][Python 3]]
+- [[https://nodejs.org][Node.js]], [[https://npmjs.com][npm]] and [[https://yarnpkg.com/en/][Yarn]] for running apps and installing JavaScript packages
+- [[https://www.ruby-lang.org/en/][Ruby]] stable and [[https://github.com/rbenv/rbenv][rbenv]] for writing general-purpose code
+- [[https://www.postgresql.org/][Postgres]] and [[https://www.mysql.com/][MySQL]] for relational data
 
 
 * How it works
 
 Upon bootstrap, every file and folder inside this repo is symlinked to your home directory.
 
-_A file is *excluded** if_:
+_A file is *excluded* if_:
 1. It's an ~.org~ or ~.md~ file (documentation)
-2. It lives inside the ~/.excludes~ directory (files you install manually go here)
-3. It lives inside the ~/.scripts~ directory
+2. It lives inside the ~.excludes/~ directory (files you can install manually go here)
+3. It lives inside the ~scripts/~ directory
 4. It's something you'd probably add to a ~/.gitignore~ file (for example ~/.DS_Store~)
 
 See [[https://github.com/ahrjarrett/dotfiles/blob/master/bootstrap.exclude.sh#L5][excluded files regex]] to alter this behavior.
@@ -111,7 +111,7 @@ Visit [[chrome://extensions]] to see and configure your extensions
 - [ ] +Open Multiple URLs+
 - [ ] +Rearrange Tabs+
 - [ ] +Reason Tools+
-- [ ] +Surfingkeys+ -- /like a more powerful Vimium, with a steeper learning curve/
+- [ ] +Surfingkeys+ -- /more powerful than Vimium, but with a steeper learning curve/
 - [ ] +Yesware+
 - [ ] +New Tab Redirect+ -- /Old redirect:/ [[chrome-extension://dbepggeogbaibhgnhhndojpepiihcmeb/pages/options.html]]
 - [ ] +Google Docs Offline+ -- /creeped me out/
@@ -123,8 +123,8 @@ Visit [[chrome://extensions]] to see and configure your extensions
 
 *Shortcut:* 
 
-1. In Chrome do ~Cmd + ,\~  or navigate to [[chrome://settings]] 
-2. then search for "Manage Search Engines"
+1. Do ~Cmd + ,\~  anywhere in Chrome or navigate to [[chrome://settings]] 
+2. Search for "Manage Search Engines"
 
 *My Custom Queries:*
 
@@ -158,9 +158,7 @@ It's basically a sitemap for everything configurable in Chrome. From there I acc
 
 **** Flags (Experimental)
 
-[[chrome://flags]]
-
-Here are some I like to turn on. Read what they do first, etc etc.
+Here are some flags I like to turn on. Read what they do first, etc etc.
 
 | Latest stable JavaScript features            | #disable-javascript-harmony-shipping | Enabled |
 | 3D software rasterizer                       | #disable-software-rasterizer         | Enable  |
@@ -168,8 +166,7 @@ Here are some I like to turn on. Read what they do first, etc etc.
 | Hardware-accelerated video decode            | #disable-accelerated-video-decode    | Enabled |
 | Creation of app shims for hosted apps on Mac | #disable-hosted-app-shim-creation    | Enabled |
 
-If you're really feeling adventurous, check out [[https://www.google.com/chrome/canary/][Chrome Canary]]
-
+If you're really feeling adventurous, check out [[https://www.google.com/chrome/canary/][Chrome Canary]].
 
 ** DONE Installed OS X Apps
 
@@ -177,7 +174,7 @@ If you're really feeling adventurous, check out [[https://www.google.com/chrome/
 
 You already did this when you bootstraped. This step is no longer done manually.
 
-However if the bootstrap failed you'll want to double check which of these failed to install:
+However if the bootstrap failed you'll want to check if any of these failed to install:
 
 - [x] Chrome [[https://www.google.com/chrome/b][Download]]
 - [x] Dropbox [[https://www.dropbox.com/install][Download]]
@@ -192,16 +189,19 @@ However if the bootstrap failed you'll want to double check which of these faile
 - [x] VLC [[https://www.videolan.org/vlc/][Download]]
 - [x] VS Code [[https://code.visualstudio.com/docs/?dv=osx][Download]]
 
-** DONE Symlink dotfiles & configure shell [Complete]
+** DONE Symlink dotfiles & configure shell
 
-You already did this when you bootstrapped. This step is no longer done manually. 
+*Complete!*
 
-If it turns out you're missing something from the dotfiles repo, check the iCloud backup you made in ~dotfiles_stash~:
+You already did this when you bootstrapped. This step is no longer done manually.
+
+If it turns out you're missing something from the dotfiles repo, check the iCloud ~dotfiles_stash~ backup you made during Preflight.
 
 
-** Random configs + secrets
+** Resources, random configs, secrets
 
 Whoops, none of my config secrets live on Github.
 
 Check iCloud for a file called ~random-configs.org~ for VPN config and other SSH logins.
 
+Here's a nice guide on [[https://mac-how-to.gadgethacks.com/how-to/reformat-mac-os-x-without-recovery-disc-drive-0155591/][erasing your disk & reinstalling OS X]]
