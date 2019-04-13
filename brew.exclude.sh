@@ -56,11 +56,12 @@ brew install postgresql
 ### SHELL
 #################################################
 brew install fish
-echo "Adding fish to /etc/shells and switching to fish..."
+echo "Adding fish to /etc/shells and making fish the default shell..."
 sudo grep -qxF "$(which fish)" /etc/shells || echo $(which fish) | sudo tee -a /etc/shells
 chsh -s $(which fish)
 
-https://github.com/jorgebucaran/fisher
+echo "Adding fisher..."
+curl https://git.io/fisher --create-dirs -sLo ~/.config/fish/functions/fisher.fish
 
 
 brew cleanup
