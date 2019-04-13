@@ -1,3 +1,6 @@
+[user]
+	email = ahrjarrett@gmail.com
+	name = Andrew Jarrett
 [core]
 	excludesfile = /Users/aj/.gitignore_global
 [alias]
