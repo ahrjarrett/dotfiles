@@ -53,7 +53,7 @@ brew install the_silver_searcher
 #################################################
 echo "Installing databases..."
 brew install postgresql
-
+brew install mysql
 
 brew cleanup
 

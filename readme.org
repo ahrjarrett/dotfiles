@@ -9,6 +9,25 @@ My notes, scripts and dotfiles for setting up my dev environment on a new comput
 - Reformatting? See my [[https://github.com/ahrjarrett/dotfiles#preflight-checklist][Preflight Checklist]]
 - Here's a nice guide on [[https://mac-how-to.gadgethacks.com/how-to/reformat-mac-os-x-without-recovery-disc-drive-0155591/][erasing your disk & reinstalling OS X]]
 
+* What it sets up
+
+Tools:
+- [[https://brew.sh/][Homebrew]] for managing operating system libraries
+- [[https://github.com/ggreer/the_silver_searcher][[The Silver Searcher]] (aka ~ag~) for finding things in files
+- [[https://github.com/fish-shell/fish-shell][fish]] as your shell
+- [[https://github.com/jorgebucaran/fisher][fisher]] as package manager for your shell
+
+Languages:
+- [[https://docs.python.org/3/]][Python 3]]
+- [[https://nodejs.org][Node.js]], [[https://npmjs.com][npm]] and [[https://yarnpkg.com/en/][Yarn]] for running apps and installing JavaScript packages
+- [[https://www.ruby-lang.org/en/][Ruby]] stable and [[https://github.com/rbenv/rbenv]][rbenv]] for writing general-purpose code
+- [[https://www.postgresql.org/][Postgres]] and [[https://www.mysql.com/][MySQL]] for relational data
+
+Apps:
+- See the [[https://github.com/ahrjarrett/dotfiles#installed-os-x-apps][lits of applications]] this script installs
+
+
+
 * How it works
 
 Upon bootstrap, every file and folder inside this repo is symlinked to your home directory.
@@ -152,7 +171,9 @@ Here are some I like to turn on. Read what they do first, etc etc.
 If you're really feeling adventurous, check out [[https://www.google.com/chrome/canary/][Chrome Canary]]
 
 
-** DONE ~DEFUNCT~ - Install OS X Apps
+** DONE Installed OS X Apps
+
+*Complete!*
 
 You already did this when you bootstraped. This step is no longer done manually.
 
@@ -171,14 +192,14 @@ However if the bootstrap failed you'll want to double check which of these faile
 - [x] VLC [[https://www.videolan.org/vlc/][Download]]
 - [x] VS Code [[https://code.visualstudio.com/docs/?dv=osx][Download]]
 
-** DONE Symlink dotfiles & configure shell
+** DONE Symlink dotfiles & configure shell [Complete]
 
 You already did this when you bootstrapped. This step is no longer done manually. 
 
 If it turns out you're missing something from the dotfiles repo, check the iCloud backup you made in ~dotfiles_stash~:
 
 
-* Random configs + secrets
+** Random configs + secrets
 
 Whoops, none of my config secrets live on Github.
 
