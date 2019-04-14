@@ -1,21 +1,23 @@
-#+TITLE: my dotfiles
+#+TITLE: dotfiles
 #+AUTHOR: Andrew Jarrett
 #+EMAIL:ahrjarrett@gmail.com
-#+DATE: 04/11/2019
+#+DATE: 11/29/2016
 
 My notes, scripts and dotfiles for setting up my dev environment on a new computer or a fresh OS X install.
 
-
 - Fresh machine? Read the [[https://github.com/ahrjarrett/dotfiles#installation][Instructions]]
-- Reformatting? See my [[https://github.com/ahrjarrett/dotfiles#preflight-checklist][Preflight Checklist]]
-- Advanced usage? See the [[https://github.com/ahrjarrett/dotfiles#postinstall-checklist][Postinstall Checklist]]
+- About to reformat? See the [[https://github.com/ahrjarrett/dotfiles/blob/master/preflight.org][Preflight Checklist]]
+- Looking to do even more config? See the [[https://github.com/ahrjarrett/dotfiles#postinstall-checklist][Postinstall Checklist]]
 
 * What it sets up
+
+macOS Defaults:
+- *Important:* See comments in [[https://github.com/ahrjarrett/dotfiles/blob/master/scripts/osx.sh][OS X Defaults file]]! Decide for yourself which parts you do and don’t want and edit the file accordingly. 
 
 Tools:
 - [[https://brew.sh/][Homebrew]] for managing operating system libraries
 - [[https://github.com/ggreer/the_silver_searcher][The Silver Searcher]] or ~ag~ for finding things in files
-- [[https://github.com/fish-shell/fish-shell][fish]] as your shell and [[https://github.com/jorgebucaran/fisher][fisher]] as its package manager
+- [[https://github.com/fish-shell/fish-shell][fish]] as your shell and [[https://github.com/jorgebucaran/fisher][fisherman]] as package manager
 - [[https://httpie.org/][HTTPie]] as a command line client for making REST requests
 
 Apps:
@@ -27,12 +29,24 @@ Languages:
 - [[https://www.ruby-lang.org/en/][Ruby]] stable and [[https://github.com/rbenv/rbenv][rbenv]] for writing general-purpose code
 - [[https://www.postgresql.org/][Postgres]] and [[https://www.mysql.com/][MySQL]] for relational data
 
+Sane OS X Defaults:
+- Check out the [[https://github.com/ahrjarrett/dotfiles/blob/master/scripts/osx.sh][osx_defaults]] script for defaults documentation
+
+* Installation
+
+1. Clone this repo anywhere on your machine
+2. /Read the scripts/! ~osx.sh~ in particular does a lot of opinonated stuff to your machine
+3. When you're ready run ~sh bootstrap.exclude.sh~
+
+That's it! 
 
 * How it works
 
-Upon bootstrap, every file and folder inside this repo is symlinked to your home directory.
+*** Symlinks
 
-_A file is *excluded* if_:
+Upon bootstrap, every file and folder you put inside this repo is will be symlinked to your home directory.
+
+A file is *excluded* if:
 1. It's an ~.org~ or ~.md~ file (documentation)
 2. It lives inside the ~.excludes/~ directory (files you can install manually go here)
 3. It lives inside the ~scripts/~ directory
@@ -40,17 +54,16 @@ _A file is *excluded* if_:
 
 See [[https://github.com/ahrjarrett/dotfiles/blob/master/bootstrap.exclude.sh#L5][excluded files regex]] to alter this behavior.
 
-* Installation
+*** Brew install
 
-1. Clone this repo
-2. /Read the scripts/. You could catch on fire, your mom would be disappointed, etc. etc.
-3. When you're ready run ~sh bootstrap.exclude.sh~
+Homebrew installs a bunch of packages and applications for you.
 
-That's it! 
+See [[https://github.com/ahrjarrett/dotfiles/blob/master/scripts/brew.sh][brew.sh]] to change what will be installed. Note that *Cask will force app installs*.
 
-*Debugging:* See the [[https://github.com/ahrjarrett/dotfiles#postinstall-checklist][Postinstall Checklist]] below if something goes wrong (or if you're looking for a more advanced configuration).
+Meaning if an app already exists in your Applications folder, _it will be removed and reinstalled_. This will ensure you get the latest version, but might also lose that app’s config.
 
-*Note_:* It's worth mentioning that ~scripts/brew_install.sh~ /forces/ GUI app installations. Meaning if an app already exists in your Applications folder, _it will be removed and reinstalled_.
+*Debugging:* See the [[https://github.com/ahrjarrett/dotfiles#postinstall-checklist][Postinstall Checklist]] if something goes wrong (or if you're looking to do more advanced config).
+
 
 * Preflight Checklist
 
@@ -198,10 +211,8 @@ You already did this when you bootstrapped. This step is no longer done manually
 If it turns out you're missing something from the dotfiles repo, check the iCloud ~dotfiles_stash~ backup you made during Preflight.
 
 
-** Resources, random configs, secrets
+** Passwords, secret files, etc.
 
 Whoops, none of my config secrets live on Github.
 
 Check iCloud for a file called ~random-configs.org~ for VPN config and other SSH logins.
-
-Here's a nice guide on [[https://mac-how-to.gadgethacks.com/how-to/reformat-mac-os-x-without-recovery-disc-drive-0155591/][erasing your disk & reinstalling OS X]]

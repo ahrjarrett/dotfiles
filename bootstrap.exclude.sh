@@ -4,6 +4,11 @@ PROJECTS_DIR="$HOME/Desktop/code"
 DEFAULT_SHELL="fish"
 EXCLUDED_FILES="\.exclude*|scripts|\.DS_Store|\.git$|\.gitignore$|.*.md$|.*.org$"
 
+
+
+# DELETE WHEN REMOVING HACK FISHER INSTALL IN CONFIGURE_SCRIPTS
+FISH_PATH="$PROJECTS_DIR/dotfiles/.config/fish"
+
 # Initialize a few things
 init () {
 	echo "Making a projects folder if it doesn't already exist..."
@@ -38,7 +43,7 @@ generate_ssh() {
   echo "Proceed? (Y/n)"
   read -s -n 1 input
   if [[ ("$input" = "y") || ("$input" = "Y") || ("$input" = "") ]] ; then
-    sh scripts/generate_ssh.sh
+    sh scripts/ssh.sh
   else
     echo "SSH utility cancelled by user"
   fi
@@ -50,7 +55,7 @@ brew_install () {
   read -s -n 1 input
   if [[ ("$input" = "y") || ("$input" = "Y") || ("$input" = "") ]] ; then
     echo "Installing useful stuff using brew. This may take a while..."
-    sh scripts/brew_install.sh
+    sh scripts/brew.sh
   else
     echo "Brew installation cancelled by user"
   fi
@@ -62,7 +67,12 @@ configure_shell () {
   read -s -n 1 input
   if [[ ("$input" = "y") || ("$input" = "Y") || ("$input" = "") ]] ; then
     echo "Installing dependencies and configuring $DEFAULT_SHELL..."
-    sh scripts/configure_shell.sh
+
+    # HACK, move this to configure_shell script soon; here for now 
+    echo "Installing fisher...."
+    curl https://git.io/fisher --create-dirs -sLo "$FISH_PATH/functions/fisher.fish"
+
+    sh scripts/shell.sh
   else
     echo "$DEFAULT_SHELL shell utility cancelled by user"
   fi
@@ -74,15 +84,16 @@ osx_defaults () {
   read -s -n 1 input
   if [[ ("$input" = "y") || ("$input" = "Y") || ("$input" = "") ]] ; then
     echo "Setting OS X defaults..."
-    sh scripts/osx_defaults.sh
+    sh scripts/osx.sh
   else
     echo "OS X defaults installation cancelled by user"
   fi
 }
 
-init
+
+#init
 link
-brew_install
+#brew_install
 configure_shell
-generate_ssh
-osx_defaults
+#generate_ssh
+#osx_defaults

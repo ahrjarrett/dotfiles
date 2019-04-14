@@ -1,5 +1,3 @@
-echo "FISH FILE FOUND BB!"
-
 set DOTFILES_PATH $HOME/Desktop/code/dotfiles
 set FISH_PATH $DOTFILES_PATH/.config/fish
 set FISH_FILE = $FISHPATH/config.fish
