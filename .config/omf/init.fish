@@ -4,6 +4,9 @@ echo "🐟🐟🐟 running init.fish 🐟🐟🐟"
 set -xg PROJECTS_PATH $HOME/code
 set -xg DOTFILES $PROJECTS_PATH/dotfiles
 set -xg OMF $DOTFILES/.config/omf
+# versions
+set -xg USER_RUBY_VERSION 2.6.1
+set -xg USER_RAILS_VERSION 5.2.0
 
 set -xg EMACS_PATH $DOTFILES/.emacs.d
 set -xg BEFORE_INIT_FILE $OMF/before.init.fish
@@ -45,7 +48,7 @@ abbr -ag sshutdown  sudo shutdown -h now
 abbr -ag ga     git add -A
 abbr -ag gs     git status
 abbr -ag gco    git checkout
-abbr -ag gcm    git commit -m 
+abbr -ag gcm    git commit -m
 abbr -ag gpom   git push origin master
 # databases
 abbr -ag sqlgo   (which mysql).server start
@@ -54,5 +57,18 @@ abbr -ag sqldoh  (which mysql).server restart
 abbr -ag pggo  launchctl load ~/Library/LaunchAgents/homebrew.mxcl.postgresql.plist
 abbr -ag pgno  launchctl unload ~/Library/LaunchAgents/homebrew.mxcl.postgresql.plist
 
-# OMF
-abbr -ag try theme
+# omf
+### Not working?
+#abbr -ag try theme
+
+
+# PATH
+status --is-interactive; and source (rbenv init -|psub)
+rbenv install $USER_RUBY_VERSION
+
+
+
+
+
+
+
