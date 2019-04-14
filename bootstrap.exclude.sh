@@ -5,10 +5,9 @@ export DOTFILES="$PROJECTS_PATH/dotfiles"
 export EMAIL="ahrjarrett@gmail.com"
 export EXCLUDED_FILES="\.exclude*|scripts|\.DS_Store|\.git$|\.gitignore$|.*.md$|.*.org$"
 DEFAULT_SHELL="fish"
-GITHUB_SSH="git@github.com"
 GITHUB_USER="ahrjarrett"
-SHELL_REPONAME="fish.d"
-export SHELL_REPO=$GITHUB_SSH:$GITHUB_USER/$SHELL_REPONAME.git
+SHELL_REPONAME="fish"
+export SHELL_REPO="git@github.com:$GITHUB_USER/$SHELL_REPONAME.git"
 
 init() {
 	echo "Making a projects folder at $PROJECTS_PATH if it doesn't already exist..."
@@ -70,8 +69,8 @@ configure_shell() {
   read -s -n 1 input
   if [[ ("$input" = "y") || ("$input" = "Y") || ("$input" = "") ]] ; then
     echo "Installing dependencies and configuring $DEFAULT_SHELL..."
-
-    sh scripts/shell.sh
+    sh scripts/fish.sh
+    # sh scripts/shell.sh
   else
     echo "$DEFAULT_SHELL shell utility cancelled by user"
   fi

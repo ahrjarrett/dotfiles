@@ -3,8 +3,6 @@
 DOTFILES="$PROJECTS_PATH/dotfiles"
 FISH_PATH="$PWD/.config/fish"
 
-echo "TRASH ME:\n\n\n DOTFILES = $DOTFILES \n\n PROJECTS_PATH = $PROJECTS_PATH \n\n\n"
-
 echo "Installing fisher to $FISH_PATH...."
 curl https://git.io/fisher --create-dirs -sLo "$FISH_PATH/functions/fisher.fish"
 
