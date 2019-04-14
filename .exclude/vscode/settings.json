@@ -1,0 +1,44 @@
+{
+  "window.zoomLevel": 0.4,
+  "editor.tabSize": 2,
+  "editor.insertSpaces": true,
+  "editor.detectIndentation": false,
+  "editor.acceptSuggestionOnEnter": "off",
+  "editor.formatOnSave": true,
+  "editor.fontFamily": "Fira Code",
+  "editor.fontWeight": "500",
+  "editor.fontLigatures": true,
+  // go away annoying stuff
+  "workbench.editor.showIcons": false,
+  "workbench.iconTheme": "material-icon-theme",
+  // make split-screen gutter smaller
+  "editor.minimap.enabled": false,
+  "editor.hideCursorInOverviewRuler": true,
+  // git, search, etc.
+  "workbench.activityBar.visible": true,
+  "editor.glyphMargin": false,
+  "editor.folding": false,
+  "editor.scrollbar.horizontal": "hidden",
+  "editor.scrollbar.vertical": "hidden",
+  "workbench.startupEditor": "newUntitledFile",
+  "workbench.editor.tabCloseButton": "off",
+  "editor.fontSize": 13,
+  // when I open a file, keep it open
+  "workbench.editor.enablePreview": false,
+  "workbench.editor.enablePreviewFromQuickOpen": false,
+  "workbench.colorCustomizations": {
+    "editorCursor.foreground": "#fffabe"
+  },
+  // show full path of current file in window
+  "window.title": "${activeEditorMedium}",
+  "colorize.languages": [
+    "javascript"
+    // ...
+  ],
+  "colorize.ignore_search_variables_info": true
+  // "editor.renderWhitespace": "all",
+  // language-specific
+  // "reason.codelens.enabled": true,
+  // "typescript.validate.enable": false,
+  // "javascript.validate.enable": false,
+}
