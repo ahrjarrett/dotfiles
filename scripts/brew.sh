@@ -61,7 +61,7 @@ brew cleanup
 #################################################
 ### APPS
 #################################################
-apps=(
+gui_apps=(
   dropbox
   emacs
   google-chrome
@@ -77,7 +77,7 @@ apps=(
 )
 
 echo "Installing apps with Cask..."
-brew cask install --force --appdir="/Applications" ${apps[@]}
+brew cask install --force --appdir="/Applications" ${gui_apps[@]}
 
 
 #################################################

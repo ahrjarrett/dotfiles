@@ -56,6 +56,11 @@ abbr -ag sqlno   (which mysql).server stop
 abbr -ag sqldoh  (which mysql).server restart
 abbr -ag pggo  launchctl load ~/Library/LaunchAgents/homebrew.mxcl.postgresql.plist
 abbr -ag pgno  launchctl unload ~/Library/LaunchAgents/homebrew.mxcl.postgresql.plist
+### if you want ^^ launched automatically at login: ###
+# To have launchd start mysql at login:
+brew services start mysql
+# To have launchd start postgresql at login:
+brew services start postgresql
 
 # omf
 ### Not working?
@@ -64,9 +69,6 @@ abbr -ag pgno  launchctl unload ~/Library/LaunchAgents/homebrew.mxcl.postgresql.
 
 # PATH
 status --is-interactive; and source (rbenv init -|psub)
-rbenv install $USER_RUBY_VERSION
-
-
 
 
 
