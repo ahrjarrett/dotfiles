@@ -116,15 +116,12 @@ setup_node() {
   fi
 }
 
-
-
-
-#init
-#generate_ssh
-#link
-#fetch_repos
-#brew_install
-#configure_shell
-#osx_defaults
-#setup_ruby
+init
+generate_ssh
+link
+fetch_repos
+brew_install
+configure_shell
+osx_defaults
+setup_ruby
 setup_node

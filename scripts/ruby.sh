@@ -17,4 +17,7 @@ rbenv rehash
 
 echo "Installing gems..."
 echo ${ruby_packages[@]}
-gem install ${ruby_packages[@]} -v $USER_RAILS_VERSION
+# gem install ${ruby_packages[@]} -v $USER_RAILS_VERSION
+echo "Installing SDK, sudo required..."
+echo "(Mojave broke pg, nokogiri, any gem that uses C extensions)"
+sudo installer -pkg /Library/Developer/CommandLineTools/Packages/macOS_SDK_headers_for_macOS_10.14.pkg -target /
