@@ -1,4 +1,5 @@
 #!/bin/sh
+
 export PROJECTS_PATH="$HOME/code"
 export DOTFILES="$PROJECTS_PATH/dotfiles"
 export EMAIL="ahrjarrett@gmail.com"
@@ -6,7 +7,7 @@ export EXCLUDED_FILES="\.exclude*|scripts|\.DS_Store|\.git$|\.gitignore$|.*.md$|
 DEFAULT_SHELL="fish"
 GITHUB_SSH="git@github.com"
 GITHUB_USER="ahrjarrett"
-SHELL_REPONAME=".fish.d"
+SHELL_REPONAME="fish.d"
 export SHELL_REPO=$GITHUB_SSH:$GITHUB_USER/$SHELL_REPONAME.git
 
 init() {
@@ -20,7 +21,6 @@ link() {
   read -s -n 1 input
   if [[ ("$input" = "y") || ("$input" = "Y") || ("$input" = "") ]] ; then
     sh scripts/link.sh
-
   else
     echo "Symlinking cancelled by user"
   return 1
