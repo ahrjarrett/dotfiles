@@ -21,8 +21,6 @@ abbr -ag o $HOME/Documents
 abbr -ag l $HOME/Downloads
 abbr -ag s $HOME/code
 
-# files
-
 # config files
 abbr -ag cfdf    $EDITOR $DOTFILES/bootstrap.exclude.sh
 abbr -ag cff     $EDITOR $INIT_FILE
@@ -34,9 +32,10 @@ abbr -ag fishit  vim $INIT_FILE
 abbr -ag bashit  vim $BASH_FILE
 abbr -ag opendf  open $DOTFILES
 abbr -ag openff  open $OMF
-# cd into these dirs
-abbr -ag dotfiles  $OMF
+# `cd` there
+abbr -ag dotfiles  $DOTFILES
 abbr -ag fishfiles  $OMF
+abbr -ag ffs  $OMF
 
 # common shell commands
 abbr -ag ll  ls -alP
@@ -55,3 +54,5 @@ abbr -ag sqldoh  (which mysql).server restart
 abbr -ag pggo  launchctl load ~/Library/LaunchAgents/homebrew.mxcl.postgresql.plist
 abbr -ag pgno  launchctl unload ~/Library/LaunchAgents/homebrew.mxcl.postgresql.plist
 
+# OMF
+abbr -ag try theme

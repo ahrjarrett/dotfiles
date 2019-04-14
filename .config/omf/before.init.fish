@@ -1,1 +1,2 @@
 echo "🐟🐟🐟 running init.fish 🐟🐟🐟"
+
