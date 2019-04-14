@@ -28,7 +28,7 @@ init() {
   if givesPermission; then
     echo "Creating projects folder at $PROJECTS_PATH..."
     mkdir -p "$PROJECTS_PATH"
-  else 
+  else
     echo "Well, I guess we won't do that then."
   fi
 }
@@ -57,8 +57,8 @@ link() {
 fetch_repos() {
   echo "\nThis utility will download repos for your configuration"
   if givesPermission; then
-    echo "Cloning fish config from $SHELL_REMOVE_REPO"
-    git clone "$SHELL_REMOVE_REPO" "./fish"
+    echo "Cloning fish config from $SHELL_REMOTE_REPO"
+    git clone "$SHELL_REMOTE_REPO" "./fish"
     cd ".."
   else
     echo "Fetch repos utility cancelled by user"

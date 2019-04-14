@@ -50,17 +50,18 @@ abbr -ag gs     git status
 abbr -ag gco    git checkout
 abbr -ag gcm    git commit -m
 abbr -ag gpom   git push origin master
+
 # databases
 abbr -ag sqlgo   (which mysql).server start
 abbr -ag sqlno   (which mysql).server stop
 abbr -ag sqldoh  (which mysql).server restart
 abbr -ag pggo  launchctl load ~/Library/LaunchAgents/homebrew.mxcl.postgresql.plist
 abbr -ag pgno  launchctl unload ~/Library/LaunchAgents/homebrew.mxcl.postgresql.plist
-### if you want ^^ launched automatically at login: ###
+### If you want ^^ launched automatically at login: ###
 # To have launchd start mysql at login:
-brew services start mysql
+#brew services start mysql
 # To have launchd start postgresql at login:
-brew services start postgresql
+#brew services start postgresql
 
 # omf
 ### Not working?
