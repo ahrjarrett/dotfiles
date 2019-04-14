@@ -169,6 +169,9 @@ defaults write com.apple.finder QLEnableTextSelection -bool true
 # Show all filename extensions in Finder by default
 defaults write NSGlobalDomain AppleShowAllExtensions -bool true
 
+# Show hidden files (have a bash alias called showit/hideit to toggle this)
+defaults write com.apple.finder AppleShowAllFiles -bool TRUE && killall Finder
+
 # Disable warning when changing a file extension
 defaults write com.apple.finder FXEnableExtensionChangeWarning -bool false
 
@@ -222,7 +225,7 @@ defaults write NSGlobalDomain KeyRepeat -int 0
 # Disable press-and-hold (that modal pop-up with diff. characters)
 defaults write NSGlobalDomain ApplePressAndHoldEnabled -bool false
 
-# Set key repeat rate from 1 (fastest) to 300000 (slowest) 
+# Set key repeat rate from 1 (fastest) to 300000 (slowest)
 defaults write NSGlobalDomain KeyRepeat -int 10
 
 # Set delay before repeat in milliseconds
