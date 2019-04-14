@@ -11,13 +11,14 @@ My notes, scripts and dotfiles for setting up my dev environment on a new comput
 
 * What it sets up
 
-macOS Defaults:
-- *Important:* See comments in [[https://github.com/ahrjarrett/dotfiles/blob/master/scripts/osx.sh][OS X Defaults file]]! Decide for yourself which parts you do and don’t want and edit the file accordingly. 
+OS X Defaults:
+- *Important:* Read the [[https://github.com/ahrjarrett/dotfiles/blob/master/scripts/osx.sh][comments in the defaults file]]! Decide for yourself which parts you want done
 
 Tools:
 - [[https://brew.sh/][Homebrew]] for managing operating system libraries
-- [[https://github.com/ggreer/the_silver_searcher][The Silver Searcher]] or ~ag~ for finding things in files
-- [[https://github.com/fish-shell/fish-shell][fish]] as your shell and [[https://github.com/jorgebucaran/fisher][fisherman]] as package manager
+- [[https://github.com/ggreer/the_silver_searcher][The Silver Searcher]] for finding things in files
+- [[https://github.com/fish-shell/fish-shell][fish]] as your shell
+- [[https://github.com/jorgebucaran/fisher][fisherman]] as your shell’s package manager
 - [[https://httpie.org/][HTTPie]] as a command line client for making REST requests
 
 Apps:
@@ -36,9 +37,9 @@ Sane OS X Defaults:
 
 1. Clone this repo anywhere on your machine
 2. /Read the scripts/! ~osx.sh~ in particular does a lot of opinonated stuff to your machine
-3. When you're ready run ~sh bootstrap.exclude.sh~
+3. When you’re ready run ~sh bootstrap.exclude.sh~
 
-That's it! 
+That’s it! 
 
 * How it works
 
@@ -47,10 +48,10 @@ That's it!
 Upon bootstrap, every file and folder you put inside this repo is will be symlinked to your home directory.
 
 A file is *excluded* if:
-1. It's an ~.org~ or ~.md~ file (documentation)
+1. It’s an ~.org~ or ~.md~ file (documentation)
 2. It lives inside the ~.excludes/~ directory (files you can install manually go here)
 3. It lives inside the ~scripts/~ directory
-4. It's something you'd probably add to a ~/.gitignore~ file (for example ~/.DS_Store~)
+4. It’s something you’d probably add to a ~/.gitignore~ file (for example ~/.DS_Store~)
 
 See [[https://github.com/ahrjarrett/dotfiles/blob/master/bootstrap.exclude.sh#L5][excluded files regex]] to alter this behavior.
 
@@ -62,41 +63,14 @@ See [[https://github.com/ahrjarrett/dotfiles/blob/master/scripts/brew.sh][brew.s
 
 Meaning if an app already exists in your Applications folder, _it will be removed and reinstalled_. This will ensure you get the latest version, but might also lose that app’s config.
 
-*Debugging:* See the [[https://github.com/ahrjarrett/dotfiles#postinstall-checklist][Postinstall Checklist]] if something goes wrong (or if you're looking to do more advanced config).
+*** Debugging
 
-
-* Preflight Checklist
-
-Reformatting your machine? Do this first:
-
-** TODO 1. Clean up files
-
-- [ ] Go through Documents & Downloads folder
-- [ ] Go through Library/Contacts folder
-- [ ] Big files like videos, tutorials & audio recordings go to Drive, Dropbox
-- [ ] Notes & org-mode files go to Dropbox
-- [ ] Documents, designs & current reading list go to iCloud
-- [ ] $HOME folder, miscellaneous config files go to iCloud
-- [ ] Copy .env files for bkwds, AWS apps, DigitalOcean & Pineneedles to iCloud dir
-- [ ] eBook library goes to bitbucket
-
-** TODO 2. Clean up projects
-
-- [ ] Make sure you've committed and push all branches of active projects
-- [ ] Make sure there are no orphans without remotes that you might care about
-- [ ] ~.env files~! Double check that you got them all.
-- [ ] Go through project directory (~stuff~, ~code~), and ugh -- /don't be a packrat/
-  
-** TODO 3. Backup dotfiles_stash
-
-Make a quick sweep and grab what you can.
-
-Copy/pasta what you find to an iCloud folder named ~dotfiles_stash~ 
+See the [[https://github.com/ahrjarrett/dotfiles#postinstall-checklist][Postinstall Checklist]] if something goes wrong (or if you’re looking to do more advanced config).
 
 
 * Postinstall Checklist
 
-You just ran the bootstrap script. Cool. Here's some stuff you might consider next:
+You just ran the bootstrap script. Cool. Here’s some stuff you might consider next:
 
 ** TODO Configure Chrome
 
@@ -156,9 +130,9 @@ Visit [[chrome://extensions]] to see and configure your extensions
 
 *** 4. Tips & Tricks
 
-*Tip:* If you're looking to configure Chrome, [[chrome://chrome-urls]] is my favorite place to start.
+*Tip:* If you’re looking to configure Chrome, [[chrome://chrome-urls]] is my favorite place to start.
 
-It's basically a sitemap for everything configurable in Chrome. From there I access links like these:
+It’s basically a sitemap for everything configurable in Chrome. From there I access links like these:
 
 - [[chrome://bookmarks]]
 - [[chrome://flags]] -- /Chrome will do some really neat stuff if you know to ask it to/
@@ -179,7 +153,7 @@ Here are some flags I like to turn on. Read what they do first, etc etc.
 | Hardware-accelerated video decode            | #disable-accelerated-video-decode    | Enabled |
 | Creation of app shims for hosted apps on Mac | #disable-hosted-app-shim-creation    | Enabled |
 
-If you're really feeling adventurous, check out [[https://www.google.com/chrome/canary/][Chrome Canary]].
+If you’re really feeling adventurous, check out [[https://www.google.com/chrome/canary/][Chrome Canary]].
 
 ** DONE Installed OS X Apps
 
@@ -187,20 +161,20 @@ If you're really feeling adventurous, check out [[https://www.google.com/chrome/
 
 You already did this when you bootstraped. This step is no longer done manually.
 
-However if the bootstrap failed you'll want to check if any of these failed to install:
+However if the bootstrap failed you’ll want to check if any of these failed to install:
 
-- [x] Chrome [[https://www.google.com/chrome/b][Download]]
-- [x] Dropbox [[https://www.dropbox.com/install][Download]]
-- [x] Emacs (copy from iCloud if borked)
-- [x] Keycastr [[https://github.com/keycastr/keycastr][Download]]
-- [x] Sequel Pro [[https://sequelpro.com/download][Download]]
-- [x] Sketch [[https://www.sketch.com/get/][Download]]
-- [x] Slack [[https://slack.com/downloads/mac][Download]]
-- [x] Spectacle [[https://www.spectacleapp.com/][Download]]
-- [x] Spotify [[https://www.spotify.com/download][Download]]
-- [x] The Unarchiver [[https://theunarchiver.com/][Download]]
-- [x] VLC [[https://www.videolan.org/vlc/][Download]]
-- [x] VS Code [[https://code.visualstudio.com/docs/?dv=osx][Download]]
+- [x] Chrome - [[https://www.google.com/chrome/b][Download]]
+- [x] Dropbox - [[https://www.dropbox.com/install][Download]]
+- [x] Emacs - (copy from iCloud if borked)
+- [x] Keycastr - [[https://github.com/keycastr/keycastr][Download]]
+- [x] Sequel Pro - [[https://sequelpro.com/download][Download]]
+- [x] Sketch - [[https://www.sketch.com/get/][Download]]
+- [x] Slack - [[https://slack.com/downloads/mac][Download]]
+- [x] Spectacle - [[https://www.spectacleapp.com/][Download]]
+- [x] Spotify - [[https://www.spotify.com/download][Download]]
+- [x] The Unarchiver - [[https://theunarchiver.com/][Download]]
+- [x] VLC - [[https://www.videolan.org/vlc/][Download]]
+- [x] VS Code - [[https://code.visualstudio.com/docs/?dv=osx][Download]]
 
 ** DONE Symlink dotfiles & configure shell
 
@@ -208,7 +182,7 @@ However if the bootstrap failed you'll want to check if any of these failed to i
 
 You already did this when you bootstrapped. This step is no longer done manually.
 
-If it turns out you're missing something from the dotfiles repo, check the iCloud ~dotfiles_stash~ backup you made during Preflight.
+If it turns out you’re missing something from the dotfiles repo, check the iCloud ~dotfiles_stash~ backup you made during Preflight.
 
 
 ** Passwords, secret files, etc.
