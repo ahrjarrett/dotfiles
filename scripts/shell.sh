@@ -1,7 +1,7 @@
 #!/bin/sh
 
 DOTFILES="$PROJECTS_PATH/dotfiles"
-FISH_PATH="$DOTFILES/.config/fish"
+FISH_PATH="$PWD/.config/fish"
 
 echo "TRASH ME:\n\n\n DOTFILES = $DOTFILES \n\n PROJECTS_PATH = $PROJECTS_PATH \n\n\n"
 
