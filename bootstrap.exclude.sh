@@ -1,37 +1,26 @@
 #!/bin/sh
-
-PROJECTS_DIR="$HOME/Desktop/code"
+export PROJECTS_PATH="$HOME/code"
+export DOTFILES="$PROJECTS_PATH/dotfiles"
+export EMAIL="ahrjarrett@gmail.com"
+export EXCLUDED_FILES="\.exclude*|scripts|\.DS_Store|\.git$|\.gitignore$|.*.md$|.*.org$"
 DEFAULT_SHELL="fish"
-EXCLUDED_FILES="\.exclude*|scripts|\.DS_Store|\.git$|\.gitignore$|.*.md$|.*.org$"
+GITHUB_SSH="git@github.com"
+GITHUB_USER="ahrjarrett"
+SHELL_REPONAME=".fish.d"
+export SHELL_REPO=$GITHUB_SSH:$GITHUB_USER/$SHELL_REPONAME.git
 
-
-
-# DELETE WHEN REMOVING HACK FISHER INSTALL IN CONFIGURE_SCRIPTS
-FISH_PATH="$PROJECTS_DIR/dotfiles/.config/fish"
-
-# Initialize a few things
-init () {
-	echo "Making a projects folder if it doesn't already exist..."
-	mkdir -p "$PROJECTS_DIR"
+init() {
+	echo "Making a projects folder at $PROJECTS_PATH if it doesn't already exist..."
+	mkdir -p "$PROJECTS_PATH"
 }
 
-# TODO : Delete symlinks to deleted files
-# rsync might be good for this
-link () {
+link() {
 	echo "\nThis utility will symlink the files in this repo to $HOME"
 	echo "Proceed? (Y/n)"
   read -s -n 1 input
   if [[ ("$input" = "y") || ("$input" = "Y") || ("$input" = "") ]] ; then
-    # TODO - regex here?
-    for file in $( ls -A | grep -vE $EXCLUDED_FILES ) ; do
-      if [[ "$file" = ".ssh_config" ]] ; then
-        mkdir -p "$HOME/.ssh"
-        ln -sv "$PWD/.ssh_config" "$HOME/.ssh/config"
-      else 
-        ln -sv "$PWD/$file" "$HOME"
-      fi
-    done
-    echo "Symlinking complete"
+    sh scripts/link.sh
+
   else
     echo "Symlinking cancelled by user"
   return 1
@@ -49,7 +38,21 @@ generate_ssh() {
   fi
 }
 
-brew_install () {
+fetch_repos() {
+  echo "\nThis utility will download repos for your configuration\n"
+  echo "Proceed? (Y/n)"
+  read -s -n 1 input
+  if [[ ("$input" = "y") || ("$input" = "Y") || ("$input" = "") ]] ; then
+    mkdir -p ".config" && cd ".config"
+    echo "Cloning fish config from $SHELL_REPO"
+    git clone "$SHELL_REPO" "./fish"
+    cd ".."
+  else
+    echo "Fetch repos utility cancelled by user"
+  fi
+}
+
+brew_install() {
   echo "\nThis utility will install useful utilities using Homebrew"
   echo "Proceed? (Y/n)"
   read -s -n 1 input
@@ -61,16 +64,12 @@ brew_install () {
   fi
 }
 
-configure_shell () {
+configure_shell() {
   echo "\nThis utility will configure your $DEFAULT_SHELL shell"
   echo "Proceed? (Y/n)"
   read -s -n 1 input
   if [[ ("$input" = "y") || ("$input" = "Y") || ("$input" = "") ]] ; then
     echo "Installing dependencies and configuring $DEFAULT_SHELL..."
-
-    # HACK, move this to configure_shell script soon; here for now 
-    echo "Installing fisher...."
-    curl https://git.io/fisher --create-dirs -sLo "$FISH_PATH/functions/fisher.fish"
 
     sh scripts/shell.sh
   else
@@ -78,7 +77,7 @@ configure_shell () {
   fi
 }
 
-osx_defaults () {
+osx_defaults() {
   echo "\nThis utility will set a bunch of OS X defaults for you. \n Please read osx.exclude.sh before running, as many settings are experimental!"
   echo "Proceed? (Y/n)"
   read -s -n 1 input
@@ -91,9 +90,10 @@ osx_defaults () {
 }
 
 
-#init
+init
+generate_ssh
 link
+fetch_repos
 #brew_install
 configure_shell
-#generate_ssh
 #osx_defaults

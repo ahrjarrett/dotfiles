@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-DEFAULT_DESKTOP=$HOME/dotfiles/.exclude/DesktopDefault.jpg
+DEFAULT_DESKTOP=$PROJECTS_DIR/dotfiles/.exclude/DesktopDefault.jpg
 
 #################################################
 ### GENERAL

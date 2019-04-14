@@ -1,9 +1,11 @@
 #!/bin/sh
 
-DOTFILES_PATH="$HOME/Desktop/code/dotfiles"
-FISH_PATH="$DOTFILES_PATH/.config/fish"
+DOTFILES="$PROJECTS_PATH/dotfiles"
+FISH_PATH="$DOTFILES/.config/fish"
 
-echo "Installing fisher...."
+echo "TRASH ME:\n\n\n DOTFILES = $DOTFILES \n\n PROJECTS_PATH = $PROJECTS_PATH \n\n\n"
+
+echo "Installing fisher to $FISH_PATH...."
 curl https://git.io/fisher --create-dirs -sLo "$FISH_PATH/functions/fisher.fish"
 
 echo "Adding fish to /etc/shells and making fish the default shell..."
@@ -16,4 +18,3 @@ echo "Installing gruvbox theme...."
 fish -c "fisher add Jomik/fish-gruvbox"
 
 printf "\n\e[36m🐠🐠🐠 fish install complete 🐠🐠🐠\e[0m\n"
-

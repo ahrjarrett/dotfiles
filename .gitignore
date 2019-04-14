@@ -1,4 +1,3 @@
-.spacemacs.d/*
-!.spacemacs.d/configuration.org
-!.spacemacs.d/init.el
-
+.config
+# .config/fish
+# .config/fisher
