@@ -9,7 +9,8 @@ export USER_RAILS_VERSION="5.2.0"
 export NPM_USERNAME="ahrjarrett"
 GITHUB_USERNAME="ahrjarrett"
 DEFAULT_SHELL="fish"
-SHELL_REPONAME="fish"
+SHELL_REPONAME=".fish.d"
+export FISH_CONFIG_PATH="$HOME/.fish.d"
 export SHELL_REMOTE_REPO="git@github.com:$GITHUB_USERNAME/$SHELL_REPONAME.git"
 
 givesPermission() {
@@ -58,8 +59,16 @@ fetch_repos() {
   echo "\nThis utility will download repos for your configuration"
   if givesPermission; then
     echo "Cloning fish config from $SHELL_REMOTE_REPO"
-    git clone "$SHELL_REMOTE_REPO" "./fish"
-    cd ".."
+    # 1. fetch repo at ~/.fish.d
+    git clone "$SHELL_REMOTE_REPO" "$FISH_CONFIG_PATH"
+    # 2. rm anything inside $OMF_CONFIG, if there
+    # 2.5?. SET $OMF_CONFIG to point at $FISH_CONFIG_PATH
+    # DONE: already set above
+    # 3. ln -sv "$HOME/.fish.d" "$PWD/.config/omf"
+    ln -sv "$HOME/.fish.d" "$PWD/.config/omf"
+    echo "fetch repos vars:"
+    echo "SHELL_REMOTE_REPO: $SHELL_REMOTE_REPO"
+    echo "FISH_CONFIG_PATH: $FISH_CONFIG_PATH"
   else
     echo "Fetch repos utility cancelled by user"
   fi
@@ -117,11 +126,11 @@ setup_node() {
 }
 
 init
-generate_ssh
+#generate_ssh
 link
 fetch_repos
-brew_install
+#brew_install
 configure_shell
-osx_defaults
-setup_ruby
-setup_node
+#osx_defaults
+#setup_ruby
+#setup_node
