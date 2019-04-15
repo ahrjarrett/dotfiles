@@ -2,12 +2,10 @@
 #+EMAIL:ahrjarrett@gmail.com
 #+DATE: 11/29/16
 
-*** dotfiles
+*** ⚫ dotfiles
 
 - minimal bash & vim setup
 - [[https://github.com/ahrjarrett/fish.d][fish shell]] config with cool fzf search
-- if you don’t want the [[https://github.com/ahrjarrett/scripts][bootstrap script]] to install it for you, but it in ~.exclude~
+- if you don’t want the [[https://github.com/ahrjarrett/scripts][bootstrap script]] to install it for you, put it in ~.exclude~
 
-started 2016/11/29
-
-⚫️
+11.29.2019
