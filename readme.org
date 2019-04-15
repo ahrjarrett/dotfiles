@@ -1,14 +1,15 @@
-#+TITLE: dotfiles
+#+TITLE: d⚫tfiles
 #+AUTHOR: Andrew Jarrett
 #+EMAIL:ahrjarrett@gmail.com
 #+DATE: 11/29/16
-
-1st commit 2016-11-29
+2016-11-29
 
 minimal bash & vim setup
 
-fish shell config with cool fzf search
+1st commit 2016-11-29
 
-~.exclude~ is where i put anything i don't want installed automatically by my [[https://github.com/ahrjarrett/scripts][bootstrap script]]
+[[https://github.com/ahrjarrett/fish.d][fish shell]] config with cool fzf search
 
-⚫️
+~.exclude~ is where i put anything i don't want installed automatically by the [[https://github.com/ahrjarrett/scripts][bootstrap script]]
+
+️
