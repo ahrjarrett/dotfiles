@@ -8,7 +8,6 @@ endif
 
 set number
 set ruler
-set paste
 set nowrap
 set softtabstop=2
 set shiftwidth=2
@@ -66,7 +65,7 @@ Plug 'tlhr/anderson.vim'
 Plug 'liuchengxu/space-vim-dark'
 call plug#end()
 
-set rtp+=/usr/local/bin/fzf
+""set rtp+=/usr/local/bin/fzf
 
 colorscheme gruvbox
 set termguicolors
@@ -127,15 +126,60 @@ let g:fzf_buffers_jump = 1
 nmap <Leader><Tab> <plug>(fzf-maps-n)
 vmap <Leader><Tab> <plug>(fzf-maps-x)
 nmap <C-O> :Files!<CR>
-nmap <C-S> :Lines!<CR>
+"" search all from CWD with preview
+nmap <C-S> :Ag!<CR>
+nmap <Leader>fe :Explore<CR>
 nmap <Leader>ff :Files!<CR>
 nmap <Leader>ww :Windows<CR>
 nmap <Leader>bb :Buffers<CR>
 nmap <Leader>tt :Colors<CR>
 nmap <Leader>cc :Commands<CR>
+"" search all buffers
+nmap <Leader>sa :Lines<CR>
+"" search current buffer
+nmap <Leader>sb :BLines<CR>
 nmap <Leader>gc :Commits<CR>
+nmap <Leader>gf :GFiles?<CR>
+nmap <Leader>ct :Tags<CR>
+nmap <Leader>bt :BTags<CR>
 
+let g:fzf_layout = { 'down': '~20%' }
 
+" In Neovim, you can set up fzf window using a Vim command
+let g:fzf_layout = { 'window': 'enew' }
+
+let g:fzf_colors =
+\ { 'fg':      ['fg', 'Normal'],
+  \ 'bg':      ['bg', 'Normal'],
+  \ 'hl':      ['fg', 'Comment'],
+  \ 'fg+':     ['fg', 'CursorLine', 'CursorColumn', 'Normal'],
+  \ 'bg+':     ['bg', 'CursorLine', 'CursorColumn'],
+  \ 'hl+':     ['fg', 'Statement'],
+  \ 'info':    ['fg', 'PreProc'],
+  \ 'border':  ['fg', 'Ignore'],
+  \ 'prompt':  ['fg', 'Conditional'],
+  \ 'pointer': ['fg', 'Exception'],
+  \ 'marker':  ['fg', 'Keyword'],
+  \ 'spinner': ['fg', 'Label'],
+  \ 'header':  ['fg', 'Comment'] }
+
+" [[B]Commits] Customize the options used by 'git log':
+let g:fzf_commits_log_options = '--graph --color=always --format="%C(auto)%h%d %s %C(black)%C(bold)%cr"'
+
+" [Tags] Command to generate tags file
+let g:fzf_tags_command = 'ctags -R'
+"" Rails Project:
+"" ctags -R --exclude=.git --exclude=log . (bundle list --paths) -f .tags-json
+
+"" Add preview to :Files cmd
 command! -bang -nargs=? -complete=dir Files
   \ call fzf#vim#files(<q-args>, fzf#vim#with_preview(), <bang>0)
+
+"" Add preview to :Ag! cmd
+command! -bang -nargs=* Ag
+  \ call fzf#vim#ag(<q-args>,
+  \                 <bang>0 ? fzf#vim#with_preview('right:50%')
+  \                         : fzf#vim#with_preview('right:10%:hidden', '?'),
+  \                 <bang>0)
+
 

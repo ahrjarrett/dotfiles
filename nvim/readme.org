@@ -27,18 +27,20 @@ Currently set to spacebar
 
 ** bindings
 
-| Custom Binding | Mode | Command          |
-|----------------+------+------------------|
-| <SPC> <SPC>    | N    | Open last file   |
-| <SPC> <Tab>    | N,V  | fzf-maps-{n,x}   |
-| <SPC> <C-Q>    | N    | :source $MYVIMRC |
-| <SPC> f b      | N    | fzf :Buffers     |
-| <SPC> f f      | N    | :GitFiles!       |
-| <SPC> f c      | N    | :Commands        |
-| <C-O>          | N    | :GitFiles!       |
-| <C-J> / <C-I>  | N    | Jump mode*       |
+| Custom Binding | Mode | Command                        |
+|----------------+------+--------------------------------|
+| <SPC> <SPC>    | N    | Open last file                 |
+| <SPC> <Tab>    | N,V  | fzf-maps-{n,x}                 |
+| <SPC> <C-Q>    | N    | :source $MYVIMRC               |
+| <SPC> f b      | N    | fzf :Buffers                   |
+| <SPC> f f      | N    | :GitFiles!                     |
+| <SPC> f c      | N    | :Commands                      |
+| <C-O>          | N    | :GitFiles!                     |
+| <C-J> / <C-I>  | N    | Jump mode**                    |
+| <C-]>          | N    | Follow ctag definition         |
+| <C-T>          | N    | Jump back from ctag definition |
 
- * <C-J> is a remapping from <C-O>, which is now used to open files in current project
+ ** <C-J> is a remapping from <C-O>, which is now used to open files in current project
 
 * nvim
 
@@ -59,4 +61,17 @@ Add to actions to create your own
 
 
 
+
+
+* ctags
+
+[[https://www.boost.co.nz/blog/2018/01/improving-ruby-rails-debugging-ctags][Guide to setting up ctags for Rails]]
+
+#+BEGIN_SRC shell
+  ctags -R --languages=ruby --exclude=.git --exclude=log . $(bundle list --paths) -f .tags-json
+#+END_SRC
+
+Note: Currently gives me an error message about the ~-f~ flag. Also, make sure you add the tags file to your .gitignore
+
+~C-]~ to jump to definition, ~C-t~ to jump back
 
