@@ -1,7 +1,7 @@
 set nocompatible
 syntax enable
 
-"" use regular shell instead of fish inside vim
+"" use regular shell inside vim (instead of fish)
 if &shell =~# 'fish$'
 	set shell=sh
 endif
@@ -30,26 +30,35 @@ set ls=2
 set clipboard=unnamedplus
 "" enable mouse bc lazy
 set mouse=a
+"" don't hide chars from me
+set conceallevel=1
 
 "" Remove trailling whitespace on :w
 autocmd BufWritePre * :%s/\s\+$//e
 
 "" install vim-plug for minimal pkg mgmt: https://github.com/junegunn/vim-plug
-if empty(glob('~/.vim/autoload/plug.vim'))
-  silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs
+if empty(glob('~/code/dotfiles/nvim/autoload/plug.vim'))
+  silent !curl -fLo ~/code/dotfiles/nvim/autoload/plug.vim --create-dirs
     \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
   autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
 endif
 
-call plug#begin('~/.vim/bundle')
+call plug#begin('~/code/dotfiles/nvim/bundle')
 Plug 'junegunn/vim-plug'
 Plug 'dag/vim-fish'
+Plug 'tpope/vim-rails'
+"" Plug '/usr/local/bin/fzf'
+Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+Plug 'junegunn/fzf.vim'
 "" themes
 Plug 'morhetz/gruvbox'
 Plug 'jdsimcoe/abstract.vim'
 Plug 'tlhr/anderson.vim'
 Plug 'liuchengxu/space-vim-dark'
 call plug#end()
+
+set rtp+=/usr/local/bin/fzf
+
 
 colorscheme gruvbox
 set termguicolors
@@ -61,6 +70,26 @@ autocmd FileType fish compiler fish
 autocmd FileType fish setlocal textwidth=79
 "" Enable folding of block structures in fish.
 autocmd FileType fish setlocal foldmethod=expr
-"" add vim fish to vim runtime path manually (see readme in .vim)
-set runtimepath^=$HOME/.vim/bundle/vim-fish
 
+"" arrow keys adjust panes
+nnoremap <Left> :vertical resize -1<CR>
+nnoremap <Right> :vertical resize +1<CR>
+nnoremap <Up> :resize -1<CR>
+nnoremap <Down> :resize +1<CR>
+
+let mapleader="\<SPACE>"
+"" return to last file opened
+nmap <Leader><Leader> <c-^>
+
+
+"" source vim settings with <SPC> & Ctrl+Q
+nmap <Leader><c-q> :source $MYVIMRC<CR>
+
+"" fzf
+nmap <Leader><Tab> <plug>(fzf-maps-n)
+xmap <Leader><Tab> <plug>(fzf-maps-x)
+omap <Leader><Tab> <plug>(fzf-maps-o)
+
+
+"" fzf
+"fzf --bind 'f1:execute(less -f {}),ctrl-y:execute-silent(echo {} | pbcopy)+abort'

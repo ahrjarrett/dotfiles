@@ -13,3 +13,32 @@ Once you clone, just run ~:PlugInstall~ to install your dependencies, then you'r
 
 ~:help plug-options~ for help/manual
 
+* packages
+
+** ruby / rails
+
+~https://github.com/tpope/vim-rails~
+
+* custom keybindings
+
+** leader key
+
+set to space
+
+** bindings
+
+| Custom Binding | Mode | Command        |
+|----------------+------+----------------|
+| <SPC><SPC>     | N    | Open last file |
+|                |      |                |
+
+
+* nvim
+
+| Binding | Behavior          |
+|---------+-------------------|
+| K       | :Man -> Nice!     |
+| g f     | Follow definition |
+|         |                   |
+
+
