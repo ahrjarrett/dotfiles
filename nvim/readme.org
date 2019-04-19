@@ -1,4 +1,4 @@
-#+TITLE: .vim readme
+#+TITLE: neo vim readme
 #+AUTHOR: Andrew Jarrett
 #+EMAIL:ahrjarrett@gmail.com
 #+DATE: 04/18/2019
@@ -23,7 +23,7 @@ Once you clone, just run ~:PlugInstall~ to install your dependencies, then you'r
 
 ** leader key
 
-set to space
+Currently set to spacebar
 
 ** bindings
 

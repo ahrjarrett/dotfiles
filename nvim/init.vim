@@ -14,6 +14,8 @@ set softtabstop=2
 set shiftwidth=2
 set expandtab
 set tabstop=2
+"" allow buffers to be in the bg even if unsaved:
+set hidden
 set autoindent
 "" turn off annoying bells
 set noerrorbells visualbell t_vb=
@@ -77,6 +79,27 @@ autocmd FileType fish setlocal textwidth=79
 "" Enable folding of block structures in fish.
 autocmd FileType fish setlocal foldmethod=expr
 
+let mapleader="\<SPACE>"
+"" return to last file opened
+nmap <Leader><Leader> <c-^>
+"" source vim settings with <SPC> & Ctrl+Q
+nmap <Leader><C-Q> :source $MYVIMRC<CR>
+nmap <Leader>vi :edit ~/code/dotfiles/nvim/init.vim<CR>
+" delete buffer without killing window
+"nmap <Leader>bq :bp|bd<CR>
+nmap <Leader>wj <C-W>j<CR>
+nmap <Leader>wk <C-W>k<CR>
+nmap <Leader>wh <C-W>h<CR>
+nmap <Leader>wl <C-W>l<CR>
+nmap <Leader>wJ <C-W>J<CR>
+nmap <Leader>wK <C-W>K<CR>
+nmap <Leader>wH <C-W>H<CR>
+nmap <Leader>wL <C-W>L<CR>
+nmap <Leader>ws <C-W>s<CR>
+nmap <Leader>wv <C-W>v<CR>
+nmap <Leader>wq :close<CR>
+nmap <Leader>fs :w<CR>
+
 "" arrow keys adjust panes
 nnoremap <Left> :vertical resize -1<CR>
 nnoremap <Right> :vertical resize +1<CR>
@@ -84,25 +107,35 @@ nnoremap <Up> :resize -1<CR>
 nnoremap <Down> :resize +1<CR>
 
 "" use \c-j to jump, instead of \c-o
-:nnoremap <C-J> <C-O>
-:nmap <C-O> :GitFiles!<CR>
+nnoremap <C-J> <C-O>
 
-let mapleader="\<SPACE>"
-"" return to last file opened
-nmap <Leader><Leader> <c-^>
-"" source vim settings with <SPC> & Ctrl+Q
-nmap <Leader><C-Q> :source $MYVIMRC<CR>
-nmap <Leader><Tab> <plug>(fzf-maps-n)
-xmap <Leader><Tab> <plug>(fzf-maps-x)
-nmap <Leader>fb :Buffers<CR>
-nmap <Leader>ff :GitFiles!<CR>
-nmap <Leader>fc :Commands<CR>
+nnoremap <SPACE> <Nop>
+nnoremap ; <Nop>
+nnoremap , <Nop>
+
+"" Emacs commands
+nmap <C-X><C-S> :w<CR>
+"" \c-g as escape not working UGH
+nmap <C-G> <Esc>
+imap <C-G> <Esc>
+vmap <C-G> <Esc>
+map <C-G> <Esc>
 
 "" fzf
-"nmap <Leader>s <plug>(fzf-buffers)
-"let g:fzf_buffers_jump = 1
-"" broken stuff
-"nmap <Leader>s :FZF <C-R><C-W>
-"command! -bang MyStuff
-"  \ call fzf#run(fzf#wrap('code', {'dir': '~/code'}, <bang>0))
-"fzf --bind 'f1:execute(less -f {}),ctrl-y:execute-silent(echo {} | pbcopy)+abort'
+let $FZF_DEFAULT_COMMAND = 'ag --nocolor -H -g "" 2>/dev/null'
+let g:fzf_buffers_jump = 1
+nmap <Leader><Tab> <plug>(fzf-maps-n)
+vmap <Leader><Tab> <plug>(fzf-maps-x)
+nmap <C-O> :Files!<CR>
+nmap <C-S> :Lines!<CR>
+nmap <Leader>ff :Files!<CR>
+nmap <Leader>ww :Windows<CR>
+nmap <Leader>bb :Buffers<CR>
+nmap <Leader>tt :Colors<CR>
+nmap <Leader>cc :Commands<CR>
+nmap <Leader>gc :Commits<CR>
+
+
+command! -bang -nargs=? -complete=dir Files
+  \ call fzf#vim#files(<q-args>, fzf#vim#with_preview(), <bang>0)
+
