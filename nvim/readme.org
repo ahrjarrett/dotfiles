@@ -1,0 +1,15 @@
+#+TITLE: .vim readme
+#+AUTHOR: Andrew Jarrett
+#+EMAIL:ahrjarrett@gmail.com
+#+DATE: 04/18/2019
+
+Using ~vim-plug~ for package management. Finally broke down and started configuring vim again -- mostly for the package ~vim-fish~.
+
+[[https://github.com/junegunn/vim-plug/wiki/tips#automatic-installation][Installing vim-plug]]
+
+Once you clone, just run ~:PlugInstall~ to install your dependencies, then you're off to the races.
+
+~:PlugUpdate~ updates 'em, and ~:PlugDiff~ shows you what changed.
+
+~:help plug-options~ for help/manual
+

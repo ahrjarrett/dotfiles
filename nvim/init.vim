@@ -1,6 +1,11 @@
 set nocompatible
 syntax enable
 
+"" use regular shell instead of fish inside vim
+if &shell =~# 'fish$'
+	set shell=sh
+endif
+
 set number
 set ruler
 set paste
@@ -47,6 +52,7 @@ Plug 'liuchengxu/space-vim-dark'
 call plug#end()
 
 colorscheme gruvbox
+set termguicolors
 
 "" vim-fish -> https://github.com/dag/vim-fish
 "" Set up :make to use fish for syntax checking.
