@@ -1,4 +1,5 @@
 .DS_Store
+.netrwhist
 .config/omf
 .config/configstore
 bundle/
