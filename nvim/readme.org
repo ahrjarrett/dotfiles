@@ -27,18 +27,36 @@ set to space
 
 ** bindings
 
-| Custom Binding | Mode | Command        |
-|----------------+------+----------------|
-| <SPC><SPC>     | N    | Open last file |
-|                |      |                |
+| Custom Binding | Mode | Command          |
+|----------------+------+------------------|
+| <SPC> <SPC>    | N    | Open last file   |
+| <SPC> <Tab>    | N,V  | fzf-maps-{n,x}   |
+| <SPC> <C-Q>    | N    | :source $MYVIMRC |
+| <SPC> f b      | N    | fzf :Buffers     |
+| <SPC> f f      | N    | :GitFiles!       |
+| <SPC> f c      | N    | :Commands        |
+| <C-O>          | N    | :GitFiles!       |
+| <C-J> / <C-I>  | N    | Jump mode*       |
 
+ * <C-J> is a remapping from <C-O>, which is now used to open files in current project
 
 * nvim
 
-| Binding | Behavior          |
-|---------+-------------------|
-| K       | :Man -> Nice!     |
-| g f     | Follow definition |
-|         |                   |
+| Binding   | Behavior          |
+|-----------+-------------------|
+| K         | :Man -> Nice!     |
+| g f       | Follow definition |
+| \c-w \c-w | Switch window     |
+|           |                   |
+
+** fzf
+
+~:FZF~, then:
+
+CTRL-T, CTRL-X or CTRL-V to open selected files in the current window, in new tabs, in horizontal splits, or in vertical splits respectively.
+
+Add to actions to create your own
+
+
 
 
