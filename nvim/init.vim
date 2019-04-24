@@ -9,6 +9,7 @@ endif
 set number
 set ruler
 set nowrap
+set timeoutlen=500
 set softtabstop=2
 set shiftwidth=2
 set expandtab
@@ -25,6 +26,7 @@ set wildignore=*~,.git,node_modules
 set showcmd
 "" search settings
 set hlsearch
+
 set ignorecase
 set smartcase
 "" show filename at bottom
@@ -47,6 +49,7 @@ autocmd BufWritePre * :%s/\s\+$//e
 nmap j gj
 nmap k gk
 
+
 "" install vim-plug for minimal pkg mgmt: https://github.com/junegunn/vim-plug
 if empty(glob('~/code/dotfiles/nvim/autoload/plug.vim'))
   silent !curl -fLo ~/code/dotfiles/nvim/autoload/plug.vim --create-dirs
@@ -59,18 +62,21 @@ Plug 'junegunn/vim-plug'
 Plug 'dag/vim-fish'
 Plug 'vim-ruby/vim-ruby'
 Plug 'tpope/vim-rails'
-Plug 'Shougo/unite.vim' " remove, unless you're using? seems /expensive/
-Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
-Plug 'junegunn/fzf.vim'
+"Plug 'Shougo/unite.vim' " remove, unless you're using? seems /expensive/
+Plug 'PeterRincker/vim-searchlight'
+Plug 'jreybert/vimagit'
+Plug 'liuchengxu/vim-which-key', { 'on': ['WhichKey', 'WhichKey!'] }
 Plug 'prettier/vim-prettier', {
   \ 'do': 'yarn install',
   \ 'for': ['javascript', 'typescript', 'ruby', 'css', 'json', 'graphql', 'markdown', 'yaml', 'html'] }
-Plug 'jreybert/vimagit'
+Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+Plug 'junegunn/fzf.vim'
 "" themes
 Plug 'morhetz/gruvbox'
 Plug 'jdsimcoe/abstract.vim'
 Plug 'tlhr/anderson.vim'
 Plug 'liuchengxu/space-vim-dark'
+
 
 call plug#end()
 
@@ -91,23 +97,58 @@ let mapleader="\<SPACE>"
 "" return to last file opened
 nmap <Leader><Leader> <c-^>
 "" source vim settings with <SPC> & Ctrl+Q
-nmap <Leader><C-Q> :source $MYVIMRC<CR>
-nmap <Leader>vi :edit ~/code/dotfiles/nvim/init.vim<CR>
+nmap <Leader><C-q> :source $MYVIMRC<CR>
+nmap <Leader>vi :edit $MYVIMRC<CR>
 " delete buffer without killing window
-"nmap <Leader>bq :bp|bd<CR>
-nmap <Leader>wj <C-W>j<CR>
-nmap <Leader>wk <C-W>k<CR>
-nmap <Leader>wh <C-W>h<CR>
-nmap <Leader>wl <C-W>l<CR>
-nmap <Leader>wJ <C-W>J<CR>
-nmap <Leader>wK <C-W>K<CR>
-nmap <Leader>wH <C-W>H<CR>
-nmap <Leader>wL <C-W>L<CR>
-nmap <Leader>ws <C-W>s<CR>
-nmap <Leader>wv <C-W>v<CR>
+nmap <Leader>bd :bd <C-^><CR>
+nmap <Leader>wj <C-w>j
+nmap <Leader>wk <C-w>k
+nmap <Leader>wh <C-w>h
+nmap <Leader>wl <C-w>l
+nmap <Leader>wJ <C-w>J
+nmap <Leader>wK <C-w>K
+nmap <Leader>wH <C-w>H
+nmap <Leader>wL <C-w>L
+nmap <Leader>ws <C-w>s
+nmap <Leader>wv <C-w>v
 nmap <Leader>wq :close<CR>
 nmap <Leader>fs :w<CR>
 nmap <Leader>qq :qa<CR>
+nmap <Leader>/ :noh<CR>
+
+""""" ALT
+imap <A-bs> <C-w>
+nmap <A-j> <C-w>j
+nmap <A-k> <C-w>k
+nmap <A-h> <C-w>h
+nmap <A-l> <C-w>l
+nmap <A-\> <C-w>v
+nmap <A--> <C-w>s
+nmap <A-S-j> <C-w>J
+nmap <A-S-k> <C-w>K
+nmap <A-S-h> <C-w>H
+nmap <A-S-l> <C-w>L
+nmap <A-/> :noh<CR>
+imap <A-/> <Esc>:noh<CR>a
+tnoremap <A-/> <C-\><C-n>:noh<CR>A
+tnoremap <A-h> <C-\><C-n><C-w>h
+tnoremap <A-j> <C-\><C-n><C-w>j
+tnoremap <A-k> <C-\><C-n><C-w>k
+tnoremap <A-l> <C-\><C-n><C-w>l
+"" Alt+Up :: jump to prev terminal command (♖ starts shell prompt)
+tnoremap <A-up> <C-\><C-n>0?^♖.*$<CR>
+tnoremap <A-down> <C-\><C-n>$/^♖.*$<CR>
+nnoremap <A-up> <C-\><C-n>0?^♖.*$<CR>
+nnoremap <A-down> <C-\><C-n>$/^♖.*$<CR>
+
+nmap <A-t> :cd %:p:h<CR>:terminal<CR>Afish<CR>
+nmap <A-S-t> :cd %:p:h<CR><C-w>s<CR>:terminal<CR>Afish<CR>
+nmap <A-b> :Buffers<CR>
+nmap <A-S-b>d :Bclose<CR>
+nmap <A-v> :edit $MYVIMRC<CR>
+nmap <A-S-v>s :source $MYVIMRC<CR>
+nmap <A-x> :Commands<CR>
+nmap <A-`> :Marks<CR>
 
 "" arrow keys adjust panes
 nnoremap <Left> :vertical resize -1<CR>
@@ -116,25 +157,27 @@ nnoremap <Up> :resize -1<CR>
 nnoremap <Down> :resize +1<CR>
 
 "" use \c-j to jump, instead of \c-o
-nnoremap <C-J> <C-O>
+nnoremap <C-j> <C-o>
 
 nnoremap <SPACE> <Nop>
 nnoremap ; <Nop>
 nnoremap , <Nop>
 
 "" Emacs commands
-nmap <C-X><C-S> :w<CR>
-"" \c-g as escape not working UGH
-nmap <C-G> <Esc>
-imap <C-G> <Esc>
-vmap <C-G> <Esc>
-map <C-G> <Esc>
+nmap <C-x><C-s> :w<CR>
+map <C-g> <Esc>
+nmap <C-g> <Esc>
+imap <C-g> <Esc>
+vmap <C-g> <Esc>
+cmap <C-g> <Esc>
+"" commented out because it conflicts with FZF stuff
+"tmap <C-g> <Esc>
 
 nmap <Leader><Tab> <plug>(fzf-maps-n)
 vmap <Leader><Tab> <plug>(fzf-maps-x)
-nmap <C-O> :Files!<CR>
+nmap <C-o> :Files!<CR>
 "" search all from CWD with preview
-nmap <C-S> :Ag!<CR>
+nmap <C-s> :Ag!<CR>
 nmap <Leader>fe :Explore<CR>
 nmap <Leader>ff :Files!<CR>
 nmap <Leader>ww :Windows<CR>
@@ -149,12 +192,11 @@ nmap <Leader>gc :Commits<CR>
 nmap <Leader>gf :GFiles?<CR>
 nmap <Leader>ct :Tags<CR>
 nmap <Leader>bt :BTags<CR>
-
-"" NOT WORKING!
-
+nmap <Leader>hh :Helptags<CR>
 
 """"" TERMINAL
-tnoremap <Esc> <C-\><C-n> " escape returns to normal mode
+tnoremap <Esc> <C-\><C-n><bs><bs><bs><bs> " escape returns to normal mode
+
 
 """"" MAGIT
 "" MAPPINGS: https://github.com/jreybert/vimagit#mappings
@@ -238,4 +280,10 @@ command! -bang -nargs=* Ag
   \                         : fzf#vim#with_preview('right:10%:hidden', '?'),
   \                 <bang>0)
 
+
+
+
+""""" WHICH
+"" config: https://github.com/liuchengxu/vim-which-key/blob/master/doc/vim-which-key.txt
+noremap <silent> <leader> :WhichKey '<Space>'<CR>
 
