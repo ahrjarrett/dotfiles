@@ -33,7 +33,8 @@ set clipboard=unnamedplus
 set mouse=a
 "" don't hide chars from me
 set conceallevel=1
-
+"enable matchit for % to jump btwn keyword pairs"
+runtime macros/matchit.vim
 "" Remove trailling whitespace on :w
 autocmd BufWritePre * :%s/\s\+$//e
 
@@ -54,15 +55,21 @@ endif
 call plug#begin('~/code/dotfiles/nvim/bundle')
 Plug 'junegunn/vim-plug'
 Plug 'dag/vim-fish'
+Plug 'vim-ruby/vim-ruby'
 Plug 'tpope/vim-rails'
+Plug 'Shougo/unite.vim' " remove, unless you're using? seems /expensive/
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
-Plug 'Shougo/unite.vim' " remove, unless you're using? seems /expensive/
+Plug 'prettier/vim-prettier', {
+  \ 'do': 'yarn install',
+  \ 'for': ['javascript', 'typescript', 'ruby', 'css', 'json', 'graphql', 'markdown', 'yaml', 'html'] }
+Plug 'jreybert/vimagit'
 "" themes
 Plug 'morhetz/gruvbox'
 Plug 'jdsimcoe/abstract.vim'
 Plug 'tlhr/anderson.vim'
 Plug 'liuchengxu/space-vim-dark'
+
 call plug#end()
 
 ""set rtp+=/usr/local/bin/fzf
@@ -120,9 +127,6 @@ imap <C-G> <Esc>
 vmap <C-G> <Esc>
 map <C-G> <Esc>
 
-"" fzf
-let $FZF_DEFAULT_COMMAND = 'ag --nocolor -H -g "" 2>/dev/null'
-let g:fzf_buffers_jump = 1
 nmap <Leader><Tab> <plug>(fzf-maps-n)
 vmap <Leader><Tab> <plug>(fzf-maps-x)
 nmap <C-O> :Files!<CR>
@@ -142,6 +146,50 @@ nmap <Leader>gc :Commits<CR>
 nmap <Leader>gf :GFiles?<CR>
 nmap <Leader>ct :Tags<CR>
 nmap <Leader>bt :BTags<CR>
+
+"" NOT WORKING!
+
+
+""""" TERMINAL
+tnoremap <Esc> <C-\><C-n> " escape returns to normal mode
+
+""""" MAGIT
+nmap <Leader>G :Magit<CR> " <Leader>M & <Leader>G launch Magit
+
+
+""""" PRETTIER
+"" Running before saving (sync, do async with PrettierAsync)
+let g:prettier#autoformat = 0
+autocmd BufWritePre *.js,*.jsx,*.ts,*.tsx,*.rb,*.css,*.json,*.graphql,*.md,*.yaml,*.html Prettier
+"" prettier config:
+let g:prettier#config#print_width = 80
+let g:prettier#config#tab_width = 2
+let g:prettier#config#use_tabs = 'false'
+let g:prettier#config#semi = 'false'
+let g:prettier#config#single_quote = 'true'
+"" print spaces between brackets
+let g:prettier#config#bracket_spacing = 'false'
+"" jsx: put > on the last line instead of new line
+let g:prettier#config#jsx_bracket_same_line = 'false'
+"" avoid|always
+let g:prettier#config#arrow_parens = 'always'
+"" none|es5|all
+let g:prettier#config#trailing_comma = 'all'
+"" flow|babylon|typescript|css|less|scss|json|graphql|markdown
+let g:prettier#config#parser = 'babylon'
+"" css|strict|ignore
+let g:prettier#config#html_whitespace_sensitivity = 'css'
+"" always|never|preserve
+let g:prettier#config#prose_wrap = 'preserve'
+"" https://prettier.io/docs/en/cli.html#config-precedence
+"" cli-override|file-override|prefer-file
+let g:prettier#config#config_precedence = 'prefer-file'
+
+
+""""" FZF
+let $FZF_DEFAULT_COMMAND = 'ag --nocolor -H -g "" 2>/dev/null'
+let g:fzf_buffers_jump = 1
+""FZF_PREVIEW_FILE_CMD "head -n 10"
 
 let g:fzf_layout = { 'down': '~20%' }
 
