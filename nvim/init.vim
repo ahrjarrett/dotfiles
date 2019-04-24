@@ -20,6 +20,8 @@ set autoindent
 set noerrorbells visualbell t_vb=
 "" commandmode settings; better completion, etc.
 set wildmenu
+"" directories to ignore with tab completion:
+set wildignore=*~,.git,node_modules
 set showcmd
 "" search settings
 set hlsearch
@@ -105,6 +107,7 @@ nmap <Leader>ws <C-W>s<CR>
 nmap <Leader>wv <C-W>v<CR>
 nmap <Leader>wq :close<CR>
 nmap <Leader>fs :w<CR>
+nmap <Leader>qq :qa<CR>
 
 "" arrow keys adjust panes
 nnoremap <Left> :vertical resize -1<CR>
@@ -154,7 +157,12 @@ nmap <Leader>bt :BTags<CR>
 tnoremap <Esc> <C-\><C-n> " escape returns to normal mode
 
 """"" MAGIT
-nmap <Leader>G :Magit<CR> " <Leader>M & <Leader>G launch Magit
+"" MAPPINGS: https://github.com/jreybert/vimagit#mappings
+"" launch magit with leader G (leader M also works)
+nmap <C-c>g :Magit<CR>
+"let g:magit_default_fold_level = 0
+"" TODO: apply custom mapping to ONLY vimagit context?
+"nmap <Tab> :call <SNR>68_mg_open_close_folding_wrapper('+')<CR>
 
 
 """"" PRETTIER
