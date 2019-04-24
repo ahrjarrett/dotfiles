@@ -6,6 +6,8 @@ if &shell =~# 'fish$'
 	set shell=sh
 endif
 
+
+"" **** GENERAL SETTINGS ****
 set number
 set ruler
 set nowrap
@@ -42,27 +44,21 @@ runtime macros/matchit.vim
 "" Remove trailling whitespace on :w
 autocmd BufWritePre * :%s/\s\+$//e
 
-" Turn off linewise keys. Normally, the `j' and `k' keys move the cursor down one entire line. with
-" line wrapping on, this can cause the cursor to actually skip a few lines on the screen because
-" it's moving from line N to line N+1 in the file. I want this to act more visually -- I want `down'
-" to mean the next line on the screen
-nmap j gj
-nmap k gk
 
-
-"" install vim-plug for minimal pkg mgmt: https://github.com/junegunn/vim-plug
+"" **** PACKAGES ****
+"" install Plug
 if empty(glob('~/code/dotfiles/nvim/autoload/plug.vim'))
   silent !curl -fLo ~/code/dotfiles/nvim/autoload/plug.vim --create-dirs
     \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
   autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
 endif
-
 call plug#begin('~/code/dotfiles/nvim/bundle')
+
+"" package list
 Plug 'junegunn/vim-plug'
 Plug 'dag/vim-fish'
 Plug 'vim-ruby/vim-ruby'
 Plug 'tpope/vim-rails'
-"Plug 'Shougo/unite.vim' " remove, unless you're using? seems /expensive/
 Plug 'PeterRincker/vim-searchlight'
 Plug 'jreybert/vimagit'
 Plug 'liuchengxu/vim-which-key', { 'on': ['WhichKey', 'WhichKey!'] }
@@ -71,21 +67,18 @@ Plug 'prettier/vim-prettier', {
   \ 'for': ['javascript', 'typescript', 'ruby', 'css', 'json', 'graphql', 'markdown', 'yaml', 'html'] }
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
-"" themes
+"" themes:
 Plug 'morhetz/gruvbox'
 Plug 'jdsimcoe/abstract.vim'
 Plug 'tlhr/anderson.vim'
 Plug 'liuchengxu/space-vim-dark'
 
-
 call plug#end()
-
-""set rtp+=/usr/local/bin/fzf
-
 colorscheme gruvbox
 set termguicolors
 
-"" vim-fish -> https://github.com/dag/vim-fish
+
+"" **** VIM-FISH ****
 "" Set up :make to use fish for syntax checking.
 autocmd FileType fish compiler fish
 "" Set this to have long lines wrap inside comments.
@@ -93,7 +86,16 @@ autocmd FileType fish setlocal textwidth=79
 "" Enable folding of block structures in fish.
 autocmd FileType fish setlocal foldmethod=expr
 
+
+"" **** LEADER & LOCAL LEADER KEYS ****
 let mapleader="\<SPACE>"
+let maplocalleader=";"
+nnoremap <SPACE> <Nop>
+nnoremap ; <Nop>
+"nnoremap , <Nop>
+
+
+"" **** KEY MAPPINGS ****
 "" return to last file opened
 nmap <Leader><Leader> <c-^>
 "" source vim settings with <SPC> & Ctrl+Q
@@ -115,64 +117,7 @@ nmap <Leader>wq :close<CR>
 nmap <Leader>fs :w<CR>
 nmap <Leader>qq :qa<CR>
 nmap <Leader>/ :noh<CR>
-
-""""" ALT
-imap <A-bs> <C-w>
-nmap <A-j> <C-w>j
-nmap <A-k> <C-w>k
-nmap <A-h> <C-w>h
-nmap <A-l> <C-w>l
-nmap <A-\> <C-w>v
-nmap <A--> <C-w>s
-nmap <A-S-j> <C-w>J
-nmap <A-S-k> <C-w>K
-nmap <A-S-h> <C-w>H
-nmap <A-S-l> <C-w>L
-nmap <A-/> :noh<CR>
-imap <A-/> <Esc>:noh<CR>a
-tnoremap <A-/> <C-\><C-n>:noh<CR>A
-tnoremap <A-h> <C-\><C-n><C-w>h
-tnoremap <A-j> <C-\><C-n><C-w>j
-tnoremap <A-k> <C-\><C-n><C-w>k
-tnoremap <A-l> <C-\><C-n><C-w>l
-"" Alt+Up :: jump to prev terminal command (♖ starts shell prompt)
-tnoremap <A-up> <C-\><C-n>0?^♖.*$<CR>
-tnoremap <A-down> <C-\><C-n>$/^♖.*$<CR>
-nnoremap <A-up> <C-\><C-n>0?^♖.*$<CR>
-nnoremap <A-down> <C-\><C-n>$/^♖.*$<CR>
-
-nmap <A-t> :cd %:p:h<CR>:terminal<CR>Afish<CR>
-nmap <A-S-t> :cd %:p:h<CR><C-w>s<CR>:terminal<CR>Afish<CR>
-nmap <A-b> :Buffers<CR>
-nmap <A-S-b>d :Bclose<CR>
-nmap <A-v> :edit $MYVIMRC<CR>
-nmap <A-S-v>s :source $MYVIMRC<CR>
-nmap <A-x> :Commands<CR>
-nmap <A-`> :Marks<CR>
-
-"" arrow keys adjust panes
-nnoremap <Left> :vertical resize -1<CR>
-nnoremap <Right> :vertical resize +1<CR>
-nnoremap <Up> :resize -1<CR>
-nnoremap <Down> :resize +1<CR>
-
-"" use \c-j to jump, instead of \c-o
-nnoremap <C-j> <C-o>
-
-nnoremap <SPACE> <Nop>
-nnoremap ; <Nop>
-nnoremap , <Nop>
-
-"" Emacs commands
-nmap <C-x><C-s> :w<CR>
-map <C-g> <Esc>
-nmap <C-g> <Esc>
-imap <C-g> <Esc>
-vmap <C-g> <Esc>
-cmap <C-g> <Esc>
-"" commented out because it conflicts with FZF stuff
-"tmap <C-g> <Esc>
-
+"" LEADER FZF:
 nmap <Leader><Tab> <plug>(fzf-maps-n)
 vmap <Leader><Tab> <plug>(fzf-maps-x)
 nmap <C-o> :Files!<CR>
@@ -188,26 +133,89 @@ nmap <Leader>cc :Commands<CR>
 nmap <Leader>sa :Lines<CR>
 "" search current buffer
 nmap <Leader>sb :BLines<CR>
-nmap <Leader>gc :Commits<CR>
-nmap <Leader>gf :GFiles?<CR>
+"nmap <Leader>gc :Commits<CR>
+"nmap <Leader>gf :GFiles?<CR>
 nmap <Leader>ct :Tags<CR>
 nmap <Leader>bt :BTags<CR>
 nmap <Leader>hh :Helptags<CR>
 
-""""" TERMINAL
+"" ALT MAPPINGS
+imap <A-bs> <C-w>
+cmap <A-bs> <C-w>
+nmap <A-v> :edit $MYVIMRC<CR>
+"" search stuff
+nmap <A-/> :noh<CR>
+imap <A-/> <Esc>:noh<CR>a
+"" window stuff
+nmap <A-j> <C-w>j
+nmap <A-k> <C-w>k
+nmap <A-h> <C-w>h
+nmap <A-l> <C-w>l
+nmap <A-\> <C-w>v
+nmap <A--> <C-w>s
+nmap <A-S-j> <C-w>J
+nmap <A-S-k> <C-w>K
+nmap <A-S-h> <C-w>H
+nmap <A-S-l> <C-w>L
+tnoremap <A-/> <C-\><C-n>:noh<CR>A
+tnoremap <A-h> <C-\><C-n><C-w>h
+tnoremap <A-j> <C-\><C-n><C-w>j
+tnoremap <A-k> <C-\><C-n><C-w>k
+tnoremap <A-l> <C-\><C-n><C-w>l
+"" Alt+Up :: jump to prev terminal command (♖ starts shell prompt)
+tnoremap <A-up> <C-\><C-n>0?^♖.*$<CR>
+tnoremap <A-down> <C-\><C-n>$/^♖.*$<CR>
+nnoremap <A-up> <C-\><C-n>0?^♖.*$<CR>
+nnoremap <A-down> <C-\><C-n>$/^♖.*$<CR>
+
+"" ALT FZF:
+nmap <A-e> :Explore<CR>
+nmap <A-x> :Commands<CR>
+"" search all open buffers
+nmap <A-s> :Lines<CR>
+"" search current buffer
+nmap <A-S-s> :BLines<CR>
+nmap <A-c> :Tags<CR>
+nmap <A-S-c> :BTags<CR>
+nmap <A-1> :Helptags<CR>
+nmap <A-b> :Buffers<CR>
+
+"" MISC. MAPPINGS
+"" adjust window size with arrow keys:
+nnoremap <Left> :vertical resize -1<CR>
+nnoremap <Right> :vertical resize +1<CR>
+nnoremap <Up> :resize -1<CR>
+nnoremap <Down> :resize +1<CR>
+"" use C-j to jump (instead of C-o, used for FZF):
+nnoremap <C-j> <C-o>
+"" Emacs stuff:
+nmap <C-x><C-s> :w<CR>
+map <C-g> <Esc>
+nmap <C-g> <Esc>
+imap <C-g> <Esc>
+vmap <C-g> <Esc>
+cmap <C-g> <Esc>
+" turn off linewise keys (j is 'down' with lines that wrap)
+nmap j gj
+nmap k gk
+
+
+
+"" **** TERMINAL ****
 tnoremap <Esc> <C-\><C-n><bs><bs><bs><bs> " escape returns to normal mode
+nmap <A-t> :cd %:p:h<CR>:terminal<CR>Afish<CR>
+nmap <A-S-t> :cd %:p:h<CR><C-w>s<CR>:terminal<CR>Afish<CR>
 
 
-""""" MAGIT
+"" **** (vi)MAGIT ****
 "" MAPPINGS: https://github.com/jreybert/vimagit#mappings
-"" launch magit with leader G (leader M also works)
 nmap <C-c>g :Magit<CR>
-"let g:magit_default_fold_level = 0
+let g:magit_default_fold_level = 1
 "" TODO: apply custom mapping to ONLY vimagit context?
 "nmap <Tab> :call <SNR>68_mg_open_close_folding_wrapper('+')<CR>
 
 
-""""" PRETTIER
+"" **** PRETTIER ****
 "" Running before saving (sync, do async with PrettierAsync)
 let g:prettier#autoformat = 0
 autocmd BufWritePre *.js,*.jsx,*.ts,*.tsx,*.rb,*.css,*.json,*.graphql,*.md,*.yaml,*.html Prettier
@@ -236,16 +244,12 @@ let g:prettier#config#prose_wrap = 'preserve'
 let g:prettier#config#config_precedence = 'prefer-file'
 
 
-""""" FZF
-let $FZF_DEFAULT_COMMAND = 'ag --nocolor -H -g "" 2>/dev/null'
+"" **** FZF ****
+"let $FZF_DEFAULT_COMMAND = 'ag --nocolor -H -g "" 2>/dev/null'
 let g:fzf_buffers_jump = 1
-""FZF_PREVIEW_FILE_CMD "head -n 10"
-
-let g:fzf_layout = { 'down': '~20%' }
-
-" In Neovim, you can set up fzf window using a Vim command
-let g:fzf_layout = { 'window': 'enew' }
-
+"FZF_PREVIEW_FILE_CMD "head -n 10"
+let g:fzf_layout = { 'down': '~45%' }
+"let g:fzf_layout = { 'window': 'enew' }
 let g:fzf_colors =
 \ { 'fg':      ['fg', 'Normal'],
   \ 'bg':      ['bg', 'Normal'],
@@ -261,18 +265,16 @@ let g:fzf_colors =
   \ 'spinner': ['fg', 'Label'],
   \ 'header':  ['fg', 'Comment'] }
 
-" [[B]Commits] Customize the options used by 'git log':
+"" [[B]Commits] Customize the options used by 'git log':
 let g:fzf_commits_log_options = '--graph --color=always --format="%C(auto)%h%d %s %C(black)%C(bold)%cr"'
-
-" [Tags] Command to generate tags file
+"" [Tags] Command to generate tags file
+""        - Example: generate tags for a Rails project:
+""        - ctags -R --exclude=.git --exclude=log . (bundle list --paths) -f .tags-json
 let g:fzf_tags_command = 'ctags -R'
-"" Rails Project:
-"" ctags -R --exclude=.git --exclude=log . (bundle list --paths) -f .tags-json
 
 "" Add preview to :Files cmd
 command! -bang -nargs=? -complete=dir Files
   \ call fzf#vim#files(<q-args>, fzf#vim#with_preview(), <bang>0)
-
 "" Add preview to :Ag! cmd
 command! -bang -nargs=* Ag
   \ call fzf#vim#ag(<q-args>,
@@ -282,8 +284,7 @@ command! -bang -nargs=* Ag
 
 
 
-
-""""" WHICH
-"" config: https://github.com/liuchengxu/vim-which-key/blob/master/doc/vim-which-key.txt
+"" **** WHICH-KEY ****
 noremap <silent> <leader> :WhichKey '<Space>'<CR>
+noremap <silent> <localleader> :WhichKey ';'<CR>
 
