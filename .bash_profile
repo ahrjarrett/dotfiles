@@ -1,5 +1,5 @@
 # path
-export PATH="$HOME/.rbenv/bin:$HOME/.npm-global/bin:$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:/usr/local/sbin:$PATH"
+export PATH="$HOME/.rbenv/bin:/usr/local/opt/elasticsearch@5.6/bin:$HOME/.npm-global/bin:$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:/usr/local/sbin:$PATH"
 
 
 # title / prompt
