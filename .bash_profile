@@ -51,8 +51,8 @@ alias cashdash1="cd ~/.ssh && ssh -i cashdash.pem ec2-user@10.21.2.170"
 alias cashdashcelery="cd ~/.ssh && ssh -i cashdash.pem ec2-user@10.21.4.92"
 
 # postgres
-alias pg_start="launchctl load ~/Library/LaunchAgents/homebrew.mxcl.postgresql.plist"
-alias pg_stop="launchctl unload ~/Library/LaunchAgents/homebrew.mxcl.postgresql.plist"
+#alias pg_start="launchctl load ~/Library/LaunchAgents/homebrew.mxcl.postgresql.plist"
+#alias pg_stop="launchctl unload ~/Library/LaunchAgents/homebrew.mxcl.postgresql.plist"
 
 
 # emacs
