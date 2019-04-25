@@ -4,8 +4,13 @@
 
 *** ⚫ dotfiles
 
-- minimal bash & vim setup
-- [[https://github.com/ahrjarrett/fish.d][fish shell]] config with cool fzf search
-- if you don’t want the [[https://github.com/ahrjarrett/scripts][bootstrap script]] to install it for you, put it in ~.exclude~
+- mostly my nvim config
+- minimal vim & bash config for debug & ssh environments
+- [[https://github.com/ahrjarrett/fish.d][fish shell]] config with cool fzf search (not included)
+- chrome/chromium scripts, browser key mappings
+- tmux & spacemacs config /(defunct)/
+- everything** you put here is automatically cloned & installed by my [[https://github.com/ahrjarrett/scripts][scripts repo]]
 
-11.29.2019
+ ** if you don’t want the [[https://github.com/ahrjarrett/scripts][bootstrap script]] to install it for you automatically, stick it in ~./.exclude~
+
+first commit: 11.29.2016
