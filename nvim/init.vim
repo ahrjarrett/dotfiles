@@ -462,15 +462,10 @@ noremap <silent> <localleader> :WhichKey ';'<CR>
 let remote_repo = getremoterepo#GetRemoteRepo()
 
 augroup orAirlineAfterInit
-  "echomsg "after init, remote_repo:"
-  "echomsg remote_repo
   autocmd User AirlineAfterInit let g:airline_section_a = "%{remote_repo}"
 augroup END
 
 augroup on_AirlineToggledOn
-  "echomsg "toggled on, remote_repo:"
-  "echomsg remote_repo
-
   autocmd User AirlineToggledOn let g:airline_section_a = "%{remote_repo}"
   "autocmd User AirlineToggledOn AirlineRefresh
 augroup END
@@ -490,18 +485,12 @@ augroup END
 augroup on_BufEnter
   "" cd to current file's context on entering buffer
   autocmd BufEnter * silent! lcd %:p:h
-
-  "echomsg "buf enter, pwd:"
-  "echomsg system(getcwd())
-  "echomsg "buf enter, remote_repo:"
-  "echomsg remote_repo
   autocmd * let g:airline_section_a = "%{remote_repo}"
-
 augroup END
 
 augroup filetype_fish
-    autocmd!
     "" **** VIM-FISH ****
+    autocmd!
     "" Set up :make to use fish for syntax checking.
     autocmd FileType fish compiler fish
     "" Set this to have long lines wrap inside comments.
