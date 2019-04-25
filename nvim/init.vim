@@ -42,12 +42,12 @@ runtime macros/matchit.vim
 
 "" **** PACKAGES ****
 "" install Plug
-if empty(glob('~/code/dotfiles/nvim/autoload/plug.vim'))
-  silent !curl -fLo ~/code/dotfiles/nvim/autoload/plug.vim --create-dirs
+if empty(glob('~/dotfiles/nvim/autoload/plug.vim'))
+  silent !curl -fLo ~/dotfiles/nvim/autoload/plug.vim --create-dirs
     \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
   autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
 endif
-call plug#begin('~/code/dotfiles/nvim/bundle')
+call plug#begin('~/dotfiles/nvim/bundle')
 
 "" package list
 Plug 'junegunn/vim-plug'
