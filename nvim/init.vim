@@ -462,14 +462,14 @@ noremap <silent> <localleader> :WhichKey ';'<CR>
 let remote_repo = getremoterepo#GetRemoteRepo()
 
 augroup orAirlineAfterInit
-  echomsg "after init, remote_repo:"
-  echomsg remote_repo
+  "echomsg "after init, remote_repo:"
+  "echomsg remote_repo
   autocmd User AirlineAfterInit let g:airline_section_a = "%{remote_repo}"
 augroup END
 
 augroup on_AirlineToggledOn
-  echomsg "toggled on, remote_repo:"
-  echomsg remote_repo
+  "echomsg "toggled on, remote_repo:"
+  "echomsg remote_repo
 
   autocmd User AirlineToggledOn let g:airline_section_a = "%{remote_repo}"
   "autocmd User AirlineToggledOn AirlineRefresh
@@ -489,13 +489,12 @@ augroup END
 
 augroup on_BufEnter
   "" cd to current file's context on entering buffer
-
   autocmd BufEnter * silent! lcd %:p:h
 
-  echomsg "buf enter, pwd:"
-  echomsg system(getcwd())
-  echomsg "buf enter, remote_repo:"
-  echomsg remote_repo
+  "echomsg "buf enter, pwd:"
+  "echomsg system(getcwd())
+  "echomsg "buf enter, remote_repo:"
+  "echomsg remote_repo
   autocmd * let g:airline_section_a = "%{remote_repo}"
 
 augroup END
@@ -533,11 +532,3 @@ augroup filetype_vim
 augroup END
 
 
-
-
-"while remote_repo =~ "^fatal"
-"  ":call timer_start(1000, {-> execute(':let &stl=&stl')}, {'repeat': -1})
-"  echomsg "in while loop, remote_repo:"
-"  echomsg remote_repo
-"  :call timer_start(1000, {-> execute(':let remote_repo = getremoterepo#GetRemoteRepo()')}, {'repeat': -1})
-"endwhile
