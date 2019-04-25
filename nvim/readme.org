@@ -15,6 +15,30 @@ Once you clone, just run ~:PlugInstall~ to install your dependencies, then you'r
 
 * packages
 
+** typescript
+
+Got typescript set up! This was tough.
+
+Generate ctags with ~:Tags~, then you'll have these commands available:
+
+| Command            | Behavior                                                                                                              |
+|--------------------+-----------------------------------------------------------------------------------------------------------------------|
+| :TSDef             | Opens the definition file for symbol under the cursor.                                                                |
+| :TSDefPreview      | Open the definition file for the symbol under the cursor but in a preview window                                      |
+| :TSRefs            | Gathers all reference of the symbol under the cursor and displays them in a quick-fix window.                         |
+| :TSDoc             | Prints the documentation for the symbol under the cursor and displays it in a split below.                            |
+| :TSStart           | Starts the typescript client. This is called automatically.                                                           |
+| :TSStop            | Stops the typescript client                                                                                           |
+| :TSRestart         | Restarts the client. This is useful if changes to the `tsconfig.json` are made during the current nvim session.       |
+| :TSType            | Prints the type signature for the symbol under the cursor.                                                            |
+| :TSRename [word]   | Renames the symbol currently under the cursor. Pass a new name as an arg, if no arg is passed, user will be prompted. |
+| :TSGetCodeFix      | Gets a fix for an error under the cursor.                                                                             |
+| :TSTypeDef         | Goes to the file where the type for the symbol is defined.                                                            |
+| :TSEditConfig      | Opens the config file for the current file.                                                                           |
+| :TSOrganizeImports | Organizes imports for the current file.                                                                               |
+| :TSGetDiagnostics  | Get any syntax or semantic errors for the current file.                                                               |
+
+
 ** ruby / rails
 
 ~https://github.com/tpope/vim-rails~

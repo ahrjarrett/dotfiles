@@ -4,12 +4,15 @@
 
 *** ⚫ dotfiles
 
-1. neovim config
-2. minimal vim & bash config for debug / ssh environments
-3. [[https://github.com/ahrjarrett/fish.d][fish shell]] config with cool fzf search [separate repo]
-4. chrome key bindings; tmux & spacemacs config =[defunct]=
-5. anything* you stick here gets auto-installed by [[https://github.com/ahrjarrett/scripts][scripts]]
+1. neovim config ([[https://github.com/ahrjarrett/dotfiles/blob/master/nvim/readme.org][readme + keybindings]]):
+   - typescipt autocompletion + jump to def - [[https://github.com/mhartington/nvim-typescript][package]]
+   - fzf; TODO: swap out for [[https://github.com/Shougo/denite.nvim][denite]]
+   - [[https://github.com/ahrjarrett/fish.d][fish shell]] integration
+   - [[https://github.com/ahrjarrett/dotfiles/blob/master/nvim/plugin/getrepodata.vim][custom airline]] config w/ git integration
+2. minimal vim + bash config for debug / ssh environments
+3. iterm2 config
+4. anything** you stick in here gets auto-installed by [[https://github.com/ahrjarrett/scripts][scripts]] repo
 
-  ** except for ~./.exclude~, which ignored recursively
+   ** except for [[https://github.com/ahrjarrett/dotfiles/tree/master/.exclude][.exclude]] dir, which is ignored recursively
 
 first commit: 11.29.2016
