@@ -206,27 +206,53 @@ let g:airline_statusline_ontop = 0
 "" might need to turn this off for FZF performance later:
 "let g:airline_exclude_preview = 0
 
-"" **** AIRLINE VARIABLES: ****
-let local_repo = getrepodata#GetLocalRepo()
-let remote_repo = getrepodata#GetRemoteRepo()
-let branch = g:airline_symbols.branch .' '. getrepodata#GetBranch() . g:airline_symbols.dirty
+let g:airline_mode_map = {
+    \ '__' : '? -',
+    \ 'c'  : '♞ C',
+    \ 'i'  : '✎ I',
+    \ 'ic' : '✏︎ I',
+    \ 'ix' : '✐ I',
+    \ 'n'  : '♜ N',
+    \ 'ni' : '♜ N',
+    \ 'no' : '♖ N',
+    \ 'R'  : '✁ R',
+    \ 'Rv' : '✂︎ R',
+    \ 's'  : '♙ S',
+    \ 'S'  : '♙ S',
+    \ '' : '♙ S',
+    \ 't'  : '♚ T',
+    \ 'v'  : '✄ V',
+    \ 'V'  : '✁ V',
+    \ '' : '✂︎ V',
+    \ }
 
-"" **** AIRLINE SECTIONS: ****
-"let g:airline_section_a = "%{'remote repo'}"
-let g:airline_section_b = "%{branch}"
-let g:airline_section_c = "%{local_repo}"
-let g:airline_section_x = "%{'normal'}"
-let g:airline_section_y = ''
-" let g:airline_section_y = '%{WebDevIconsGetFileFormatSymbol()}'
-let g:airline_section_z = '%l:%c'
 
-"function! AirlineInit()
-"  let g:airline_section_a = airline#section#create(['branch', 'mode'])
-"  let g:airline_section_b = airline#section#create_left(['mode'])
-"  "let g:airline_section_c = airline#section#create(['filetype'])
-"  "let g:airline_section_d = airline#section#create(['filetype'])
-"endfunction
-"autocmd VimEnter * call AirlineInit()
+function! MakeBranch()
+  let l:branch = g:airline_symbols.branch .' '. getrepodata#GetBranch() . g:airline_symbols.dirty
+  return l:branch
+endfunction
+
+call airline#parts#define_function('git_local', 'getrepodata#GetLocalRepo')
+call airline#parts#define_function('git_remote', 'getrepodata#GetRemoteRepo')
+call airline#parts#define_function('git_branch', 'MakeBranch')
+
+
+function! AirlineInit()
+	let g:airline_section_a = airline#section#create(['mode', '  ', 'git_branch'])
+	let g:airline_section_b = airline#section#create(['git_remote'])
+	let g:airline_section_c = airline#section#create(['git_local'])
+	let g:airline_section_x = ''
+	let g:airline_section_z = ''
+  "call airline#parts#define_accent('git_branch', 'orange')
+endfunction
+autocmd VimEnter * call AirlineInit()
+"let g:airline_section_y = airline#section#create_right(['ffenc','foo'])
+"let g:airline_section_a = airline#section#create(['branch', 'mode'])
+"let g:airline_section_b = airline#section#create_left(['mode'])
+"let g:airline_section_c = airline#section#create(['filetype'])
+"let g:airline_section_d = airline#section#create(['filetype'])
+"let g:airline_section_y = '%{WebDevIconsGetFileFormatSymbol()}'
+"let g:airline_section_z = '%l:%c'
 
 
 "" **** CUSTOM KEY MAPPINGS ****
@@ -243,10 +269,6 @@ tmap <A-{> <C-\><C-n>:previous<CR>
 
 inoremap <silent><A-}> <Esc>:bnext<CR>
 inoremap <silent><A-{> <Esc>:bprevious<CR>
-
-
-
-
 
 
 "" **** KEY MAPPINGS ****
@@ -468,12 +490,10 @@ noremap <silent> <localleader> :WhichKey ';'<CR>
 
 augroup orAirlineAfterInit
   autocmd!
-  autocmd User AirlineAfterInit let g:airline_section_a = "%{remote_repo}"
 augroup END
 
 augroup on_AirlineToggledOn
   autocmd!
-  autocmd User AirlineToggledOn let g:airline_section_a = "%{remote_repo}"
   "autocmd User AirlineToggledOn AirlineRefresh
 augroup END
 
@@ -495,7 +515,6 @@ augroup on_BufEnter
   autocmd!
   "" cd to current file's context on entering buffer
   autocmd BufEnter * silent! lcd %:p:h
-  autocmd * let g:airline_section_a = "%{remote_repo}"
 augroup END
 
 augroup filetype_fish
