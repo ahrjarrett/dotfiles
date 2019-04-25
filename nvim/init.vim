@@ -238,10 +238,11 @@ call airline#parts#define_function('git_branch', 'MakeBranch')
 
 
 function! AirlineInit()
-	let g:airline_section_a = airline#section#create(['mode', '  ', 'git_branch'])
-	let g:airline_section_b = airline#section#create(['git_remote'])
-	let g:airline_section_c = airline#section#create(['git_local'])
-	let g:airline_section_x = ''
+	let g:airline_section_a = airline#section#create(["mode"])
+	let g:airline_section_b = airline#section#create(["git_branch"])
+	let g:airline_section_c = airline#section#create(["⎇' ", "git_remote"])
+	let g:airline_section_x = airline#section#create_right(["git_local"])
+	let g:airline_section_y = ''
 	let g:airline_section_z = ''
   "call airline#parts#define_accent('git_branch', 'orange')
 endfunction
