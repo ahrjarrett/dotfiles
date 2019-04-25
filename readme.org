@@ -4,13 +4,12 @@
 
 *** ⚫ dotfiles
 
-- mostly my nvim config
-- minimal vim & bash config for debug & ssh environments
-- [[https://github.com/ahrjarrett/fish.d][fish shell]] config with cool fzf search (not included)
-- chrome/chromium scripts, browser key mappings
-- tmux & spacemacs config /(defunct)/
-- everything** you put here is automatically cloned & installed by my [[https://github.com/ahrjarrett/scripts][scripts repo]]
+1. neovim config
+2. minimal vim & bash config for debug / ssh environments
+3. [[https://github.com/ahrjarrett/fish.d][fish shell]] config with cool fzf search [separate repo]
+4. chrome key bindings; tmux & spacemacs config =[defunct]=
+5. anything* you stick here gets auto-installed by [[https://github.com/ahrjarrett/scripts][scripts]]
 
- ** if you don’t want the [[https://github.com/ahrjarrett/scripts][bootstrap script]] to install it for you automatically, stick it in ~./.exclude~
+  ** except for ~./.exclude~, which ignored recursively
 
 first commit: 11.29.2016
