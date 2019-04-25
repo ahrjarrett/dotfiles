@@ -3,7 +3,7 @@ syntax enable
 
 "" use regular shell inside vim (instead of fish)
 if &shell =~# 'fish$'
-	set shell=sh
+  set shell=sh
 endif
 
 "" **** GENERAL SETTINGS ****
@@ -18,7 +18,6 @@ set tabstop=2
 "" allow buffers to be in the bg even if unsaved:
 set hidden
 set autoindent
-"" turn off annoying bells
 set noerrorbells visualbell t_vb=
 "" commandmode settings; better completion, etc.
 set wildmenu
@@ -27,7 +26,6 @@ set wildignore=*~,.git,node_modules
 set showcmd
 "" search settings
 set hlsearch
-
 set ignorecase
 set smartcase
 "" show filename at bottom
@@ -62,14 +60,61 @@ Plug 'tpope/vim-fugitive'
 Plug 'vimwiki/vimwiki'
 Plug 'vim-ruby/vim-ruby'
 Plug 'tpope/vim-rails'
-Plug 'leafgarland/typescript-vim'
-Plug 'peitalin/vim-jsx-typescript'
+
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
 Plug 'liuchengxu/vim-which-key', { 'on': ['WhichKey', 'WhichKey!'] }
+
+
+"" TS syntax file:
+Plug 'HerringtonDarkholme/yats.vim'
+Plug 'mhartington/nvim-typescript', {'build': './install.sh' }
+"" Async completion:
+Plug 'Shougo/deoplete.nvim'
+Plug 'Shougo/denite.nvim'
+
+
 Plug 'prettier/vim-prettier', {
   \ 'do': 'yarn install',
   \ 'for': ['javascript', 'typescript', 'ruby', 'css', 'json', 'graphql', 'markdown', 'yaml', 'html'] }
+
+
+"" **** TYPESCRIPT/TSX ****
+let g:deoplete#enable_at_startup = 1
+let $NVIM_NODE_LOG_FILE='nvim-node.log'
+let $NVIM_NODE_LOG_LEVEL='warn'
+"" nvim-yarp && roxma/vim-hug-neovim-rpc
+let $NVIM_PYTHON_LOG_FILE="/tmp/nvim_log"
+let $NVIM_PYTHON_LOG_LEVEL="DEBUG"
+
+
+"" ** REMOVED 4/25/19
+"" Plug 'leafgarland/typescript-vim'
+"" Plug 'peitalin/vim-jsx-typescript'
+"" **** OLD NOW? ****
+"" pink
+"hi tsxTagName guifg=#E06C75 cterm=italic
+""" orange
+"hi tsxCloseString guifg=#F99575
+"hi tsxCloseTag guifg=#F99575
+"hi tsxAttributeBraces guifg=#F99575
+"hi tsxEqual guifg=#F99575
+""" yellow
+"hi tsxAttrib guifg=#F8BD7F cterm=italic
+"" light-grey
+"hi tsxTypeBraces guifg=#999999
+"" dark-grey
+"hi tsxTypes guifg=#666666
+"" tan
+"hi ReactProps guifg=#D19A66 cterm=italic
+"hi ReactLifeCycleMethods ctermfg=204 guifg=#D19A66
+"" aqua
+"hi Events ctermfg=204 guifg=#56B6C2
+"hi WebBrowser ctermfg=204 guifg=#56B6C2
+"" light purple
+"hi ReactState guifg=#C176A7 cterm=italic
+"" purple
+"hi ReduxKeywords ctermfg=204 guifg=#C678DD
 
 
 
@@ -79,6 +124,7 @@ Plug 'jdsimcoe/abstract.vim'
 Plug 'tlhr/anderson.vim'
 Plug 'liuchengxu/space-vim-dark'
 Plug 'mhartington/oceanic-next'
+Plug 'NLKNguyen/papercolor-theme'
 
 "" supposed to load last, for some reason
 Plug 'ryanoasis/vim-devicons'
@@ -93,8 +139,6 @@ nnoremap ; <Nop>
 "nnoremap , <Nop>
 
 
-
-
 "" **** GRUVBOX ****
 let g:gruvbox_italic='1'
 let g:gruvbox_bold='1'
@@ -105,57 +149,39 @@ let g:gruvbox_contrast_dark='hard'
 let g:gruvbox_vert_split='bg2'
 "let g:gruvbox_invert_tabline='0'
 "let g:gruvbox_invert_indent_guides='1'
+
+
+"" **** OCEANIC-NEXT ****
+"" Background: #1d2b35
+let g:oceanic_next_terminal_bold = 1
+let g:oceanic_next_terminal_italic = 1
 colorscheme gruvbox
 set termguicolors
 
 
 "" **** AIRLINE ****
-let g:airline_theme='oceanicnext'
-
-"" This might break airline_symbols approach?
+let g:airline_theme='onedark'
 let g:airline_powerline_fonts = 1
 if !exists('g:airline_symbols')
   let g:airline_symbols = {}
 endif
 
-if !exists('*getremoterepo#GetRemoteRepo')
-   runtime plugin/getremoterepo.vim
+"" LOAD CUSTOM AIRLINE FUNCTIONS
+if !exists('getrepodata#GetRemoteRepo')
+  runtime plugin/getrepodata.vim
 endif
 
+"" 0=full branch, 1=tail (foo/bar => bar), 2=truncate (foo/bar => f/bar)
+let g:airline#extensions#branch#format = 0
 let g:airline#extensions#tabline#enabled=1
 let g:webdevicons_enable_airline_statusline=1
 let g:webdevicons_enable_airline_tabline = 1
-"" 0=full branch, 1=tail (feature/foo => foo), 2=truncate (feature/foo => f/foo)
-let g:airline#extensions#branch#format = 0
 let g:airline#extensions#hunks#enabled = 0
 let g:airline#extensions#wordcount#enabled = 0
 let g:airline#extensions#whitespace#enabled = 0
-"let g:airline_section_a ="%<%f\ %h%m%r%{FugitiveStatusline()}%=%-14.(%l,%c%V%)\ %P"
-"let g:airline_section_a ="%{eval Git config --get remote.origin.url}"
 
-set laststatus=2
-let g:airline#extensions#tabline#formatter = 'unique_tail'
-
-let g:airline_section_a = "%{'<loading>'}"
-let g:airline_section_c = "%{getcwd()}"
-"" determine whether inactive windows should have the left section collapsed to only the filename of that buffer
-let g:airline_inactive_collapse=1
-"let g:airline_section_c = '%{:!command git remote -v}'
-let g:airline_section_x = ''
-" let g:airline_section_y = '%{WebDevIconsGetFileFormatSymbol()}'
-let g:airline_section_y = ''
-let g:airline_section_z = '%l:%c'
-"let g:airline_symbols.branch = '⎇''
-"let g:airline_symbols.branch = ''
-"let g:airline_symbols.branch = ''
-"let g:airline_symbols.readonly = '👀'
-"" MIGHT NEED TO TURN THIS ON FOR FZF PERFORMANCE:
-"let g:airline_exclude_preview = 0
-let g:airline_skip_empty_sections = 1
-let g:airline_statusline_ontop = 0
 let g:airline#extensions#tabline#left_sep = ''
 let g:airline#extensions#tabline#left_alt_sep = ''
-
 let g:airline_left_sep = ''
 let g:airline_left_alt_sep = ''
 let g:airline_right_sep = ''
@@ -165,10 +191,45 @@ let g:airline_symbols.paste = 'Þ'
 let g:airline_symbols.readonly = ''
 let g:airline_symbols.linenr = '☰'
 let g:airline_symbols.maxlinenr = ''
-let g:airline_symbols.dirty='⚡'
+let g:airline_symbols.dirty=' ⚡'
+set laststatus=2
+let g:airline#extensions#tabline#formatter = 'unique_tail'
+"" inactive windows' left section collapsed to just buffer filename
+let g:airline_inactive_collapse=1
+let g:airline#ignore_bufadd_pat = 'undotree|vimfiler|tagbar|startify|!'
+"let g:airline_symbols.branch = '⎇''
+"let g:airline_symbols.branch = ''
+"let g:airline_symbols.branch = ''
+"let g:airline_symbols.readonly = '👀'
+let g:airline_skip_empty_sections = 1
+let g:airline_statusline_ontop = 0
+"" might need to turn this off for FZF performance later:
+"let g:airline_exclude_preview = 0
+
+"" **** AIRLINE VARIABLES: ****
+let local_repo = getrepodata#GetLocalRepo()
+let remote_repo = getrepodata#GetRemoteRepo()
+let branch = g:airline_symbols.branch .' '. getrepodata#GetBranch() . g:airline_symbols.dirty
+
+"" **** AIRLINE SECTIONS: ****
+"let g:airline_section_a = "%{'remote repo'}"
+let g:airline_section_b = "%{branch}"
+let g:airline_section_c = "%{local_repo}"
+let g:airline_section_x = "%{'normal'}"
+let g:airline_section_y = ''
+" let g:airline_section_y = '%{WebDevIconsGetFileFormatSymbol()}'
+let g:airline_section_z = '%l:%c'
+
+"function! AirlineInit()
+"  let g:airline_section_a = airline#section#create(['branch', 'mode'])
+"  let g:airline_section_b = airline#section#create_left(['mode'])
+"  "let g:airline_section_c = airline#section#create(['filetype'])
+"  "let g:airline_section_d = airline#section#create(['filetype'])
+"endfunction
+"autocmd VimEnter * call AirlineInit()
 
 
-
+"" **** CUSTOM KEY MAPPINGS ****
 tmap <leader>x <C-\><C-n>:bp! <BAR> bd! #<CR>
 tmap <leader>. <C-\><C-n>:bnext<CR>
 tmap <leader>, <C-\><C-n>:bprevious<CR>
@@ -184,61 +245,6 @@ inoremap <silent><A-}> <Esc>:bnext<CR>
 inoremap <silent><A-{> <Esc>:bprevious<CR>
 
 
-"tmap <leader>1  <C-\><C-n><Plug>AirlineSelectTab1
-"tmap <leader>2  <C-\><C-n><Plug>AirlineSelectTab2
-"tmap <leader>3  <C-\><C-n><Plug>AirlineSelectTab3
-"tmap <leader>4  <C-\><C-n><Plug>AirlineSelectTab4
-"tmap <leader>5  <C-\><C-n><Plug>AirlineSelectTab5
-"tmap <leader>6  <C-\><C-n><Plug>AirlineSelectTab6
-"tmap <leader>7  <C-\><C-n><Plug>AirlineSelectTab7
-"tmap <leader>8  <C-\><C-n><Plug>AirlineSelectTab8
-"tmap <leader>9  <C-\><C-n><Plug>AirlineSelectTab9
-"nmap <leader>1 <Plug>AirlineSelectTab1
-"nmap <leader>2 <Plug>AirlineSelectTab2
-"nmap <leader>3 <Plug>AirlineSelectTab3
-"nmap <leader>4 <Plug>AirlineSelectTab4
-"nmap <leader>5 <Plug>AirlineSelectTab5
-"nmap <leader>6 <Plug>AirlineSelectTab6
-"nmap <leader>7 <Plug>AirlineSelectTab7
-"nmap <leader>8 <Plug>AirlineSelectTab8
-"nmap <leader>9 <Plug>AirlineSelectTab9
-
-
-
-
-"function! AirlineInit()
-"  let g:airline_section_a = airline#section#create(['branch', 'mode'])
-"  let g:airline_section_b = airline#section#create_left(['mode'])
-"  "let g:airline_section_c = airline#section#create(['filetype'])
-"  "let g:airline_section_d = airline#section#create(['filetype'])
-"endfunction
-"autocmd VimEnter * call AirlineInit()
-
-
-"" **** TYPESCRIPT/TSX ****
-"" pink
-hi tsxTagName guifg=#E06C75 cterm=italic
-"" orange
-hi tsxCloseString guifg=#F99575
-hi tsxCloseTag guifg=#F99575
-hi tsxAttributeBraces guifg=#F99575
-hi tsxEqual guifg=#F99575
-"" yellow
-hi tsxAttrib guifg=#F8BD7F cterm=italic
-" light-grey
-hi tsxTypeBraces guifg=#999999
-" dark-grey
-hi tsxTypes guifg=#666666
-" tan
-hi ReactProps guifg=#D19A66 cterm=italic
-hi ReactLifeCycleMethods ctermfg=204 guifg=#D19A66
-" aqua
-hi Events ctermfg=204 guifg=#56B6C2
-hi WebBrowser ctermfg=204 guifg=#56B6C2
-" light purple
-hi ReactState guifg=#C176A7 cterm=italic
-" purple
-hi ReduxKeywords ctermfg=204 guifg=#C678DD
 
 
 
@@ -248,6 +254,7 @@ hi ReduxKeywords ctermfg=204 guifg=#C678DD
 nmap <Leader><Leader> <c-^>
 "" source vim settings with <SPC> & Ctrl+Q
 nmap <Leader><C-q> :source $MYVIMRC<CR>
+nmap <C-q> :source $MYVIMRC<CR>
 nmap <Leader>vi :edit $MYVIMRC<CR>
 " delete buffer without killing window
 nmap <Leader>bd :bd <C-^><CR>
@@ -459,18 +466,19 @@ noremap <silent> <leader> :WhichKey '<Space>'<CR>
 noremap <silent> <localleader> :WhichKey ';'<CR>
 
 
-let remote_repo = getremoterepo#GetRemoteRepo()
-
 augroup orAirlineAfterInit
+  autocmd!
   autocmd User AirlineAfterInit let g:airline_section_a = "%{remote_repo}"
 augroup END
 
 augroup on_AirlineToggledOn
+  autocmd!
   autocmd User AirlineToggledOn let g:airline_section_a = "%{remote_repo}"
   "autocmd User AirlineToggledOn AirlineRefresh
 augroup END
 
 augroup on_BufWritePre
+  autocmd!
   "" prettier
   autocmd BufWritePre *.js,*.jsx,*.ts,*.tsx,*.rb,*.css,*.json,*.graphql,*.md,*.yaml,*.html Prettier
   "" Remove trailling whitespace on :w
@@ -478,18 +486,19 @@ augroup on_BufWritePre
 augroup END
 
 augroup on_BufNewFile
+  autocmd!
   "" Create the file as soon as it's editing (no more phantom files)
   autocmd BufNewFile * :write
 augroup END
 
 augroup on_BufEnter
+  autocmd!
   "" cd to current file's context on entering buffer
   autocmd BufEnter * silent! lcd %:p:h
   autocmd * let g:airline_section_a = "%{remote_repo}"
 augroup END
 
 augroup filetype_fish
-    "" **** VIM-FISH ****
     autocmd!
     "" Set up :make to use fish for syntax checking.
     autocmd FileType fish compiler fish
