@@ -44,8 +44,7 @@ alias chrome_debug="/Applications/Google\ Chrome.app/Contents/MacOS/Google\ Chro
 # ssh
 alias thegrepper="ssh root@159.65.76.75"
 alias projection="ssh projection@172.16.1.101" # P
-# alias marketplace="ssh jarrett@10.0.1.206"
-alias marketplace="ssh jarrett@marketplace9.prod"
+alias marketplace="ssh jarrett@mp-jobs1.prod"
 alias cashdash1="cd ~/.ssh && ssh -i cashdash.pem ec2-user@10.21.2.170"
 alias cashdashcelery="cd ~/.ssh && ssh -i cashdash.pem ec2-user@10.21.4.92"
 
@@ -81,4 +80,8 @@ curlN() {
 eval "$(rbenv init -)"
 
 # source "$HOME/"
+
+# integrate iterm with bash (allows prompt jumping, etc)
+source ~/.iterm2_shell_integration.bash
+
 

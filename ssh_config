@@ -1,4 +1,11 @@
-host github.com 
-  HostName github.com 
-  IdentityFile ~/.ssh/github
+Host adforge?.prod* af-*.prod* marketplace?.prod* mp-*.prod* persistor?.prod* whoosh?.prod* impressionsd?.prod* bastion?.prod* mch?.prod* api?.prod? sinatra*.prod* rabbit*.prod* business-classifier?.prod*
+  IdentityFile ~/.ssh/id_rsa
+  ProxyCommand ssh jarrett@54.210.49.254 'nc `echo %h | cut -d "." -f1` %p'
+Host adforge* af-* marketplace* mp-* persistor? whoosh? impressionsd? bastion? mch? api? sinatra* rabbit* business-classifier? statsd?
+  IdentityFile ~/.ssh/id_rsa
+  ProxyCommand ssh jarrett@54.84.172.50 nc %h %p
+Host github.com
+  HostName github.com
+  IdentityFile ~/.ssh/github_rsa
   User git
+
