@@ -1,3 +1,4 @@
+
 function! s:ParseRepoName(remoteStr)
   let l:locations = split(split(a:remoteStr)[1], '[:\/]')
   let l:gitPath = join(l:locations[1:2], '@')
@@ -19,5 +20,4 @@ function! getrepodata#GetBranch()
   let l:branch = system('git branch')
   return l:branch[2:-2]
 endfunction
-
 

@@ -1,212 +1,292 @@
-set nocompatible
-syntax enable
+" Andrew Jarrett
+" https://github.com/ahrjarrett
+" rewritten 2019/04/25
 
-"" use regular shell inside vim (instead of fish)
-if &shell =~# 'fish$'
-  set shell=sh
+" Dein {{{
+if (!isdirectory(expand("$HOME/.config/nvim/repos/github.com/Shougo/dein.vim")))
+  call system(expand("mkdir -p $HOME/.config/nvim/repos/github.com"))
+  call system(expand("git clone https://github.com/Shougo/dein.vim $HOME/.config/nvim/repos/github.com/Shougo/dein.vim"))
 endif
+set runtimepath+=~/.config/nvim/repos/github.com/Shougo/dein.vim/
+  call dein#begin(expand('~/.config/nvim'))
+  call dein#add('Shougo/dein.vim')
+  call dein#add('haya14busa/dein-command.vim')
+  call dein#add('wsdjeg/dein-ui.vim') " very simliar to Plug UI
+  call dein#add('Shougo/context_filetype.vim')
+  call dein#add('Shougo/defx.nvim')
+" }}}
+" Denite {{{
+  call dein#add('Shougo/denite.nvim')
+  call dein#add('Shougo/deoplete.nvim') "python3 -m pip install --user --upgrade pynvim
+  call dein#add('raghur/fruzzy', {'hook_post_update': 'call fruzzy#install()'})
+	call dein#add('neoclide/denite-extra')
+" }}}
+" Navigation {{{
+  call dein#add('lambdalisue/fila.vim')
+  call dein#add('terryma/vim-multiple-cursors')
+  call dein#add('tpope/vim-surround')
+" UI {{{
+  call dein#add('Yggdroot/indentLine')
+  call dein#add('vim-airline/vim-airline')
+  call dein#add('vim-airline/vim-airline-themes')
+" }}}
+" Themes {{{
+  call dein#add('rakr/vim-one')
+  call dein#add('morhetz/gruvbox')
+  call dein#add('patstockwell/vim-monokai-tasty')
+  call dein#add('jdsimcoe/abstract.vim')
+  call dein#add('tlhr/anderson.vim')
+  call dein#add('mhartington/oceanic-next')
+  call dein#add('NLKNguyen/papercolor-theme')
+" }}}
+" TypeScript {{{
+  call dein#add('HerringtonDarkholme/yats.vim')
+  call dein#add('mhartington/nvim-typescript', {'build': './install.sh'})
+" }}}
+  call dein#add('ryanoasis/vim-devicons')
+  call dein#end()
+  call dein#save_state() " not sure why we have to do this part?
+  filetype plugin indent on
+" }}}
 
-"" **** GENERAL SETTINGS ****
-set number
-set ruler
-set nowrap
-set timeoutlen=500
-set softtabstop=2
-set shiftwidth=2
-set expandtab
-set tabstop=2
-"" allow buffers to be in the bg even if unsaved:
-set hidden
-set autoindent
-set noerrorbells visualbell t_vb=
-"" commandmode settings; better completion, etc.
-set wildmenu
-"" directories to ignore with tab completion:
-set wildignore=*~,.git,node_modules
-set showcmd
-"" search settings
-set hlsearch
-set ignorecase
-set smartcase
-"" show filename at bottom
-set ls=2
-"" use system clipboard by default
-set clipboard=unnamedplus
-"" enable mouse bc lazy
-set mouse=a
-"" don't hide chars from me
-set conceallevel=1
-"enable matchit for % to jump btwn keyword pairs"
-runtime macros/matchit.vim
+" System Settings  ----------------------------------------------------------{{{
+  set termguicolors
+  set mouse=a
+  set nowrap
+  set guicursor=n-v-c-sm:block,i-ci-ve:ver25,r-cr-o:hor20
+  set clipboard+=unnamedplus
+  " Better search defaults:
+  set hlsearch
+  set ignorecase
+  set smartcase
+  filetype on
+  set number
+  set numberwidth=1
+  set tabstop=2 shiftwidth=2 expandtab
+  set shiftwidth=2
+  set conceallevel=0
+  set hidden
+  set autoindent
+  set noerrorbells visualbell t_vb=
+  set laststatus=2
+  set conceallevel=0
+  set wildmenu
+  set wildmode=full
+  set wildignore=*~,.git,node_modules
+  set autoread
+  set updatetime=500
+  set fillchars+=vert:│
+  let mapleader="\<SPACE>"
+  let maplocalleader=";"
+  nnoremap <SPACE> <Nop>
+  nnoremap ; <Nop>
 
+  set undofile
+  set undodir="$HOME/.VIM_UNDO_FILES"
+  " Remember cursor position between vim sessions:
+  autocmd BufReadPost *
+          \ if line("'\"") > 0 && line ("'\"") <= line("$") |
+          \   exe "normal! g'\"" |
+          \ endif
+  set complete=.,w,b,u,t,k " CTRL-P completion: where to source
+  set inccommand=nosplit   " enable live substitution highlighting - http://vimcasts.org/transcripts/73/en
+  set spell
+  let g:indentLine_color_gui = '#343d46'
 
-"" **** PACKAGES ****
-"" install Plug
-if empty(glob('~/dotfiles/nvim/autoload/plug.vim'))
-  silent !curl -fLo ~/dotfiles/nvim/autoload/plug.vim --create-dirs
-    \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
-  autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
-endif
-call plug#begin('~/dotfiles/nvim/bundle')
+" Clipboard Stuff:
+  let g:clipboard = {
+  \ 'name': 'pbcopy',
+  \ 'copy': {
+  \    '+': 'pbcopy',
+  \    '*': 'pbcopy',
+  \  },
+  \ 'paste': {
+  \    '+': 'pbpaste',
+  \    '*': 'pbpaste',
+  \ },
+  \ 'cache_enabled': 0,
+  \ }
 
-"" package list
-Plug 'junegunn/vim-plug'
-Plug 'dag/vim-fish'
-Plug 'PeterRincker/vim-searchlight'
-Plug 'vim-airline/vim-airline'
-Plug 'vim-airline/vim-airline-themes'
-"Plug 'jreybert/vimagit'
-Plug 'tpope/vim-fugitive'
-Plug 'vimwiki/vimwiki'
-Plug 'vim-ruby/vim-ruby'
-Plug 'tpope/vim-rails'
+  " Copy current file path to clipboard:
+  nmap cp :let @+= expand("%") <cr>
+	" Copy to osx clipboard:
+  vnoremap <C-c> "*y<CR>
+  vnoremap y "*y<CR>
+  noremap Y y$
+  vnoremap y myy`y
+  vnoremap Y myY`y
+" }}}
 
-Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
-Plug 'junegunn/fzf.vim'
-Plug 'liuchengxu/vim-which-key', { 'on': ['WhichKey', 'WhichKey!'] }
+" System mappings  ----------------------------------------------------------{{{
+  " Disable linewise keys when lines wrap
+  nmap j gj
+  nmap k gk
+  " No need for ex mode
+  nnoremap Q <nop>
+  " Turn off macros until I have time to figure them out
+  map q <Nop>
+  " Align blocks of text and keep them selected
+  vmap < <gv
+  vmap > >gv
 
-
-"" TS syntax file:
-Plug 'HerringtonDarkholme/yats.vim'
-Plug 'mhartington/nvim-typescript', {'build': './install.sh' }
-"" Async completion:
-Plug 'Shougo/deoplete.nvim'
-Plug 'Shougo/denite.nvim'
-
-
-Plug 'prettier/vim-prettier', {
-  \ 'do': 'yarn install',
-  \ 'for': ['javascript', 'typescript', 'ruby', 'css', 'json', 'graphql', 'markdown', 'yaml', 'html'] }
-
-
-"" **** TYPESCRIPT/TSX ****
-let g:deoplete#enable_at_startup = 1
-let $NVIM_NODE_LOG_FILE='nvim-node.log'
-let $NVIM_NODE_LOG_LEVEL='warn'
-"" nvim-yarp && roxma/vim-hug-neovim-rpc
-let $NVIM_PYTHON_LOG_FILE="/tmp/nvim_log"
-let $NVIM_PYTHON_LOG_LEVEL="DEBUG"
-
-
-"" ** REMOVED 4/25/19
-"" Plug 'leafgarland/typescript-vim'
-"" Plug 'peitalin/vim-jsx-typescript'
-"" **** OLD NOW? ****
-"" pink
-"hi tsxTagName guifg=#E06C75 cterm=italic
-""" orange
-"hi tsxCloseString guifg=#F99575
-"hi tsxCloseTag guifg=#F99575
-"hi tsxAttributeBraces guifg=#F99575
-"hi tsxEqual guifg=#F99575
-""" yellow
-"hi tsxAttrib guifg=#F8BD7F cterm=italic
-"" light-grey
-"hi tsxTypeBraces guifg=#999999
-"" dark-grey
-"hi tsxTypes guifg=#666666
-"" tan
-"hi ReactProps guifg=#D19A66 cterm=italic
-"hi ReactLifeCycleMethods ctermfg=204 guifg=#D19A66
-"" aqua
-"hi Events ctermfg=204 guifg=#56B6C2
-"hi WebBrowser ctermfg=204 guifg=#56B6C2
-"" light purple
-"hi ReactState guifg=#C176A7 cterm=italic
-"" purple
-"hi ReduxKeywords ctermfg=204 guifg=#C678DD
-
-
-
-"" themes:
-Plug 'morhetz/gruvbox'
-Plug 'jdsimcoe/abstract.vim'
-Plug 'tlhr/anderson.vim'
-Plug 'liuchengxu/space-vim-dark'
-Plug 'mhartington/oceanic-next'
-Plug 'NLKNguyen/papercolor-theme'
-
-"" supposed to load last, for some reason
-Plug 'ryanoasis/vim-devicons'
-call plug#end()
-
-
-"" **** LEADER & LOCAL LEADER KEYS ****
-let mapleader="\<SPACE>"
-let maplocalleader=";"
-nnoremap <SPACE> <Nop>
-nnoremap ; <Nop>
-"nnoremap , <Nop>
-
-
-"" **** GRUVBOX ****
-let g:gruvbox_italic='1'
-let g:gruvbox_bold='1'
-let g:gruvbox_underline='1'
-let g:gruvbox_undercurl='1'
-let g:gruvbox_italicize_comments='1'
-let g:gruvbox_contrast_dark='hard'
-let g:gruvbox_vert_split='bg2'
-"let g:gruvbox_invert_tabline='0'
-"let g:gruvbox_invert_indent_guides='1'
-
-
-"" **** OCEANIC-NEXT ****
-"" Background: #1d2b35
-let g:oceanic_next_terminal_bold = 1
-let g:oceanic_next_terminal_italic = 1
-colorscheme gruvbox
-set termguicolors
+" Leader Key:
+  " Return to last file/buffer:
+  nmap <Leader><Leader> <c-^>
+  " Source vimrc with C-Q:
+  nmap <C-q> :source $MYVIMRC<CR>
+  tmap <leader>x <C-\><C-n>:bp! <BAR> bd! #<CR>
+  tmap <leader>. <C-\><C-n>:bnext<CR>
+  tmap <leader>, <C-\><C-n>:bprevious<CR>
+  nmap <silent><leader>. :bnext<CR>
+  nmap <silent><leader>, :bprevious<CR>
+  nmap <Leader>bd :bd <C-^><CR>
+  nmap <Leader>wq :close<CR>
+  nmap <Leader>fs :w<CR>
+  nmap <Leader>qq :qa<CR>
+  nmap <Leader>wj <C-w>j
+  nmap <Leader>wk <C-w>k
+  nmap <Leader>wh <C-w>h
+  nmap <Leader>wl <C-w>l
+  nmap <Leader>wJ <C-w>J
+  nmap <Leader>wK <C-w>K
+  nmap <Leader>wH <C-w>H
+  nmap <Leader>wL <C-w>L
+  nmap <Leader>ws <C-w>s
+  nmap <Leader>wv <C-w>v
 
 
-"" **** AIRLINE ****
-let g:airline_theme='onedark'
-let g:airline_powerline_fonts = 1
-if !exists('g:airline_symbols')
-  let g:airline_symbols = {}
-endif
+" Alt Key:
+  imap <A-bs> <C-w>
+  imap <A-left> <C-o>b
+  imap <A-right> <Esc>ea
+  cmap <A-bs> <C-w>
+  nmap <A-v> :edit $MYVIMRC<CR>
+  nmap <A-e> :Explore<CR>
+  nmap <A-/> :noh<CR>
+  imap <A-/> <Esc>:noh<CR>a
+  " Window mechanics:
+  nmap <A-j> <C-w>j
+  nmap <A-k> <C-w>k
+  nmap <A-h> <C-w>h
+  nmap <A-l> <C-w>l
+  nmap <A-\> <C-w>v
+  nmap <A--> <C-w>s
+  nmap <A-S-j> <C-w>J
+  nmap <A-S-k> <C-w>K
+  nmap <A-S-h> <C-w>H
+  nmap <A-S-l> <C-w>L
+  tnoremap <A-/> <C-\><C-n>:noh<CR>A
+  tnoremap <A-h> <C-\><C-n><C-w>h
+  tnoremap <A-j> <C-\><C-n><C-w>j
+  tnoremap <A-k> <C-\><C-n><C-w>k
+  tnoremap <A-l> <C-\><C-n><C-w>l
+  "" Alt+Up :: jump to prev terminal command (~@)
+  tnoremap <A-up> <C-\><C-n>0?^\~@.*$<CR>
+  tnoremap <A-down> <C-\><C-n>$/^\~@☭ .*$<CR>
+  nnoremap <A-up> <C-\><C-n>0?^\~@.*$<CR>
+  nnoremap <A-down> <C-\><C-n>$/^\~@.*$<CR>
+" Mappings Miscellany:
+  nnoremap <Left>  :vertical resize -1<CR>
+  nnoremap <Right> :vertical resize +1<CR>
+  nnoremap <Up>    :resize -1<CR>
+  nnoremap <Down>  :resize +1<CR>
+  " Support Emacs muscle-memory:
+  nmap <C-x><C-s> :w<CR>
+  map <C-g> <Esc>
+  nmap <C-g> <Esc>
+  imap <C-g> <Esc>
+  vmap <C-g> <Esc>
+  cmap <C-g> <Esc>
+  " Use C-j to jump (instead of C-o, used for FZF):
+  nnoremap <C-j> <C-o>
+" }}}
 
-"" LOAD CUSTOM AIRLINE FUNCTIONS
-if !exists('getrepodata#GetRemoteRepo')
-  runtime plugin/getrepodata.vim
-endif
+" Code formatting -----------------------------------------------------------{{{
+" }}}
 
-"" 0=full branch, 1=tail (foo/bar => bar), 2=truncate (foo/bar => f/bar)
-let g:airline#extensions#branch#format = 0
-let g:airline#extensions#tabline#enabled=1
-let g:webdevicons_enable_airline_statusline=1
-let g:webdevicons_enable_airline_tabline = 1
-let g:airline#extensions#hunks#enabled = 0
-let g:airline#extensions#wordcount#enabled = 0
-let g:airline#extensions#whitespace#enabled = 0
+" Nvim terminal -------------------------------------------------------------{{{
+  au BufEnter * if &buftype == 'terminal' | :startinsert | endif
+  autocmd BufEnter term://* startinsert
+  autocmd TermOpen * set bufhidden=hide
 
-let g:airline#extensions#tabline#left_sep = ''
-let g:airline#extensions#tabline#left_alt_sep = ''
-let g:airline_left_sep = ''
-let g:airline_left_alt_sep = ''
-let g:airline_right_sep = ''
-let g:airline_right_alt_sep = ''
-let g:airline_symbols.branch = ''
-let g:airline_symbols.paste = 'Þ'
-let g:airline_symbols.readonly = ''
-let g:airline_symbols.linenr = '☰'
-let g:airline_symbols.maxlinenr = ''
-let g:airline_symbols.dirty=' ⚡'
-set laststatus=2
-let g:airline#extensions#tabline#formatter = 'unique_tail'
-"" inactive windows' left section collapsed to just buffer filename
-let g:airline_inactive_collapse=1
-let g:airline#ignore_bufadd_pat = 'undotree|vimfiler|tagbar|startify|!'
-"let g:airline_symbols.branch = '⎇''
-"let g:airline_symbols.branch = ''
-"let g:airline_symbols.branch = ''
-"let g:airline_symbols.readonly = '👀'
-let g:airline_skip_empty_sections = 1
-let g:airline_statusline_ontop = 0
-"" might need to turn this off for FZF performance later:
-"let g:airline_exclude_preview = 0
+  " Use fish shell (buggy at times):
+  if &shell =~# 'fish$'
+    set shell=sh
+  endif
+" }}}
 
-let g:airline_mode_map = {
+" Themes, Commands, etc  ----------------------------------------------------{{{
+  syntax on
+  let g:one_allow_italics = 1
+  let g:oceanic_next_terminal_bold = 1
+  let g:oceanic_next_terminal_italic = 1
+  let g:vim_monokai_tasty_italic = 1
+  colorscheme OceanicNext
+  let g:airline_theme='onedark'
+  "let g:airline_theme='oceanicnext'
+" }}}
+
+" Airline -------------------------------------------------------------------{{{
+  let g:airline_powerline_fonts = 1
+  if !exists('g:airline_symbols')
+    let g:airline_symbols = {}
+  endif
+" Import custom Airline functions/namespace:
+  if !exists('getrepodata#GetRemoteRepo')
+    runtime plugin/getrepodata.vim
+  endif
+
+  " 0 = full branch; 1 = tail (foo/bar => bar); 2 = truncate (foo/bar => f/bar)
+  let g:airline#extensions#branch#format = 0
+  let g:airline#extensions#tabline#enabled=1
+  let g:webdevicons_enable_airline_statusline=1
+  let g:webdevicons_enable_airline_tabline = 1
+  let g:airline#extensions#hunks#enabled = 0
+  let g:airline#extensions#wordcount#enabled = 0
+  let g:airline#extensions#whitespace#enabled = 0
+
+  let g:airline#extensions#tabline#formatter = 'unique_tail'
+  " Inactive windows' left section collapsed to just buffer filename
+  let g:airline_inactive_collapse=1
+  let g:airline#ignore_bufadd_pat = 'undotree|vimfiler|tagbar|startify|!'
+  let g:airline_skip_empty_sections = 1
+  let g:airline_statusline_ontop = 0
+  
+  function! MakeBranch()
+    let l:branch = g:airline_symbols.branch .' '. getrepodata#GetBranch() . g:airline_symbols.dirty
+    return l:branch
+  endfunction
+
+  call airline#parts#define_function('git_local', 'getrepodata#GetLocalRepo')
+  call airline#parts#define_function('git_remote', 'getrepodata#GetRemoteRepo')
+  call airline#parts#define_function('git_branch', 'MakeBranch')
+
+
+  function! AirlineInit()
+    let g:airline_section_a = airline#section#create(["mode"])
+    let g:airline_section_b = airline#section#create(["git_branch"])
+    let g:airline_section_c = airline#section#create(["⎇' ", "git_remote"])
+    let g:airline_section_x = airline#section#create_right(["git_local"])
+    let g:airline_section_y = ''
+    let g:airline_section_z = ''
+    "call airline#parts#define_accent('git_branch', 'orange')
+  endfunction
+  autocmd VimEnter * call AirlineInit()
+
+  let g:airline#extensions#tabline#left_sep = ''
+  let g:airline#extensions#tabline#left_alt_sep = ''
+  let g:airline_left_sep = ''
+  let g:airline_left_alt_sep = ''
+  let g:airline_right_sep = ''
+  let g:airline_right_alt_sep = ''
+  let g:airline_symbols.branch = ''
+  let g:airline_symbols.paste = 'Þ'
+  let g:airline_symbols.readonly = ''
+  let g:airline_symbols.linenr = '☰'
+  let g:airline_symbols.maxlinenr = ''
+  let g:airline_symbols.dirty=' ⚡'
+
+  let g:airline_mode_map = {
     \ '__' : '? -',
     \ 'c'  : '♞ C',
     \ 'i'  : '✎ I',
@@ -219,334 +299,114 @@ let g:airline_mode_map = {
     \ 'Rv' : '✂︎ R',
     \ 's'  : '♙ S',
     \ 'S'  : '♙ S',
-    \ '' : '♙ S',
     \ 't'  : '♚ T',
     \ 'v'  : '✄ V',
     \ 'V'  : '✁ V',
-    \ '' : '✂︎ V',
+    \ ' '  : '✂︎ V',
     \ }
 
+" Airline Mappings:
+  " Glide through Buffer tabs like Browser tabs:
+  nmap <silent><A-}> :bnext<CR>
+  nmap <silent><A-{> :bprevious<CR>
+  tmap <A-}> <C-\><C-n>:bnext<CR>
+  tmap <A-{> <C-\><C-n>:previous<CR>
+  inoremap <silent><A-}> <Esc>:bnext<CR>
+  inoremap <silent><A-{> <Esc>:bprevious<CR>
+" }}}
 
-function! MakeBranch()
-  let l:branch = g:airline_symbols.branch .' '. getrepodata#GetBranch() . g:airline_symbols.dirty
-  return l:branch
-endfunction
+" Vim-Devicons --------------------------------------------------------------{{{
+  let g:webdevicons_enable_denite = 0
+  let g:WebDevIconsUnicodeDecorateFolderNodesDefaultSymbol = ''
+  let g:DevIconsEnableFoldersOpenClose = 1
+  let g:WebDevIconsOS = 'Darwin'
+  let g:WebDevIconsUnicodeDecorateFolderNodes = 1
+  let g:WebDevIconsUnicodeDecorateFileNodesDefaultSymbol = ''
+  let g:WebDevIconsUnicodeDecorateFileNodesExtensionSymbols = {} " needed
+  let g:WebDevIconsUnicodeDecorateFileNodesExtensionSymbols['js'] = ''
+  let g:WebDevIconsUnicodeDecorateFileNodesExtensionSymbols['vim'] = ''
+  let g:WebDevIconsUnicodeDecorateFileNodesExtensionSymbols['tsx'] = ''
+  let g:WebDevIconsUnicodeDecorateFileNodesExtensionSymbols['css'] = ''
+  let g:WebDevIconsUnicodeDecorateFileNodesExtensionSymbols['html'] = ''
+  let g:WebDevIconsUnicodeDecorateFileNodesExtensionSymbols['json'] = ''
+  let g:WebDevIconsUnicodeDecorateFileNodesExtensionSymbols['md'] = ''
+  let g:WebDevIconsUnicodeDecorateFileNodesExtensionSymbols['sql'] = ''
 
-call airline#parts#define_function('git_local', 'getrepodata#GetLocalRepo')
-call airline#parts#define_function('git_remote', 'getrepodata#GetRemoteRepo')
-call airline#parts#define_function('git_branch', 'MakeBranch')
+" }}}
 
+" Deoplete ------------------------------------------------------------------{{{
 
-function! AirlineInit()
-	let g:airline_section_a = airline#section#create(["mode"])
-	let g:airline_section_b = airline#section#create(["git_branch"])
-	let g:airline_section_c = airline#section#create(["⎇' ", "git_remote"])
-	let g:airline_section_x = airline#section#create_right(["git_local"])
-	let g:airline_section_y = ''
-	let g:airline_section_z = ''
-  "call airline#parts#define_accent('git_branch', 'orange')
-endfunction
-autocmd VimEnter * call AirlineInit()
-"let g:airline_section_y = airline#section#create_right(['ffenc','foo'])
-"let g:airline_section_a = airline#section#create(['branch', 'mode'])
-"let g:airline_section_b = airline#section#create_left(['mode'])
-"let g:airline_section_c = airline#section#create(['filetype'])
-"let g:airline_section_d = airline#section#create(['filetype'])
-"let g:airline_section_y = '%{WebDevIconsGetFileFormatSymbol()}'
-"let g:airline_section_z = '%l:%c'
+  "    " **** I don't know what any of this section does yet. ****
+  "    " enable deoplete
+  "    let g:deoplete#enable_at_startup = 1
+  "    let g:deoplete#auto_complete_delay = 0
+  "    let g:echodoc_enable_at_startup=1
+  "    let g:echodoc#type="virtual"
+  "    set splitbelow
+  "    set completeopt+=menuone,noinsert,noselect
+  "    set completeopt-=preview
+  "    autocmd CompleteDone * pclose
 
+  "    function! Multiple_cursors_before()
+  "    	let b:deoplete_disable_auto_complete=2
+  "    endfunction
+  "    function! Multiple_cursors_after()
+  "    	let b:deoplete_disable_auto_complete=0
+  "    endfunction
+  "    let g:deoplete#file#enable_buffer_path=1
+  "    function! Preview_func()
+  "    	if &pvw
+  "    		setlocal nonumber norelativenumber
+  "    	endif
+  "    endfunction
+  "    autocmd WinEnter * call Preview_func()
+  "    let g:deoplete#ignore_sources = {'_': ['around', 'buffer', 'member' ]}
 
-"" **** CUSTOM KEY MAPPINGS ****
-tmap <leader>x <C-\><C-n>:bp! <BAR> bd! #<CR>
-tmap <leader>. <C-\><C-n>:bnext<CR>
-tmap <leader>, <C-\><C-n>:bprevious<CR>
-nmap <silent><leader>. :bnext<CR>
-nmap <silent><leader>, :bprevious<CR>
+" }}}
 
-nmap <silent><A-}> :bnext<CR>
-nmap <silent><A-{> :bprevious<CR>
-tmap <A-}> <C-\><C-n>:bnext<CR>
-tmap <A-{> <C-\><C-n>:previous<CR>
+" Denite --------------------------------------------------------------------{{{
 
-inoremap <silent><A-}> <Esc>:bnext<CR>
-inoremap <silent><A-{> <Esc>:bprevious<CR>
+  let s:menus = {}
+  call denite#custom#option('_', {
+        \ 'prompt': '❯',
+        \ 'winheight': 10,
+        \ 'updatetime': 1,
+        \ 'auto_resize': 0,
+        \ 'highlight_matched_char': 'Underlined',
+        \ 'highlight_mode_normal': 'CursorLine',
+        \ 'reversed': 1,
+        \ 'auto-accel': 1,
+        \})
 
+  call denite#custom#option('TSDocumentSymbol', {
+        \ 'prompt': ' @' ,
+        \})
+  call denite#custom#option('TSWorkspaceSymbol', {
+        \ 'prompt': ' #' ,
+        \})
 
-"" **** KEY MAPPINGS ****
-"" return to last file opened
-nmap <Leader><Leader> <c-^>
-"" source vim settings with <SPC> & Ctrl+Q
-nmap <Leader><C-q> :source $MYVIMRC<CR>
-nmap <C-q> :source $MYVIMRC<CR>
-nmap <Leader>vi :edit $MYVIMRC<CR>
-" delete buffer without killing window
-nmap <Leader>bd :bd <C-^><CR>
-"nmap <Leader>wj <C-w>j
-"nmap <Leader>wk <C-w>k
-"nmap <Leader>wh <C-w>h
-"nmap <Leader>wl <C-w>l
-"nmap <Leader>wJ <C-w>J
-"nmap <Leader>wK <C-w>K
-"nmap <Leader>wH <C-w>H
-"nmap <Leader>wL <C-w>L
-"nmap <Leader>ws <C-w>s
-"nmap <Leader>wv <C-w>v
-nmap <Leader>wq :close<CR>
-nmap <Leader>fs :w<CR>
-nmap <Leader>qq :qa<CR>
-nmap <Leader>/ :noh<CR>
-"" LEADER FZF:
-nmap <Leader><Tab> <plug>(fzf-maps-n)
-vmap <Leader><Tab> <plug>(fzf-maps-x)
-nmap <C-o> :Files!<CR>
-"" search all from CWD with preview
-nmap <C-s> :Ag!<CR>
-nmap <Leader>fe :Explore<CR>
-nmap <Leader>ff :Files!<CR>
-"nmap <Leader>ww :Windows<CR>
-nmap <Leader>bb :Buffers<CR>
-nmap <Leader>tt :Colors<CR>
-nmap <Leader>cc :Commands<CR>
-"" search all buffers
-nmap <Leader>sa :Lines<CR>
-"" search current buffer
-nmap <Leader>sb :BLines<CR>
-"nmap <Leader>gc :Commits<CR>
-"nmap <Leader>gf :GFiles?<CR>
-nmap <Leader>ct :Tags<CR>
-nmap <Leader>bt :BTags<CR>
-nmap <Leader>hh :Helptags<CR>
+  call denite#custom#source('file_rec', 'vars', {
+        \'command': ['rg', '--files', '--glob', '!.git'],
+        \'matchers': ['matcher/fruzzy'],
+        \'sorters':['sorter_sublime'],
+        \})
+  let fruzzy#usenative = 1
+  "     \ 'command': ['ag', '--follow','--nogroup','--hidden', '--column', '-g', '', '--ignore', '.git', '--ignore', '*.png', '--ignore', 'node_modules'
+  
+  "    "call denite#custom#source('grep', 'vars', {
+  "    "       \'command': ['rg'],
+  "    "       \'default_opts': ['-i', '--vimgrep'],
+  "    "       \'recursive_opts': [],
+  "    "       \'pattern_opt': [],
+  "    "       \'separator': ['--'],
+  "    "       \'final_opts': [],
+  "    "       \'matchers': ['matcher/ignore_globs', 'matcher/regexp', 'matcher/pyfuzzy']
+  "    "       \})
 
+  nmap <Leader>bb :Denite buffer<CR>
 
-"" ALT MAPPINGS
-imap <A-bs> <C-w>
-imap <A-left> <C-o>b
-imap <A-right> <Esc>ea
-cmap <A-bs> <C-w>
-nmap <A-v> :edit $MYVIMRC<CR>
-"" search stuff
-nmap <A-/> :noh<CR>
-imap <A-/> <Esc>:noh<CR>a
-"" window stuff
-nmap <A-j> <C-w>j
-nmap <A-k> <C-w>k
-nmap <A-h> <C-w>h
-nmap <A-l> <C-w>l
-nmap <A-\> <C-w>v
-nmap <A--> <C-w>s
-nmap <A-S-j> <C-w>J
-nmap <A-S-k> <C-w>K
-nmap <A-S-h> <C-w>H
-nmap <A-S-l> <C-w>L
-tnoremap <A-/> <C-\><C-n>:noh<CR>A
-tnoremap <A-h> <C-\><C-n><C-w>h
-tnoremap <A-j> <C-\><C-n><C-w>j
-tnoremap <A-k> <C-\><C-n><C-w>k
-tnoremap <A-l> <C-\><C-n><C-w>l
-"" Alt+Up :: jump to prev terminal command (☭  starts shell prompt)
-tnoremap <A-up> <C-\><C-n>0?^☭ .*$<CR>
-tnoremap <A-down> <C-\><C-n>$/^☭ .*$<CR>
-nnoremap <A-up> <C-\><C-n>0?^☭ .*$<CR>
-nnoremap <A-down> <C-\><C-n>$/^☭ .*$<CR>
-
-"" ALT FZF:
-nmap <A-e> :Explore<CR>
-nmap <A-x> :Commands<CR>
-"" search all open buffers
-nmap <A-s> :Lines<CR>
-"" search current buffer
-nmap <A-S-s> :BLines<CR>
-nmap <A-c> :Tags<CR>
-nmap <A-S-c> :BTags<CR>
-nmap <A-1> :Helptags<CR>
-nmap <A-b> :Buffers<CR>
-
-"" MISC. MAPPINGS
-"" adjust window size with arrow keys:
-nnoremap <Left> :vertical resize -1<CR>
-nnoremap <Right> :vertical resize +1<CR>
-nnoremap <Up> :resize -1<CR>
-nnoremap <Down> :resize +1<CR>
-"use C-j to jump (instead of C-o, used for FZF):
-nnoremap <C-j> <C-o>
-"" Emacs stuff:
-nmap <C-x><C-s> :w<CR>
-map <C-g> <Esc>
-nmap <C-g> <Esc>
-imap <C-g> <Esc>
-vmap <C-g> <Esc>
-cmap <C-g> <Esc>
-" turn off linewise keys (j is 'down' with lines that wrap)
-nmap j gj
-nmap k gk
+  """ TODO """
 
 
-"" **** VIM-WIKI ****
-nmap <Leader>ww <Plug>VimwikiIndex
-"" these all come with vim-wiki by default
-"nmap <Leader>ws <Plug>VimwikiUISelect
-"nmap <Leader>wt <Plug>VimwikiTabIndex
-"nmap <Leader>wi <Plug>VimwikiDiaryIndex
-nmap <Leader>wb <Plug>VimwikiGoBackLink
-nmap == <Plug>VimwikiAddHeaderLevel
-nmap -- <Plug>VimwikiRemoveHeaderLevel
-"nmap <A-Right> <Plug>VimwikiAddHeaderLevel
-"nmap <A-Left> <Plug>VimwikiRemoveHeaderLevel
-map <C-c><C-c> <Plug>VimwikiToggleListItem
-map <C-c><C-c> <Plug>VimwikiToggleListItem
-hi VimwikiHeader1 guifg=#009900
-hi VimwikiHeader2 guifg=#FF0000
-hi VimwikiHeader3 guifg=#00afff
-hi VimwikiHeader4 guifg=#990000
-hi VimwikiHeader5 guifg=#00a6b2
-hi VimwikiHeader6 guifg=#005fd7
-
-
-"" **** TERMINAL ****
-tnoremap <Esc> <C-\><C-n><bs><bs><bs><bs> " escape returns to normal mode
-nmap <A-t> :cd %:p:h<CR>:terminal<CR>Afish<CR>
-nmap <A-S-t> :cd %:p:h<CR><C-w>s<CR>:terminal<CR>Afish<CR>
-
-
-"" **** (vi)MAGIT ****
-"" MAPPINGS: https://github.com/jreybert/vimagit#mappings
-nmap <C-c>g :Magit<CR>
-let g:magit_default_fold_level = 1
-"" TODO: apply custom mapping to ONLY vimagit context?
-"nmap <Tab> :call <SNR>68_mg_open_close_folding_wrapper('+')<CR>
-
-
-"" **** PRETTIER ****
-"" Running before saving (sync, do async with PrettierAsync)
-let g:prettier#autoformat = 0
-"" prettier config:
-let g:prettier#config#print_width = 80
-let g:prettier#config#tab_width = 2
-let g:prettier#config#use_tabs = 'false'
-let g:prettier#config#semi = 'false'
-let g:prettier#config#single_quote = 'true'
-"" print spaces between brackets
-let g:prettier#config#bracket_spacing = 'false'
-"" jsx: put > on the last line instead of new line
-let g:prettier#config#jsx_bracket_same_line = 'false'
-"" avoid|always
-let g:prettier#config#arrow_parens = 'always'
-"" none|es5|all
-let g:prettier#config#trailing_comma = 'all'
-"" flow|babylon|typescript|css|less|scss|json|graphql|markdown
-let g:prettier#config#parser = 'babylon'
-"" css|strict|ignore
-let g:prettier#config#html_whitespace_sensitivity = 'css'
-"" always|never|preserve
-let g:prettier#config#prose_wrap = 'preserve'
-"" https://prettier.io/docs/en/cli.html#config-precedence
-"" cli-override|file-override|prefer-file
-let g:prettier#config#config_precedence = 'prefer-file'
-
-
-"" **** FZF ****
-let $FZF_DEFAULT_COMMAND = 'ag --nocolor -H -g "" 2>/dev/null'
-let g:fzf_buffers_jump = 1
-"FZF_PREVIEW_FILE_CMD "head -n 10"
-let g:fzf_layout = { 'down': '~45%' }
-"let g:fzf_layout = { 'window': 'enew' }
-let g:fzf_colors =
-\ { 'fg':      ['fg', 'Normal'],
-  \ 'bg':      ['bg', 'Normal'],
-  \ 'hl':      ['fg', 'Comment'],
-  \ 'fg+':     ['fg', 'CursorLine', 'CursorColumn', 'Normal'],
-  \ 'bg+':     ['bg', 'CursorLine', 'CursorColumn'],
-  \ 'hl+':     ['fg', 'Statement'],
-  \ 'info':    ['fg', 'PreProc'],
-  \ 'border':  ['fg', 'Ignore'],
-  \ 'prompt':  ['fg', 'Conditional'],
-  \ 'pointer': ['fg', 'Exception'],
-  \ 'marker':  ['fg', 'Keyword'],
-  \ 'spinner': ['fg', 'Label'],
-  \ 'header':  ['fg', 'Comment'] }
-
-"" [[B]Commits] Customize the options used by 'git log':
-let g:fzf_commits_log_options = '--graph --color=always --format="%C(auto)%h%d %s %C(black)%C(bold)%cr"'
-"" [Tags] Command to generate tags file
-""        - Example: generate tags for a Rails project:
-""        - ctags -R --exclude=.git --exclude=log . (bundle list --paths) -f .tags-json
-let g:fzf_tags_command = 'ctags -R'
-
-"" Add preview to :Files cmd
-command! -bang -nargs=? -complete=dir Files
-  \ call fzf#vim#files(<q-args>, fzf#vim#with_preview(), <bang>0)
-"" Add preview to :Ag! cmd
-command! -bang -nargs=* Ag
-  \ call fzf#vim#ag(<q-args>,
-  \                 <bang>0 ? fzf#vim#with_preview('right:50%')
-  \                         : fzf#vim#with_preview('right:10%:hidden', '?'),
-  \                 <bang>0)
-
-
-
-"" **** WHICH-KEY ****
-noremap <silent> <leader> :WhichKey '<Space>'<CR>
-noremap <silent> <localleader> :WhichKey ';'<CR>
-
-
-augroup orAirlineAfterInit
-  autocmd!
-augroup END
-
-augroup on_AirlineToggledOn
-  autocmd!
-  "autocmd User AirlineToggledOn AirlineRefresh
-augroup END
-
-augroup on_BufWritePre
-  autocmd!
-  "" prettier
-  autocmd BufWritePre *.js,*.jsx,*.ts,*.tsx,*.rb,*.css,*.json,*.graphql,*.md,*.yaml,*.html Prettier
-  "" Remove trailling whitespace on :w
-  autocmd BufWritePre * :%s/\s\+$//e
-augroup END
-
-augroup on_BufNewFile
-  autocmd!
-  "" Create the file as soon as it's editing (no more phantom files)
-  autocmd BufNewFile * :write
-augroup END
-
-augroup on_BufEnter
-  autocmd!
-  "" cd to current file's context on entering buffer
-  autocmd BufEnter * silent! lcd %:p:h
-augroup END
-
-augroup filetype_fish
-    autocmd!
-    "" Set up :make to use fish for syntax checking.
-    autocmd FileType fish compiler fish
-    "" Set this to have long lines wrap inside comments.
-    autocmd FileType fish setlocal textwidth=79
-    "" Enable folding of block structures in fish.
-    autocmd FileType fish setlocal foldmethod=expr
-    autocmd FileType fish nnoremap <buffer> <localleader>; I#<Esc>
-augroup END
-
-augroup filetype_javascript
-    autocmd!
-    autocmd FileType javascript nnoremap <buffer> <localleader>; I//<Esc>
-augroup END
-
-augroup filetype_python
-    autocmd!
-    autocmd FileType python nnoremap <buffer> <localleader>; I#<Esc>
-augroup END
-
-augroup filetype_ruby
-    autocmd!
-    autocmd FileType ruby nnoremap <buffer> <localleader>; I#<Esc>
-augroup END
-
-augroup filetype_vim
-    autocmd!
-    autocmd FileType vim nnoremap <buffer> <localleader>; I"<Esc>
-augroup END
-
+" }}}
 
