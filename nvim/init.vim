@@ -1,8 +1,9 @@
-" Andrew Jarrett
-" https://github.com/ahrjarrett
-" rewritten 2019/04/25
 
-" Dein {{{
+" Dotfiles: https://github.com/ahrjarrett/dotfiles {{{
+  " Author: Andrew Jarrett 
+" }}}
+
+" Dein: {{{
 if (!isdirectory(expand("$HOME/.config/nvim/repos/github.com/Shougo/dein.vim")))
   call system(expand("mkdir -p $HOME/.config/nvim/repos/github.com"))
   call system(expand("git clone https://github.com/Shougo/dein.vim $HOME/.config/nvim/repos/github.com/Shougo/dein.vim"))
@@ -15,22 +16,23 @@ set runtimepath+=~/.config/nvim/repos/github.com/Shougo/dein.vim/
   call dein#add('Shougo/context_filetype.vim')
   call dein#add('Shougo/defx.nvim')
 " }}}
-" Denite {{{
+" Denite: {{{
   call dein#add('Shougo/denite.nvim')
   call dein#add('Shougo/deoplete.nvim') "python3 -m pip install --user --upgrade pynvim
   call dein#add('raghur/fruzzy', {'hook_post_update': 'call fruzzy#install()'})
 	call dein#add('neoclide/denite-extra')
+  call dein#add('Shougo/neomru.vim')
 " }}}
-" Navigation {{{
+" Navigation: {{{
   call dein#add('lambdalisue/fila.vim')
   call dein#add('terryma/vim-multiple-cursors')
   call dein#add('tpope/vim-surround')
-" UI {{{
+" UI: {{{
   call dein#add('Yggdroot/indentLine')
   call dein#add('vim-airline/vim-airline')
   call dein#add('vim-airline/vim-airline-themes')
 " }}}
-" Themes {{{
+" Themes: {{{
   call dein#add('rakr/vim-one')
   call dein#add('morhetz/gruvbox')
   call dein#add('patstockwell/vim-monokai-tasty')
@@ -39,7 +41,7 @@ set runtimepath+=~/.config/nvim/repos/github.com/Shougo/dein.vim/
   call dein#add('mhartington/oceanic-next')
   call dein#add('NLKNguyen/papercolor-theme')
 " }}}
-" TypeScript {{{
+" TypeScript: {{{
   call dein#add('HerringtonDarkholme/yats.vim')
   call dein#add('mhartington/nvim-typescript', {'build': './install.sh'})
 " }}}
@@ -49,7 +51,7 @@ set runtimepath+=~/.config/nvim/repos/github.com/Shougo/dein.vim/
   filetype plugin indent on
 " }}}
 
-" System Settings  ----------------------------------------------------------{{{
+" System Settings:  ----------------------------------------------------------{{{
   set termguicolors
   set mouse=a
   set nowrap
@@ -77,9 +79,10 @@ set runtimepath+=~/.config/nvim/repos/github.com/Shougo/dein.vim/
   set updatetime=500
   set fillchars+=vert:│
   let mapleader="\<SPACE>"
-  let maplocalleader=";"
+  let maplocalleader=","
+" Open command mode with just semicolon!
+  nnoremap ; :
   nnoremap <SPACE> <Nop>
-  nnoremap ; <Nop>
 
   set undofile
   set undodir="$HOME/.VIM_UNDO_FILES"
@@ -117,7 +120,7 @@ set runtimepath+=~/.config/nvim/repos/github.com/Shougo/dein.vim/
   vnoremap Y myY`y
 " }}}
 
-" System mappings  ----------------------------------------------------------{{{
+" System Mappings:  ----------------------------------------------------------{{{
   " Disable linewise keys when lines wrap
   nmap j gj
   nmap k gk
@@ -137,8 +140,8 @@ set runtimepath+=~/.config/nvim/repos/github.com/Shougo/dein.vim/
   tmap <leader>x <C-\><C-n>:bp! <BAR> bd! #<CR>
   tmap <leader>. <C-\><C-n>:bnext<CR>
   tmap <leader>, <C-\><C-n>:bprevious<CR>
-  nmap <silent><leader>. :bnext<CR>
-  nmap <silent><leader>, :bprevious<CR>
+  nmap <silent><Leader>. :bnext<CR>
+  nmap <silent><Leader>, :bprevious<CR>
   nmap <Leader>bd :bd <C-^><CR>
   nmap <Leader>wq :close<CR>
   nmap <Leader>fs :w<CR>
@@ -185,6 +188,7 @@ set runtimepath+=~/.config/nvim/repos/github.com/Shougo/dein.vim/
   tnoremap <A-down> <C-\><C-n>$/^\~@☭ .*$<CR>
   nnoremap <A-up> <C-\><C-n>0?^\~@.*$<CR>
   nnoremap <A-down> <C-\><C-n>$/^\~@.*$<CR>
+
 " Mappings Miscellany:
   nnoremap <Left>  :vertical resize -1<CR>
   nnoremap <Right> :vertical resize +1<CR>
@@ -201,10 +205,10 @@ set runtimepath+=~/.config/nvim/repos/github.com/Shougo/dein.vim/
   nnoremap <C-j> <C-o>
 " }}}
 
-" Code formatting -----------------------------------------------------------{{{
+" Code formatting: -----------------------------------------------------------{{{
 " }}}
 
-" Nvim terminal -------------------------------------------------------------{{{
+" Nvim Terminal: -------------------------------------------------------------{{{
   au BufEnter * if &buftype == 'terminal' | :startinsert | endif
   autocmd BufEnter term://* startinsert
   autocmd TermOpen * set bufhidden=hide
@@ -215,18 +219,27 @@ set runtimepath+=~/.config/nvim/repos/github.com/Shougo/dein.vim/
   endif
 " }}}
 
-" Themes, Commands, etc  ----------------------------------------------------{{{
+" Themes, Commands, etc: ------------------------------------------------------{{{
   syntax on
   let g:one_allow_italics = 1
   let g:oceanic_next_terminal_bold = 1
   let g:oceanic_next_terminal_italic = 1
   let g:vim_monokai_tasty_italic = 1
-  colorscheme OceanicNext
-  let g:airline_theme='onedark'
-  "let g:airline_theme='oceanicnext'
+  let g:gruvbox_contrast_dark = 'hard'
+  let g:gruvbox_italic='1'
+  let g:gruvbox_bold='1'
+  let g:gruvbox_underline='1'
+  let g:gruvbox_undercurl='1'
+  let g:gruvbox_italicize_comments='1'
+  let g:gruvbox_contrast_dark='hard'
+
+  "colorscheme OceanicNext
+  colorscheme gruvbox
+  let g:airline_theme='oceanicnext'
+  "let g:airline_theme='onedark'
 " }}}
 
-" Airline -------------------------------------------------------------------{{{
+" Airline: --------------==-----------------------------------------------------{{{
   let g:airline_powerline_fonts = 1
   if !exists('g:airline_symbols')
     let g:airline_symbols = {}
@@ -315,7 +328,7 @@ set runtimepath+=~/.config/nvim/repos/github.com/Shougo/dein.vim/
   inoremap <silent><A-{> <Esc>:bprevious<CR>
 " }}}
 
-" Vim-Devicons --------------------------------------------------------------{{{
+" Vim-Devicons: --------------------------------------------------------------{{{
   let g:webdevicons_enable_denite = 0
   let g:WebDevIconsUnicodeDecorateFolderNodesDefaultSymbol = ''
   let g:DevIconsEnableFoldersOpenClose = 1
@@ -334,7 +347,7 @@ set runtimepath+=~/.config/nvim/repos/github.com/Shougo/dein.vim/
 
 " }}}
 
-" Deoplete ------------------------------------------------------------------{{{
+" Deoplete: ------------------------------------------------------------------{{{
 
   "    " **** I don't know what any of this section does yet. ****
   "    " enable deoplete
@@ -363,8 +376,15 @@ set runtimepath+=~/.config/nvim/repos/github.com/Shougo/dein.vim/
   "    let g:deoplete#ignore_sources = {'_': ['around', 'buffer', 'member' ]}
 
 " }}}
+" Denite: --------------------------------------------------------------------{{{
 
-" Denite --------------------------------------------------------------------{{{
+  " TODO: 
+    " 1. "Find CTags": Build <C-f> search that builds & searches for CTags at cursor
+    " 2. "Ctrl P": Fix completion -- C-p seems to be broken:
+      "nnoremap <silent> <C-p> :Denite file/rec<CR>
+    " 3. "Yank File": Find file by title OR contents, pipe file's conetnts to pbcopy
+      "noremap<Leader>yf :Denite file -auto-action=preview -default-action=yank_to_default_register<CR>
+    " 4. Figure out how to get everything on the same leaderkey / namespace?
 
   let s:menus = {}
   call denite#custom#option('_', {
@@ -385,28 +405,35 @@ set runtimepath+=~/.config/nvim/repos/github.com/Shougo/dein.vim/
         \ 'prompt': ' #' ,
         \})
 
-  call denite#custom#source('file_rec', 'vars', {
-        \'command': ['rg', '--files', '--glob', '!.git'],
+  call denite#custom#source('file/rec', 'vars', {
+        \'command': ['ag', '--follow','--nogroup','--hidden', '--column', '-g', '', '--ignore', '.git', '--ignore', '*.png', '--ignore', 'node_modules'],
         \'matchers': ['matcher/fruzzy'],
         \'sorters':['sorter_sublime'],
         \})
   let fruzzy#usenative = 1
-  "     \ 'command': ['ag', '--follow','--nogroup','--hidden', '--column', '-g', '', '--ignore', '.git', '--ignore', '*.png', '--ignore', 'node_modules'
   
-  "    "call denite#custom#source('grep', 'vars', {
-  "    "       \'command': ['rg'],
-  "    "       \'default_opts': ['-i', '--vimgrep'],
-  "    "       \'recursive_opts': [],
-  "    "       \'pattern_opt': [],
-  "    "       \'separator': ['--'],
-  "    "       \'final_opts': [],
-  "    "       \'matchers': ['matcher/ignore_globs', 'matcher/regexp', 'matcher/pyfuzzy']
-  "    "       \})
+  call denite#custom#source('grep', 'vars', {
+         \'command': ['ag'],
+         \'default_opts': ['-i', '--vimgrep'],
+         \'recursive_opts': [],
+         \'pattern_opt': [],
+         \'separator': ['--'],
+         \'final_opts': [],
+         \'matchers': ['matcher/ignore_globs', 'matcher/regexp', 'matcher/pyfuzzy']
+         \})
+  nnoremap <C-s> :Denite file/rec line -default-action=split<CR>
+  noremap<C-o> :Denite file -auto-action=preview -default-action=open<CR>
+  noremap<Leader>1 :DeniteCursorWord help<CR>
+	call denite#custom#map(
+	      \ 'insert',
+	      \ '<C-g>',
+	      \ '<denite:quit><CR>',
+	      \ 'noremap'
+	      \)
 
-  nmap <Leader>bb :Denite buffer<CR>
-
-  """ TODO """
-
-
+  call denite#custom#map('insert', '<C-j>', '<denite:move_to_next_line>', 'noremap')
+  call denite#custom#map('insert', '<C-n>', '<denite:move_to_next_line>', 'noremap')
+  call denite#custom#map('insert', '<C-k>', '<denite:move_to_previous_line>', 'noremap')
+  call denite#custom#map('insert', '<C-p>', '<denite:move_to_previous_line>', 'noremap')
 " }}}
 
