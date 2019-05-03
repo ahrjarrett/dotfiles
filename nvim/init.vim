@@ -15,6 +15,9 @@ set runtimepath+=~/.config/nvim/repos/github.com/Shougo/dein.vim/
   call dein#add('wsdjeg/dein-ui.vim') " very simliar to Plug UI
   call dein#add('Shougo/context_filetype.vim')
   call dein#add('Shougo/defx.nvim')
+  call dein#add('kristijanhusak/defx-git')
+  call dein#add('kristijanhusak/defx-icons')
+
 " }}}
 " Denite: {{{
   call dein#add('Shougo/denite.nvim')
@@ -78,9 +81,11 @@ set runtimepath+=~/.config/nvim/repos/github.com/Shougo/dein.vim/
   set autoread
   set updatetime=500
   set fillchars+=vert:│
+" Explore config (netrw):
+  let g:netrw_liststyle = 3
   let mapleader="\<SPACE>"
   let maplocalleader=","
-" Open command mode with just semicolon!
+" Open command mode with just semicolon:
   nnoremap ; :
   nnoremap <SPACE> <Nop>
 
@@ -135,6 +140,7 @@ set runtimepath+=~/.config/nvim/repos/github.com/Shougo/dein.vim/
 " Leader Key:
   " Return to last file/buffer:
   nmap <Leader><Leader> <c-^>
+  nmap <Leader>; <C-w><C-w>
   " Source vimrc with C-Q:
   nmap <C-q> :source $MYVIMRC<CR>
   tmap <leader>x <C-\><C-n>:bp! <BAR> bd! #<CR>
@@ -167,7 +173,11 @@ set runtimepath+=~/.config/nvim/repos/github.com/Shougo/dein.vim/
   nmap <A-e> :Explore<CR>
   nmap <A-/> :noh<CR>
   imap <A-/> <Esc>:noh<CR>a
+  " Buffer mechanics:
+  nmap <A-d> :bd <C-^><CR>
+
   " Window mechanics:
+  nmap <A-w> :close<CR>
   nmap <A-j> <C-w>j
   nmap <A-k> <C-w>k
   nmap <A-h> <C-w>h
@@ -189,6 +199,7 @@ set runtimepath+=~/.config/nvim/repos/github.com/Shougo/dein.vim/
   nnoremap <A-up> <C-\><C-n>0?^\~@.*$<CR>
   nnoremap <A-down> <C-\><C-n>$/^\~@.*$<CR>
 
+
 " Mappings Miscellany:
   nnoremap <Left>  :vertical resize -1<CR>
   nnoremap <Right> :vertical resize +1<CR>
@@ -207,6 +218,68 @@ set runtimepath+=~/.config/nvim/repos/github.com/Shougo/dein.vim/
 
 " Code formatting: -----------------------------------------------------------{{{
 " }}}
+
+
+" Defx: ----------------------------------------------------------------------{{{
+  augroup defxConfig
+    autocmd!
+    autocmd FileType defx call s:defx_my_settings()
+  augroup END
+
+  map <silent> - :call OpenDefx()<cr>
+  let g:defx_open_path = getcwd()
+
+  function!  OpenDefx() abort
+    if isdirectory(expand('%:p:h'))
+      let g:defx_open_path = expand('%:p:h')
+    endif
+    execute('Defx
+      \ -columns=git:icons:filename:type
+      \ -buffer-name=""
+      \ -show_ignored_files
+      \ -split=vertical
+      \ -winwidth=45
+      \ -direction=botright
+      \ -toggle
+      \ -resume
+      \ `g:defx_open_path`')
+  endfunction
+
+  function! s:defx_my_settings() abort
+    " Open:
+    nnoremap <silent><buffer><expr> <CR> defx#do_action('open', 'wincmd w \| drop')
+    nnoremap <silent><buffer><expr> <C-j> defx#do_action('open')
+
+    " Navigation:
+    nnoremap <silent><buffer><expr> <C-k> defx#do_action('cd', ['..'])
+    nnoremap <silent><buffer><expr> ~ defx#do_action('cd', [getcwd()])
+    nnoremap <silent><buffer><expr> <S-A-d> defx#do_action('cd', [$HOME . '/Desktop'])
+    nnoremap <silent><buffer><expr> <S-A-c> defx#do_action('cd', [$HOME . '/code'])
+
+    " Mutations:
+    nnoremap <silent><buffer><expr> <A-N> defx#do_action('new_directory')
+    nnoremap <silent><buffer><expr> <A-n> defx#do_action('new_file')
+    nnoremap <silent><buffer><expr> <A-BS> defx#do_action('remove_trash', ['true'])
+    nnoremap <silent><buffer><expr> <A-CR> defx#do_action('rename')
+    nnoremap <silent><buffer><expr> <A-y> defx#do_action('copy')
+    nnoremap <silent><buffer><expr> <A-c> defx#do_action('copy')
+    nnoremap <silent><buffer><expr> <A-v> defx#do_action('paste')
+    nnoremap <silent><buffer><expr> <A-p> defx#do_action('paste')
+    nnoremap <silent><buffer><expr> <A-m> defx#do_action('move')
+    "nnoremap <silent><buffer><expr> M defx#do_action('new_multiple_files')
+
+    nnoremap <silent><buffer><expr><nowait> <Tab> defx#do_action('toggle_select') . 'j'
+    nnoremap <silent><buffer><expr><nowait> <S-Tab> defx#do_action('toggle_select') . 'k'
+    nnoremap <silent><buffer><expr> <A-g> defx#do_action('redraw')
+  endfunction
+
+  let g:loaded_netrwPlugin = 1 " Disable netrw.vim
+  let g:defx_git#show_ignored = 0
+  let g:defx_git#raw_mode = 0
+  let g:defx_git#column_length = 2
+
+" }}}
+
 
 " Nvim Terminal: -------------------------------------------------------------{{{
   au BufEnter * if &buftype == 'terminal' | :startinsert | endif
