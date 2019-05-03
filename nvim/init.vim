@@ -463,7 +463,7 @@ set runtimepath+=~/.config/nvim/repos/github.com/Shougo/dein.vim/
   let s:menus = {}
   call denite#custom#option('_', {
         \ 'prompt': '❯',
-        \ 'winheight': 10,
+        \ 'winheight': 20,
         \ 'updatetime': 1,
         \ 'auto_resize': 0,
         \ 'highlight_matched_char': 'Underlined',
@@ -496,8 +496,12 @@ set runtimepath+=~/.config/nvim/repos/github.com/Shougo/dein.vim/
          \'matchers': ['matcher/ignore_globs', 'matcher/regexp', 'matcher/pyfuzzy']
          \})
   nnoremap <C-s> :Denite file/rec line -default-action=split<CR>
-  "noremap <C-o> :Denite file -auto-action=preview -default-action=open<CR>
   noremap <C-o> :Denite file/rec -default-action=open<CR>
+  "noremap <C-o> :Denite file -auto-action=preview -default-action=open<CR>
+  " GENERATE CTAGS (doesn't use Denite currently)
+  noremap <C-f> :tag <C-r><C-w><CR>
+
+
   noremap <Leader>1 :DeniteCursorWord help<CR>
 	call denite#custom#map(
 	      \ 'insert',
