@@ -15,7 +15,6 @@ set runtimepath+=~/.config/nvim/repos/github.com/Shougo/dein.vim/
   call dein#add('wsdjeg/dein-ui.vim') " very simliar to Plug UI
   call dein#add('Shougo/context_filetype.vim')
   call dein#add('Shougo/defx.nvim')
-  call dein#add('kristijanhusak/defx-git')
   call dein#add('kristijanhusak/defx-icons')
 
 " }}}
@@ -221,20 +220,22 @@ set runtimepath+=~/.config/nvim/repos/github.com/Shougo/dein.vim/
 
 
 " Defx: ----------------------------------------------------------------------{{{
+  map <silent> - :call OpenDefx()<cr>
+  let g:loaded_netrwPlugin = 1 " Disable netrw.vim
+  let g:defx_open_path = getcwd()
+
   augroup defxConfig
     autocmd!
     autocmd FileType defx call s:defx_my_settings()
   augroup END
 
-  map <silent> - :call OpenDefx()<cr>
-  let g:defx_open_path = getcwd()
 
   function!  OpenDefx() abort
     if isdirectory(expand('%:p:h'))
       let g:defx_open_path = expand('%:p:h')
     endif
     execute('Defx
-      \ -columns=git:icons:filename:type
+      \ -columns=mark:indent:icons:filename:type
       \ -buffer-name=""
       \ -show_ignored_files
       \ -split=vertical
@@ -268,15 +269,16 @@ set runtimepath+=~/.config/nvim/repos/github.com/Shougo/dein.vim/
     nnoremap <silent><buffer><expr> <A-m> defx#do_action('move')
     "nnoremap <silent><buffer><expr> M defx#do_action('new_multiple_files')
 
-    nnoremap <silent><buffer><expr><nowait> <Tab> defx#do_action('toggle_select') . 'j'
-    nnoremap <silent><buffer><expr><nowait> <S-Tab> defx#do_action('toggle_select') . 'k'
+    " Misc:
     nnoremap <silent><buffer><expr> <A-g> defx#do_action('redraw')
+    nnoremap <silent><buffer><expr><nowait> <Tab> defx#do_action('toggle_select')
+    "nnoremap <silent><buffer><expr><nowait> <Tab> defx#do_action('toggle_select') . 'j'
+    "nnoremap <silent><buffer><expr><nowait> <S-Tab> defx#do_action('toggle_select') . 'k'
   endfunction
 
-  let g:loaded_netrwPlugin = 1 " Disable netrw.vim
-  let g:defx_git#show_ignored = 0
-  let g:defx_git#raw_mode = 0
-  let g:defx_git#column_length = 2
+  "let g:defx_git#show_ignored = 0
+  "let g:defx_git#raw_mode = 0
+  "let g:defx_git#column_length = 2
 
 " }}}
 
