@@ -1,5 +1,10 @@
+### DELETE (now shell commands):
+#alias showit="defaults write com.apple.finder AppleShowAllFiles -bool TRUE && killall Finder"
+#alias hideit="defaults write com.apple.finder AppleShowAllFiles -bool FALSE && killall Finder"
+
+
 # path
-export PATH="$HOME/.rbenv/bin:/usr/local/opt/elasticsearch@5.6/bin:$HOME/.npm-global/bin:$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:/usr/local/sbin:$PATH"
+export PATH="/usr/local/opt/imagemagick@6/bin:/usr/local/opt/mysql@5.6:/usr/local/opt/elasticsearch@5.6/bin:$HOME/go/bin/Users/aj2/scripts/utilities:$HOME/.npm-global/bin:$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:/usr/local/sbin:$PATH"
 
 
 # title / prompt
@@ -31,8 +36,6 @@ alias ll="ls -alF"
 alias pd="pwd"
 alias c="clear"
 alias vim="nvim"
-alias showit="defaults write com.apple.finder AppleShowAllFiles -bool TRUE && killall Finder"
-alias hideit="defaults write com.apple.finder AppleShowAllFiles -bool FALSE && killall Finder"
 alias bashit="vim ~/dotfiles/.bash_profile"
 alias vimmit="vim ~/dotfiles/nvim/init.vim"
 alias ga="git add -A"
@@ -77,7 +80,7 @@ curlN() {
 # [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 
 
-eval "$(rbenv init -)"
+# eval "$(rbenv init -)"
 
 # source "$HOME/"
 
@@ -85,3 +88,5 @@ eval "$(rbenv init -)"
 source ~/.iterm2_shell_integration.bash
 
 
+
+[[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm" # Load RVM into a shell session *as a function*
