@@ -229,7 +229,6 @@ set runtimepath+=~/.config/nvim/repos/github.com/Shougo/dein.vim/
     autocmd FileType defx call s:defx_my_settings()
   augroup END
 
-
   function!  OpenDefx() abort
     if isdirectory(expand('%:p:h'))
       let g:defx_open_path = expand('%:p:h')
@@ -497,8 +496,9 @@ set runtimepath+=~/.config/nvim/repos/github.com/Shougo/dein.vim/
          \'matchers': ['matcher/ignore_globs', 'matcher/regexp', 'matcher/pyfuzzy']
          \})
   nnoremap <C-s> :Denite file/rec line -default-action=split<CR>
-  noremap<C-o> :Denite file -auto-action=preview -default-action=open<CR>
-  noremap<Leader>1 :DeniteCursorWord help<CR>
+  "noremap <C-o> :Denite file -auto-action=preview -default-action=open<CR>
+  noremap <C-o> :Denite file/rec -default-action=open<CR>
+  noremap <Leader>1 :DeniteCursorWord help<CR>
 	call denite#custom#map(
 	      \ 'insert',
 	      \ '<C-g>',
