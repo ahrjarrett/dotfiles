@@ -1,6 +1,6 @@
-
-" Dotfiles: https://github.com/ahrjarrett/dotfiles {{{
-  " Author: Andrew Jarrett 
+" DOTFILES: https://github.com/ahrjarrett/dotfiles {{{
+  " Author: Andrew Jarrett
+  " Email: <ahrjarrett@gmail.com>
 " }}}
 
 " Dein: {{{
@@ -43,6 +43,7 @@ set runtimepath+=~/.config/nvim/repos/github.com/Shougo/dein.vim/
   call dein#add('tlhr/anderson.vim')
   call dein#add('mhartington/oceanic-next')
   call dein#add('NLKNguyen/papercolor-theme')
+  call dein#add('sonjapeterson/1989.vim')
 " }}}
 " TypeScript: {{{
   call dein#add('HerringtonDarkholme/yats.vim')
@@ -60,6 +61,7 @@ set runtimepath+=~/.config/nvim/repos/github.com/Shougo/dein.vim/
   set mouse=a
   set nowrap
   set guicursor=n-v-c-sm:block,i-ci-ve:ver25,r-cr-o:hor20
+  set guicursor+=n-v-c:blinkon0 " Turn off cursor blinking in NVC modes
   set clipboard+=unnamedplus
   " Better search defaults:
   set hlsearch
@@ -306,9 +308,11 @@ highlight link SearchCursor WarningMsg
 " Themes, Commands, etc: ------------------------------------------------------{{{
   syntax on
   let g:one_allow_italics = 1
+  let g:vim_monokai_tasty_italic = 1
+  " Oceanic Next:
   let g:oceanic_next_terminal_bold = 1
   let g:oceanic_next_terminal_italic = 1
-  let g:vim_monokai_tasty_italic = 1
+  " Gruvbox:
   let g:gruvbox_contrast_dark = 'hard'
   let g:gruvbox_italic='1'
   let g:gruvbox_bold='1'
@@ -324,10 +328,11 @@ highlight link SearchCursor WarningMsg
   nnoremap / :let @/ = ""<CR>:call gruvbox#hls_show()<CR>/
   nnoremap ? :let @/ = ""<CR>:call gruvbox#hls_show()<CR>?
 
-
-  "colorscheme OceanicNext
   colorscheme gruvbox
-  let g:airline_theme='oceanicnext'
+  let g:airline_theme='night_owl'
+  "colorscheme OceanicNext
+  "colorscheme 1989
+  "let g:airline_theme='oceanicnext'
   "let g:airline_theme='onedark'
 " }}}
 
