@@ -33,6 +33,7 @@ set runtimepath+=~/.config/nvim/repos/github.com/Shougo/dein.vim/
   call dein#add('Yggdroot/indentLine')
   call dein#add('vim-airline/vim-airline')
   call dein#add('vim-airline/vim-airline-themes')
+  call dein#add('PeterRincker/vim-searchlight')
 " }}}
 " Themes: {{{
   call dein#add('rakr/vim-one')
@@ -47,6 +48,7 @@ set runtimepath+=~/.config/nvim/repos/github.com/Shougo/dein.vim/
   call dein#add('HerringtonDarkholme/yats.vim')
   call dein#add('mhartington/nvim-typescript', {'build': './install.sh'})
 " }}}
+" Misc: {{{
   call dein#add('ryanoasis/vim-devicons')
   call dein#end()
   call dein#save_state() " not sure why we have to do this part?
@@ -99,6 +101,14 @@ set runtimepath+=~/.config/nvim/repos/github.com/Shougo/dein.vim/
   set inccommand=nosplit   " enable live substitution highlighting - http://vimcasts.org/transcripts/73/en
   set spell
   let g:indentLine_color_gui = '#343d46'
+
+" Search Config:
+highlight CurrentSearch
+  \ cterm=reverse,bold ctermfg=108 ctermbg=235
+  \ gui=reverse,bold guifg=#8ec07c guibg=#282828
+
+highlight link SearchCursor WarningMsg
+
 
 " Clipboard Stuff:
   let g:clipboard = {
@@ -306,6 +316,14 @@ set runtimepath+=~/.config/nvim/repos/github.com/Shougo/dein.vim/
   let g:gruvbox_undercurl='1'
   let g:gruvbox_italicize_comments='1'
   let g:gruvbox_contrast_dark='hard'
+  " Better Search Color Highlighting in Gruvbox:
+  nnoremap <silent> [oh :call gruvbox#hls_show()<CR>
+  nnoremap <silent> ]oh :call gruvbox#hls_hide()<CR>
+  nnoremap <silent> coh :call gruvbox#hls_toggle()<CR>
+  nnoremap * :let @/ = ""<CR>:call gruvbox#hls_show()<CR>*
+  nnoremap / :let @/ = ""<CR>:call gruvbox#hls_show()<CR>/
+  nnoremap ? :let @/ = ""<CR>:call gruvbox#hls_show()<CR>?
+
 
   "colorscheme OceanicNext
   colorscheme gruvbox
@@ -425,7 +443,13 @@ set runtimepath+=~/.config/nvim/repos/github.com/Shougo/dein.vim/
 
   "    " **** I don't know what any of this section does yet. ****
   "    " enable deoplete
-  "    let g:deoplete#enable_at_startup = 1
+  let g:deoplete#enable_at_startup = 1
+  call deoplete#custom#option({
+    \ 'auto_complete_delay': 0,
+    \ 'smart_case': v:true,
+    \ })
+
+
   "    let g:deoplete#auto_complete_delay = 0
   "    let g:echodoc_enable_at_startup=1
   "    let g:echodoc#type="virtual"
@@ -437,7 +461,7 @@ set runtimepath+=~/.config/nvim/repos/github.com/Shougo/dein.vim/
   "    function! Multiple_cursors_before()
   "    	let b:deoplete_disable_auto_complete=2
   "    endfunction
-  "    function! Multiple_cursors_after()
+  "    function! MPeterRincker/vim-searchlightultiple_cursors_after()
   "    	let b:deoplete_disable_auto_complete=0
   "    endfunction
   "    let g:deoplete#file#enable_buffer_path=1
