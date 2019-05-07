@@ -16,7 +16,6 @@ set runtimepath+=~/.config/nvim/repos/github.com/Shougo/dein.vim/
   call dein#add('Shougo/context_filetype.vim')
   call dein#add('Shougo/defx.nvim')
   call dein#add('kristijanhusak/defx-icons')
-
 " }}}
 " Denite: {{{
   call dein#add('Shougo/denite.nvim')
@@ -24,6 +23,15 @@ set runtimepath+=~/.config/nvim/repos/github.com/Shougo/dein.vim/
   call dein#add('raghur/fruzzy', {'hook_post_update': 'call fruzzy#install()'})
 	call dein#add('neoclide/denite-extra')
   call dein#add('Shougo/neomru.vim')
+" }}}
+" Deoplete: {{{
+  " Ruby:
+  " Tags:
+  call dein#add('deoplete-plugins/deoplete-tag')
+" }}}
+
+" Tmux: {{{
+  call dein#add('christoomey/vim-tmux-navigator')
 " }}}
 " Navigation: {{{
   call dein#add('lambdalisue/fila.vim')
@@ -45,6 +53,7 @@ set runtimepath+=~/.config/nvim/repos/github.com/Shougo/dein.vim/
   call dein#add('NLKNguyen/papercolor-theme')
   call dein#add('sonjapeterson/1989.vim')
 " }}}
+
 " TypeScript: {{{
   call dein#add('HerringtonDarkholme/yats.vim')
   call dein#add('mhartington/nvim-typescript', {'build': './install.sh'})
@@ -61,8 +70,8 @@ set runtimepath+=~/.config/nvim/repos/github.com/Shougo/dein.vim/
   set mouse=a
   set nowrap
   set guicursor=n-v-c-sm:block,i-ci-ve:ver25,r-cr-o:hor20
-  set guicursor+=n-v-c:blinkon0 " Turn off cursor blinking in NVC modes
-  set clipboard+=unnamedplus
+  " Turn off cursor blinking (noticable perf gain with autocomplete)
+  set guicursor+=a:blinkon0
   " Better search defaults:
   set hlsearch
   set ignorecase
@@ -89,8 +98,9 @@ set runtimepath+=~/.config/nvim/repos/github.com/Shougo/dein.vim/
   let mapleader="\<SPACE>"
   let maplocalleader=","
 " Open command mode with just semicolon:
-  nnoremap ; :
   nnoremap <SPACE> <Nop>
+  nnoremap <C-SPACE> <Nop>
+  nnoremap ; :
 
   set undofile
   set undodir="$HOME/.VIM_UNDO_FILES"
@@ -99,20 +109,29 @@ set runtimepath+=~/.config/nvim/repos/github.com/Shougo/dein.vim/
           \ if line("'\"") > 0 && line ("'\"") <= line("$") |
           \   exe "normal! g'\"" |
           \ endif
+  " Remove trailling whitespace on :w
+  autocmd BufWritePre * :%s/\s\+$//e
   set complete=.,w,b,u,t,k " CTRL-P completion: where to source
   set inccommand=nosplit   " enable live substitution highlighting - http://vimcasts.org/transcripts/73/en
   set spell
   let g:indentLine_color_gui = '#343d46'
 
-" Search Config:
-highlight CurrentSearch
-  \ cterm=reverse,bold ctermfg=108 ctermbg=235
-  \ gui=reverse,bold guifg=#8ec07c guibg=#282828
-
-highlight link SearchCursor WarningMsg
-
+  " Dim Inactive Window:
+  "augroup DimInactiveWindow
+  "  autocmd!
+  "  autocmd WinLeave,BufLeave,TabLeave * ownsyntax off
+  "augroup END
+  "augroup UndimActiveWindow
+  "  autocmd!
+  "  autocmd WinEnter,BufEnter,TabEnter * ownsyntax on
+  "augroup END
+  "
+  "autocmd BufEnter,FocusGained,VimEnter,WinEnter * set winhighlight=
+  ""autocmd FocusLost,WinLeave * set winhighlight=CursorLineNr:LineNr,EndOfBuffer:ColorColumn,IncSearch:ColorColumn,Normal:ColorColumn,NormalNC:ColorColumn,SignColumn:ColorColumn
+  "autocmd FocusLost,WinLeave * set winhighlight=Normal:InactiveWindow
 
 " Clipboard Stuff:
+  set clipboard+=unnamedplus
   let g:clipboard = {
   \ 'name': 'pbcopy',
   \ 'copy': {
@@ -148,10 +167,15 @@ highlight link SearchCursor WarningMsg
   vmap < <gv
   vmap > >gv
 
+" Tmux: ----------------------------------------------------------------------{{{
+  " When Tmux adds a window, resize vim windows too:
+  autocmd VimResized * :wincmd =
+" }}}
+
 " Leader Key:
   " Return to last file/buffer:
   nmap <Leader><Leader> <c-^>
-  nmap <Leader>; <C-w><C-w>
+  nmap <Leader>; <C-w><C-p>
   " Source vimrc with C-Q:
   nmap <C-q> :source $MYVIMRC<CR>
   tmap <leader>x <C-\><C-n>:bp! <BAR> bd! #<CR>
@@ -159,20 +183,18 @@ highlight link SearchCursor WarningMsg
   tmap <leader>, <C-\><C-n>:bprevious<CR>
   nmap <silent><Leader>. :bnext<CR>
   nmap <silent><Leader>, :bprevious<CR>
-  nmap <Leader>bd :bd <C-^><CR>
+  nmap <Leader>bd :Bclose <CR>
   nmap <Leader>wq :close<CR>
   nmap <Leader>fs :w<CR>
   nmap <Leader>qq :qa<CR>
-  nmap <Leader>wj <C-w>j
-  nmap <Leader>wk <C-w>k
-  nmap <Leader>wh <C-w>h
-  nmap <Leader>wl <C-w>l
-  nmap <Leader>wJ <C-w>J
-  nmap <Leader>wK <C-w>K
-  nmap <Leader>wH <C-w>H
-  nmap <Leader>wL <C-w>L
-  nmap <Leader>ws <C-w>s
-  nmap <Leader>wv <C-w>v
+  " TODO: Make these work again with Tmux!
+  nmap <Leader>J <C-w>J
+  nmap <Leader>K <C-w>K
+  nmap <Leader>H <C-w>H
+  nmap <Leader>L <C-w>L
+  nmap <Leader>\ <C-w>v
+  nmap <Leader>/ <C-w>s
+  nmap <Leader>x :close<CR>
 
 
 " Alt Key:
@@ -189,12 +211,8 @@ highlight link SearchCursor WarningMsg
 
   " Window mechanics:
   nmap <A-w> :close<CR>
-  nmap <A-j> <C-w>j
-  nmap <A-k> <C-w>k
-  nmap <A-h> <C-w>h
-  nmap <A-l> <C-w>l
   nmap <A-\> <C-w>v
-  nmap <A--> <C-w>s
+  nmap <A-/> <C-w>s
   nmap <A-S-j> <C-w>J
   nmap <A-S-k> <C-w>K
   nmap <A-S-h> <C-w>H
@@ -224,7 +242,7 @@ highlight link SearchCursor WarningMsg
   vmap <C-g> <Esc>
   cmap <C-g> <Esc>
   " Use C-j to jump (instead of C-o, used for FZF):
-  nnoremap <C-j> <C-o>
+  nnoremap <C-S-i> <C-o>
 " }}}
 
 " Code formatting: -----------------------------------------------------------{{{
@@ -260,10 +278,10 @@ highlight link SearchCursor WarningMsg
   function! s:defx_my_settings() abort
     " Open:
     nnoremap <silent><buffer><expr> <CR> defx#do_action('open', 'wincmd w \| drop')
-    nnoremap <silent><buffer><expr> <C-j> defx#do_action('open')
+    nnoremap <silent><buffer><expr> <A-j> defx#do_action('open')
 
     " Navigation:
-    nnoremap <silent><buffer><expr> <C-k> defx#do_action('cd', ['..'])
+    nnoremap <silent><buffer><expr> <A-k> defx#do_action('cd', ['..'])
     nnoremap <silent><buffer><expr> ~ defx#do_action('cd', [getcwd()])
     nnoremap <silent><buffer><expr> <S-A-d> defx#do_action('cd', [$HOME . '/Desktop'])
     nnoremap <silent><buffer><expr> <S-A-c> defx#do_action('cd', [$HOME . '/code'])
@@ -361,7 +379,7 @@ highlight link SearchCursor WarningMsg
   let g:airline#ignore_bufadd_pat = 'undotree|vimfiler|tagbar|startify|!'
   let g:airline_skip_empty_sections = 1
   let g:airline_statusline_ontop = 0
-  
+
   function! MakeBranch()
     let l:branch = g:airline_symbols.branch .' '. getrepodata#GetBranch() . g:airline_symbols.dirty
     return l:branch
@@ -443,17 +461,20 @@ highlight link SearchCursor WarningMsg
   let g:WebDevIconsUnicodeDecorateFileNodesExtensionSymbols['sql'] = ''
 
 " }}}
-
 " Deoplete: ------------------------------------------------------------------{{{
 
-  "    " **** I don't know what any of this section does yet. ****
-  "    " enable deoplete
-  let g:deoplete#enable_at_startup = 1
+  let g:deoplete#enable_at_startup = 0
   call deoplete#custom#option({
     \ 'auto_complete_delay': 0,
     \ 'smart_case': v:true,
+    \ 'refresh_always': v:false,
     \ })
+  set completeopt-=preview
 
+	inoremap <silent> <C-2> <C-r>=<SID>complete_and_close() . "\<SPACE>"
+  function! s:complete_and_close() abort
+	  return deoplete#close_popup() . "\<CR>"
+	endfunction
 
   "    let g:deoplete#auto_complete_delay = 0
   "    let g:echodoc_enable_at_startup=1
@@ -481,7 +502,7 @@ highlight link SearchCursor WarningMsg
 " }}}
 " Denite: --------------------------------------------------------------------{{{
 
-  " TODO: 
+  " TODO:
     " 1. "Find CTags": Build <C-f> search that builds & searches for CTags at cursor
     " 2. "Ctrl P": Fix completion -- C-p seems to be broken:
       "nnoremap <silent> <C-p> :Denite file/rec<CR>
@@ -492,7 +513,7 @@ highlight link SearchCursor WarningMsg
   let s:menus = {}
   call denite#custom#option('_', {
         \ 'prompt': '❯',
-        \ 'winheight': 20,
+        \ 'winheight': 16,
         \ 'updatetime': 1,
         \ 'auto_resize': 0,
         \ 'highlight_matched_char': 'Underlined',
@@ -514,7 +535,7 @@ highlight link SearchCursor WarningMsg
         \'sorters':['sorter_sublime'],
         \})
   let fruzzy#usenative = 1
-  
+
   call denite#custom#source('grep', 'vars', {
          \'command': ['ag'],
          \'default_opts': ['-i', '--vimgrep'],
@@ -525,10 +546,12 @@ highlight link SearchCursor WarningMsg
          \'matchers': ['matcher/ignore_globs', 'matcher/regexp', 'matcher/pyfuzzy']
          \})
   nnoremap <C-s> :Denite file/rec line -default-action=split<CR>
-  noremap <C-o> :Denite file/rec -default-action=open<CR>
-  "noremap <C-o> :Denite file -auto-action=preview -default-action=open<CR>
+  nnoremap <C-o> :Denite file/rec -default-action=open<CR>
+  nnoremap <silent> <leader>T :Denite -auto-preview colorscheme<CR>
+  nnoremap <silent> <leader>H :Denite help<CR>
   " GENERATE CTAGS (doesn't use Denite currently)
-  noremap <C-f> :tag <C-r><C-w><CR>
+  nnoremap <C-f> :tag <C-r><C-w><CR>
+
 
 
   noremap <Leader>1 :DeniteCursorWord help<CR>
@@ -539,9 +562,7 @@ highlight link SearchCursor WarningMsg
 	      \ 'noremap'
 	      \)
 
-  call denite#custom#map('insert', '<C-j>', '<denite:move_to_next_line>', 'noremap')
   call denite#custom#map('insert', '<C-n>', '<denite:move_to_next_line>', 'noremap')
-  call denite#custom#map('insert', '<C-k>', '<denite:move_to_previous_line>', 'noremap')
   call denite#custom#map('insert', '<C-p>', '<denite:move_to_previous_line>', 'noremap')
 " }}}
 

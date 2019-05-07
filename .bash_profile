@@ -4,7 +4,7 @@
 
 
 # path
-export PATH="/usr/local/opt/imagemagick@6/bin:/usr/local/opt/mysql@5.6:/usr/local/opt/elasticsearch@5.6/bin:$HOME/go/bin/Users/aj2/scripts/utilities:$HOME/.npm-global/bin:$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:/usr/local/sbin:$PATH"
+export PATH="/usr/local/opt/imagemagick@6/bin:/usr/local/opt/mysql@5.6:/usr/local/opt/elasticsearch@5.6/bin:$HOME/go/bin:$HOME/scripts/utilities:$HOME/.npm-global/bin:$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:/usr/local/sbin:$PATH"
 
 
 # title / prompt
