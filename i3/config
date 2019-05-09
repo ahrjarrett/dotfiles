@@ -53,7 +53,7 @@ bindsym $mod+v split v
 bindsym $mod+f fullscreen
 
 # wallpaper
-exec feh --bg-center '.background.jpg'
+exec feh --bg-center 'background.jpg'
 
 # brightness
 bindsym Ctrl+F7 exec light -U 10
