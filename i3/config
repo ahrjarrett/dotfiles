@@ -171,22 +171,21 @@ bar {
 # for_window [title="term1"] move workspace number 2
 # for_window [title="Files"] move window to workspace 3
 # for_window [title="term2"] move workspace number 3
-for_window [instance="gthumb"] floating enable
-for_window [instance="gThumb"] floating enable
-for_window [instance="vlc"] floating enable
-for_window [instance="qalculate"] floating enable
+# for_window [instance="gthumb"] floating enable
+# for_window [instance="gThumb"] floating enable
+# for_window [instance="vlc"] floating enable
+# for_window [instance="qalculate"] floating enable
 
 # startup
 # exec --no-startup-id xinput set-prop 12 "Device Enabled" 0 # disable touchpad
 exec --no-startup-id xset b off # disable annoying beeps
 exec --no-startup-id xrandr --setprovideroutputsource 1 0
 exec --no-startup-id xinput --set-prop "SynPS/2 Synaptics TouchPad" "libinput Tapping Enabled" 1
-exec --no-startup-id /home/authmane512/.i3/check_battery_ram.py 12
+exec --no-startup-id /home/aj/dotfiles/i3/check_battery_ram.py 12
 exec --no-startup-id redshift -t 4500:2500 -b 1.0:0.8 -l geoclue2
 
 exec nm-applet
 exec clipit
-exec skypeforlinux
 exec nextcloud
 
 # exec --no-startup-id i3-msg 'workspace 2; exec terminator --title=Terminal'
