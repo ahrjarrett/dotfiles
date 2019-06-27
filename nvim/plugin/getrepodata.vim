@@ -17,7 +17,8 @@ function! getrepodata#GetLocalRepo()
 endfunction
 
 function! getrepodata#GetBranch()
-  let l:branch = system('git branch')
-  return l:branch[2:-2]
+  "let l:branch = system('git branch')
+  let l:branch = system('git status --branch | grep "On branch " | sed "s/On branch //"')
+  return l:branch[:-2]
 endfunction
 

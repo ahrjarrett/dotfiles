@@ -1,0 +1,357 @@
+snippet     render
+abbr        render() {...}
+options     head
+    render() {
+      return (
+        ${1}
+      )
+    }
+
+snippet     pt
+abbr        static propTypes = {...}
+options     head
+    static propTypes = {
+      ${1}
+    }
+
+snippet     dp
+abbr        static defaultProps = {...}
+    static defaultProps = {
+      ${1}
+    }
+
+snippet     ptany
+abbr        PropTypes.ny
+options     word
+    PropTypes.any
+
+snippet     pta
+abbr        PropTypes.array
+options     word
+    PropTypes.array
+
+snippet     ptb
+abbr        PropTypes.bool
+options     word
+    PropTypes.bool
+
+snippet     ptf
+abbr        PropTypes.func
+options     word
+    PropTypes.func
+
+snippet     ptn
+abbr        PropTypes.number
+options     word
+    PropTypes.number
+
+snippet     pto
+abbr        PropTypes.object
+options     word
+    PropTypes.object
+
+snippet     pts
+abbr        PropTypes.string
+options     word
+    PropTypes.string
+
+snippet     ptsy
+abbr        PropTypes.symbol
+options     word
+    PropTypes.symbol
+
+snippet     ptno
+abbr        PropTypes.node
+options     word
+    PropTypes.node
+
+snippet     pte
+abbr        PropTypes.element
+options     word
+    PropTypes.element
+
+snippet     ptio
+abbr        PropTypes.instanceOf(Message)
+options     word
+    PropTypes.instanceOf(${1:Class})
+
+snippet     ptoo
+abbr        PropTypes.oneOf(['News', 'Photos'])
+options     word
+    PropTypes.oneOf([${1:'value'}])
+
+snippet     ptoot
+abbr        PropTypes.oneOfType([PropTypes.string, PropTypes.number])
+options     word
+    PropTypes.oneOfType([${1:PropTypes.string}])
+
+snippet     ptao
+abbr        PropTypes.arrayOf(PropTypes.number)
+options     word
+    PropTypes.arrayOf(${1:PropTypes.number})
+
+snippet     ptobo
+abbr        PropTypes.objectOf(PropTypes.number)
+options     word
+    PropTypes.objectOf(${1:PropTypes.number})
+
+snippet     ptsh
+abbr        PropTypes.shape(PropTypes.number)
+options     word, indent
+    PropTypes.shape({
+      ${1}
+    })
+
+snippet     ptai
+abbr        PropTypes.array
+options     word
+    PropTypes.array.isRequired
+
+snippet     isr
+alias       isR
+abbr        isRequired
+options     word
+    isRequired
+
+snippet     ptcustom
+abbr        ${1:customProp}: (props, propName, componentName) => {...}
+options     indent
+    customProp: (props, propName, componentName) => {
+      if (!/${2:matchme}/.test(props.[propName])) {
+        return new Error('Invalid prop `' + propName + '` supplied to' + ' `' + componentName + '`. Validation failed.')
+      }
+    }
+
+snippet     maps
+abbr        const mapStateToProps = (state) => {...}
+options     head
+    const mapStateToProps = (${1:state: Object}) => ({
+      ${2}
+    })
+
+snippet     mapd
+abbr        const mapDispatchToProps = (dispatch) => {...}
+options     head
+    const mapDispatchToProps = (dispatch: Dispatch) => ({
+      ${1}
+    })
+
+snippet     conn
+abbr        export default connect(mapStateToProps, mapDispatchToProps)(Component)
+options     head
+    export default connect(mapStateToProps, mapDispatchToProps)(${1:Component})
+
+snippet     econn
+abbr        export const Component = connect(mapStateToProps, mapDispatchToProps)(Component)
+options     head
+    export const ${1:Component} = connect(mapStateToProps, mapDispatchToProps)(${2:_Component})
+
+
+
+
+
+snippet :f
+options head
+  ${1:#:method_name}: function(${2:#:attribute}) {
+    ${0:TARGET}
+  }
+
+snippet function
+abbr    func
+options word
+  function ${1:#:function_name}(${2:#:argument}) {
+    ${0:TARGET}
+  }
+
+snippet function2
+abbr    func2
+options head
+  function ${1:function_name}(${2:argument}) {
+    ${0:TARGET}
+  }
+
+snippet proto
+options head
+  ${1:#:class_name}.prototype.${2:#:method_name} = function(${3:#:first_argument}) {
+    ${0:TARGET}
+  };
+
+
+snippet f
+options word
+  function(${1}) { ${0:TARGET} };
+
+snippet if
+options head
+  if (${1:true}) {
+    ${0:TARGET}
+  }
+
+snippet if-else
+abbr ife
+options head
+  if (${1:#:condition}) {
+    ${2:TARGET}
+  } else {
+    ${3}
+  }
+
+snippet for
+options head
+  for (let ${1:i} = 0; $1 < ${2:#:Things}.length; ++$1) {
+    ${0:TARGET}
+  }
+
+snippet forin
+options head
+  for (let ${1:i} in ${2:#:Things}) {
+    ${0:TARGET}
+  }
+
+snippet while
+options head
+  while (${1:true}) {
+    ${0:TARGET}
+  }
+
+snippet switch
+options head
+  switch (${1:#:let}) {
+    case ${2:#:val}:
+      ${0:TARGET}
+      break;
+  }
+
+snippet try
+options head
+  try {
+    ${1:TARGET}
+  } catch (${2:e}) {
+    ${3}
+  }
+
+snippet try_finally
+options head
+  try {
+    ${1:TARGET}
+  } catch (${2:e}) {
+    ${3}
+  } finally {
+    ${4}
+  }
+
+
+snippet key-value
+abbr :,
+options word
+  ${1:#:value_name}: ${0:#:value},
+
+#snippet key
+#options word
+#  ${1:#:key}: "${2:#:value}"}${3:, }
+
+snippet setTimeout-function
+options head
+  setTimeout(function() { ${0} }, ${1:10});
+
+snippet debugger
+alias db
+options head
+  debugger;
+
+snippet console-log
+alias cl
+options head
+  console.log(${0:TARGET});
+
+snippet console-trace
+alias ct
+options head
+  console.trace();
+
+snippet console-error
+alias ce
+options head
+  console.error(${0:TARGET});
+
+snippet console-warn
+alias cw
+options head
+  console.warn(${0:TARGET});
+
+snippet console-info
+alias ci
+options head
+  console.info(${0:TARGET});
+
+snippet iife
+options head
+  (function(${1}) {
+    'use strict';
+    ${0:TARGET}
+  })(${2});
+
+snippet js
+options head
+  JSON.stringify(${1:TARGET}, null, 2);
+
+snippet jsc
+options head
+  console.log(JSON.stringify(${1:TARGET}, null, 2));
+
+snippet     class
+abbr        class {...}
+options     head
+  class ${1:#:NAME} {
+    constructor(${2:#:ARGS}) {
+      ${0:TARGET}
+    }
+  }
+
+snippet     class-extends
+abbr        class extends {...}
+options     head
+  class ${1:#:NAME} extends ${2:#:SuperClass} {
+    constructor(${3:#:ARGS}) {
+      ${0:TARGET}
+    }
+  }
+
+snippet     static
+options     head
+  static ${1:#:NAME}(${2:#:ARGS}) {
+    ${0:TARGET}
+  }
+
+snippet     set
+options     head
+  set ${1:#:NAME}(${2:#:ARGS}) {
+    ${0:TARGET}
+  }
+
+snippet     get
+options     head
+  get ${1:#:NAME}() {
+    ${0:TARGET}
+  }
+
+snippet     imp
+abbr        import { member, ... } from "module-name";
+options     head
+  import { ${1:MEMBERS} } from "${0:TARGET}";
+
+snippet     import-default
+abbr        import defaultMember from "module-name";
+options     head
+  import ${1:defaultMember} from "${0:TARGET}";
+
+snippet     import-all
+abbr        import * as NAME from "...";
+options     head
+  import * as ${1:NAME} from "${0:TARGET}";
+
+snippet     import-default-member
+abbr        import defaultMember, { member, ... } from "module-name";
+options     head
+  import ${1:defaultMember}, { ${2:MEMBERS} } from "${0:TARGET}";
+

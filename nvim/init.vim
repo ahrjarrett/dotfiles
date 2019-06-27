@@ -30,6 +30,13 @@ set runtimepath+=~/.config/nvim/repos/github.com/Shougo/dein.vim/
   call dein#add('deoplete-plugins/deoplete-tag')
 " }}}
 
+" Snippets: {{{
+  call dein#add('Shougo/neosnippet.vim')
+  call dein#add('Shougo/neosnippet-snippets')
+" }}}
+
+
+
 " Tmux: {{{
   call dein#add('christoomey/vim-tmux-navigator')
 " }}}
@@ -55,8 +62,16 @@ set runtimepath+=~/.config/nvim/repos/github.com/Shougo/dein.vim/
 " }}}
 
 " TypeScript: {{{
+  "call dein#add('mxw/vim-jsx')
+  call dein#add('MaxMEllon/vim-jsx-pretty')
+  call dein#add('pangloss/vim-javascript')
   call dein#add('HerringtonDarkholme/yats.vim')
   call dein#add('mhartington/nvim-typescript', {'build': './install.sh'})
+" }}}
+" Formatting: {{{
+  call dein#add('w0rp/ale')
+  call dein#add('styled-components/vim-styled-components')
+  call dein#add('hail2u/vim-css3-syntax')
 " }}}
 " Misc: {{{
   call dein#add('ryanoasis/vim-devicons')
@@ -111,9 +126,11 @@ set runtimepath+=~/.config/nvim/repos/github.com/Shougo/dein.vim/
           \ endif
   " Remove trailling whitespace on :w
   autocmd BufWritePre * :%s/\s\+$//e
+  " Disable auto-comment on new line:
+  autocmd FileType * setlocal formatoptions-=c formatoptions-=r formatoptions-=o
   set complete=.,w,b,u,t,k " CTRL-P completion: where to source
   set inccommand=nosplit   " enable live substitution highlighting - http://vimcasts.org/transcripts/73/en
-  set spell
+  "set spell
   let g:indentLine_color_gui = '#343d46'
 
   " Dim Inactive Window:
@@ -246,6 +263,18 @@ set runtimepath+=~/.config/nvim/repos/github.com/Shougo/dein.vim/
 " }}}
 
 " Code formatting: -----------------------------------------------------------{{{
+  " jsx formatting/highlighting in any .js file
+  let g:jsx_ext_required = 0
+  let g:vim_jsx_pretty_colorful_config = 1
+  "let g:vim_jsx_pretty_highlight_close_tag = 1
+
+  let g:ale_fixers = {
+  \   'javascript': ['prettier'],
+  \   'css': ['prettier'],
+  \}
+  " Only run linters I've explicitly configured
+  let g:ale_linters_explicit = 1
+	let g:ale_fix_on_save = 1
 " }}}
 
 
@@ -328,30 +357,43 @@ set runtimepath+=~/.config/nvim/repos/github.com/Shougo/dein.vim/
   let g:one_allow_italics = 1
   let g:vim_monokai_tasty_italic = 1
   " Oceanic Next:
-  let g:oceanic_next_terminal_bold = 1
-  let g:oceanic_next_terminal_italic = 1
+  "let g:oceanic_next_terminal_bold = 1
+  "let g:oceanic_next_terminal_italic = 1
   " Gruvbox:
-  let g:gruvbox_contrast_dark = 'hard'
-  let g:gruvbox_italic='1'
-  let g:gruvbox_bold='1'
-  let g:gruvbox_underline='1'
-  let g:gruvbox_undercurl='1'
-  let g:gruvbox_italicize_comments='1'
-  let g:gruvbox_contrast_dark='hard'
-  " Better Search Color Highlighting in Gruvbox:
-  nnoremap <silent> [oh :call gruvbox#hls_show()<CR>
-  nnoremap <silent> ]oh :call gruvbox#hls_hide()<CR>
-  nnoremap <silent> coh :call gruvbox#hls_toggle()<CR>
-  nnoremap * :let @/ = ""<CR>:call gruvbox#hls_show()<CR>*
-  nnoremap / :let @/ = ""<CR>:call gruvbox#hls_show()<CR>/
-  nnoremap ? :let @/ = ""<CR>:call gruvbox#hls_show()<CR>?
+  "let g:gruvbox_contrast_dark = 'hard'
+  "let g:gruvbox_italic=1
+  "let g:gruvbox_bold=1
+  "let g:gruvbox_underline=1
+  "let g:gruvbox_undercurl=1
+  "let g:gruvbox_italicize_comments=1
+  "" Better Search Color Highlighting in Gruvbox:
+  "nnoremap <silent> [oh :call gruvbox#hls_show()<CR>
+  "nnoremap <silent> ]oh :call gruvbox#hls_hide()<CR>
+  "nnoremap <silent> coh :call gruvbox#hls_toggle()<CR>
+  "nnoremap * :let @/ = ""<CR>:call gruvbox#hls_show()<CR>*
+  "nnoremap / :let @/ = ""<CR>:call gruvbox#hls_show()<CR>/
+  "nnoremap ? :let @/ = ""<CR>:call gruvbox#hls_show()<CR>?
 
-  colorscheme gruvbox
-  let g:airline_theme='night_owl'
-  "colorscheme OceanicNext
-  "colorscheme 1989
-  "let g:airline_theme='oceanicnext'
-  "let g:airline_theme='onedark'
+
+
+  set background=
+  colorscheme Gruvbox
+  let g:airline_theme='one'
+  let g:PaperColor_Theme_Options = {
+  \   'language': {
+  \     'javascript': {
+  \       'highlight_builtins' : 1
+  \     },
+  \     'ruby': {
+  \       'highlight_standard_library': 1
+  \     }
+  \   }
+  \ }
+
+  "let g:airline_theme='atomic'
+  "let g:airline_theme='base16_flat'
+  "let g:airline_theme='jellybeans'
+
 " }}}
 
 " Airline: --------------==-----------------------------------------------------{{{
@@ -397,7 +439,7 @@ set runtimepath+=~/.config/nvim/repos/github.com/Shougo/dein.vim/
     let g:airline_section_x = airline#section#create_right(["git_local"])
     let g:airline_section_y = ''
     let g:airline_section_z = ''
-    "call airline#parts#define_accent('git_branch', 'orange')
+    call airline#parts#define_accent('git_branch', 'orange')
   endfunction
   autocmd VimEnter * call AirlineInit()
 
@@ -461,9 +503,22 @@ set runtimepath+=~/.config/nvim/repos/github.com/Shougo/dein.vim/
   let g:WebDevIconsUnicodeDecorateFileNodesExtensionSymbols['sql'] = ''
 
 " }}}
-" Deoplete: ------------------------------------------------------------------{{{
+" Deoplete & NeoSnippet: ------------------------------------------------------------------{{{
+  let g:AutoPairsMapCR=0
+  let g:deoplete#enable_at_startup = 1
+  " turn off default snippets & set up my own directory:
+  let g:neosnippet#snippets_directory='~/dotfiles/nvim/plugin/my_snippets/'
 
-  let g:deoplete#enable_at_startup = 0
+  imap <expr><TAB> pumvisible() ? "\<C-n>" : (neosnippet#expandable_or_jumpable() ? "\<Plug>(neosnippet_expand_or_jump)" : "\<TAB>")
+	imap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<S-TAB>"
+	"imap <expr><CR> pumvisible() ? deoplete#mappings#close_popup() : "\<CR>\<Plug>AutoPairsReturn"
+  autocmd BufWritePost *.snip,*.snippets
+          \ call neosnippet#variables#set_snippets({})
+	" For conceal markers.
+	if has('conceal')
+	  set conceallevel=2 concealcursor=niv
+	endif
+
   call deoplete#custom#option({
     \ 'auto_complete_delay': 0,
     \ 'smart_case': v:true,
