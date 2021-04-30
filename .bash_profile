@@ -1,6 +1,6 @@
 ### DELETE (now shell commands):
-#alias showit="defaults write com.apple.finder AppleShowAllFiles -bool TRUE && killall Finder"
-#alias hideit="defaults write com.apple.finder AppleShowAllFiles -bool FALSE && killall Finder"
+alias showit="defaults write com.apple.finder AppleShowAllFiles -bool TRUE && killall Finder"
+alias hideit="defaults write com.apple.finder AppleShowAllFiles -bool FALSE && killall Finder"
 
 
 # path
@@ -90,3 +90,4 @@ source ~/.iterm2_shell_integration.bash
 
 
 [[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm" # Load RVM into a shell session *as a function*
+if [ -e /Users/aj/.nix-profile/etc/profile.d/nix.sh ]; then . /Users/aj/.nix-profile/etc/profile.d/nix.sh; fi # added by Nix installer
