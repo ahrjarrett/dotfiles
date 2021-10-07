@@ -91,3 +91,4 @@ source ~/.iterm2_shell_integration.bash
 
 [[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm" # Load RVM into a shell session *as a function*
 if [ -e /Users/aj/.nix-profile/etc/profile.d/nix.sh ]; then . /Users/aj/.nix-profile/etc/profile.d/nix.sh; fi # added by Nix installer
+. "$HOME/.cargo/env"
