@@ -1,0 +1,628 @@
+// Place your key bindings in this file to override the defaults
+
+[
+  /**********************************/
+  /*** START<EVIL-MAGIT-BINDINGS> ***/
+  /**********************************/
+  {
+    "key": "tab",
+    "command": "extension.vim_tab",
+    "when": "editorFocus && vim.active && !inDebugRepl && vim.mode != ‘Insert’ && editorLangId != ‘magit’"
+  },
+  {
+    "key": "tab",
+    "command": "-extension.vim_tab",
+    "when": "editorFocus && vim.active && !inDebugRepl && vim.mode != ‘Insert’"
+  },
+  {
+    "key": "x",
+    "command": "magit.discard-at-point",
+    "when": "editorTextFocus && editorLangId == ‘magit’ && vim.mode =~ /^(?!SearchInProgressMode|CommandlineInProgress).*$/"
+  },
+  { "key": "k", "command": "-magit.discard-at-point" },
+  {
+    "key": "-",
+    "command": "magit.reverse-at-point",
+    "when": "editorTextFocus && editorLangId == ‘magit’ && vim.mode =~ /^(?!SearchInProgressMode|CommandlineInProgress).*$/"
+  },
+  { "key": "v", "command": "-magit.reverse-at-point" },
+  {
+    "key": "shift+-",
+    "command": "magit.reverting",
+    "when": "editorTextFocus && editorLangId == ‘magit’ && vim.mode =~ /^(?!SearchInProgressMode|CommandlineInProgress).*$/"
+  },
+  { "key": "shift+v", "command": "-magit.reverting" },
+  {
+    "key": "shift+o",
+    "command": "magit.resetting",
+    "when": "editorTextFocus && editorLangId == ‘magit’ && vim.mode =~ /^(?!SearchInProgressMode|CommandlineInProgress).*$/"
+  },
+  { "key": "shift+x", "command": "-magit.resetting" },
+  { "key": "x", "command": "-magit.reset-mixed" },
+  { "key": "ctrl+u x", "command": "-magit.reset-hard" },
+  /********************************/
+  /*** END<EVIL-MAGIT-BINDINGS> ***/
+  /********************************/
+
+  {
+    "key": "cmd+e cmd+g",
+    "command": "magit.status"
+  },
+  {
+    "key": "cmd+e cmd+k",
+    "command": "workbench.action.openGlobalKeybindingsFile"
+  },
+  {
+    "key": "cmd+e cmd+h",
+    "command": "gitlens.views.fileHistory:explorer.focus"
+  },
+  {
+    "key": "alt+cmd+j",
+    "command": "workbench.action.terminal.toggleTerminal",
+    "when": "terminal.active"
+  },
+  {
+    "key": "cmd+enter cmd+d",
+    "command": "editor.debug.action.showDebugHover"
+    // "when": "editorTextFocus"
+  },
+  {
+    "key": "alt+;",
+    "command": "editor.action.commentLine",
+    "when": "editorTextFocus && !editorReadonly"
+  },
+  /*** FILE EXPLORER ***/
+  {
+    "key": "cmd+enter cmd+n",
+    "command": "explorer.newFile"
+  },
+  {
+    "key": "cmd+enter shift+cmd+n",
+    "command": "explorer.newFolder"
+  },
+  /*** Add Folder to Workspace ***/
+  {
+    "key": "cmd+e cmd+w",
+    "command": "workbench.action.addRootFolder"
+  },
+  // CMD+Enter to open file "passively"
+  {
+    "key": "enter",
+    "command": "explorer.openAndPassFocus",
+    "when": "explorerViewletFocus && explorerViewletVisible && !explorerResourceIsFolder && !inputFocus"
+  },
+  {
+    "key": "tab",
+    "command": "list.toggleExpand",
+    "when": "listFocus && !inputFocus"
+  },
+  {
+    "key": "cmd+e cmd+r",
+    "command": "renameFile",
+    "when": "explorerViewletVisible && filesExplorerFocus && !explorerResourceIsRoot && !explorerResourceReadonly && !inputFocus"
+  },
+  // prettier-ignore
+  { "key": "enter", "command": "-renameFile", "when": "explorerViewletVisible && filesExplorerFocus && !explorerResourceIsRoot && !explorerResourceReadonly && !inputFocus" },
+  {
+    "key": "ctrl+g ctrl+h",
+    "command": "editor.action.showDefinitionPreviewHover",
+    "when": "editorTextFocus"
+  },
+
+  {
+    "key": "ctrl+tab",
+    "command": "editor.toggleFold",
+    "when": "editorTextFocus && foldingEnabled"
+  },
+  {
+    "key": "cmd+k cmd+l",
+    "command": "editor.toggleFold",
+    "when": "editorTextFocus && foldingEnabled"
+  },
+  {
+    "key": "tab",
+    "command": "-editor.unfold",
+    "when": "editorTextFocus && foldingEnabled"
+  },
+  {
+    "key": "cmd+e cmd+u",
+    "command": "editor.unfoldAll",
+    "when": "editorTextFocus && foldingEnabled"
+  },
+  {
+    "key": "cmd+enter cmd+f",
+    "command": "editor.fold",
+    "when": "editorTextFocus && foldingEnabled"
+  },
+  {
+    "key": "cmd+enter f",
+    "command": "editor.foldAll",
+    "when": "editorTextFocus && foldingEnabled"
+  },
+  // prettier-ignore
+  { "key": "tab", "command": "-editor.unfold", "when": "editorTextFocus && foldingEnabled" },
+  // prettier-ignore
+  { "key": "alt+cmd+]", "command": "-editor.unfold", "when": "editorTextFocus && foldingEnabled" },
+  {
+    "key": "alt+x",
+    // +++
+    "command": "workbench.action.showCommands"
+  },
+  { "key": "shift+cmd+p", "command": "-workbench.action.showCommands" },
+  {
+    "key": "shift+cmd+e",
+    "command": "workbench.view.explorer"
+  },
+  /*************************************************/
+  /*** CMD+F OPENS EXPLORER + FOCUSES, OR CLOSES ***/
+  {
+    "key": "cmd+f",
+    "command": "workbench.view.explorer",
+    "when": "!explorerViewletVisible"
+  },
+  // prettier-ignore
+  { "key": "cmd+f", "command": "workbench.action.toggleSidebarVisibility", "when": "explorerViewletVisible" },
+  { "key": "cmd+b", "command": "-workbench.action.toggleSidebarVisibility" },
+  {
+    "key": "alt+cmd+f",
+    "command": "editor.action.startFindReplaceAction"
+  },
+  {
+    "key": "shift+cmd+f",
+    "command": "workbench.action.findInFiles"
+  },
+  // prettier-ignore
+  { "key": "cmd+p", "command": "-workbench.action.quickOpen" },
+  // prettier-ignore
+  { "key": "cmd+p", "command": "workbench.action.quickOpenPreviousRecentlyUsedEditorInGroup" },
+  // prettier-ignore
+  { "key": "ctrl+tab", "command": "-workbench.action.quickOpenPreviousRecentlyUsedEditorInGroup" },
+  // prettier-ignore
+  { "key": "ctrl+shift+tab", "command": "-workbench.action.quickOpenLeastRecentlyUsedEditorInGroup" },
+  // prettier-ignore
+  { "key": "alt+tab", "command": "workbench.action.quickOpenPreviousRecentlyUsedEditorInGroup" },
+  // prettier-ignore
+  { "key": "alt+shift+tab", "command": "workbench.action.quickOpenLeastRecentlyUsedEditorInGroup" },
+  {
+    "key": "tab",
+    "command": "editor.action.jumpToBracket",
+    "when": "editorTextFocus && vim.mode != ‘Insert’"
+  },
+  {
+    "key": "ctrl+tab",
+    "command": "-workbench.action.nextEditor"
+  },
+  {
+    "key": "ctrl+shift+tab",
+    "command": "-workbench.action.previousEditor"
+  },
+  /**************************/
+  /**************************/
+  /**************************/
+  /**************************/
+  /**************************/
+  /**************************/
+  /**************************/
+  /***    UN-MAPPINGS:    ***/
+  /**************************/
+  /**************************/
+  /**************************/
+  /**************************/
+  /**************************/
+  /**************************/
+  /**************************/
+  /**************************/
+  /*** CMD+F UN-MAPPINGS: ***/
+  {
+    "key": "cmd+f",
+    "command": "-actions.find"
+  },
+  {
+    "key": "cmd+f",
+    "command": "-repl.action.filter",
+    "when": "inDebugRepl && textInputFocus"
+  },
+  {
+    "key": "cmd+f",
+    "command": "-workbench.action.terminal.focusFind",
+    "when": "terminalFindFocused || terminalFocus"
+  },
+  {
+    "key": "cmd+f",
+    "command": "-editor.action.extensioneditor.showfind",
+    "when": "!editorFocus && activeEditor == ‘workbench.editor.extension’"
+  },
+  {
+    "key": "cmd+f",
+    "command": "-editor.action.webvieweditor.showFind",
+    "when": "!editorFocus && activeEditor == ‘WebviewEditor’"
+  },
+  {
+    "key": "cmd+f",
+    "command": "-notebook.find",
+    "when": "notebookEditorFocused"
+  },
+  {
+    "key": "cmd+f",
+    "command": "-problems.action.focusFilter",
+    "when": "focusedView == ‘workbench.panel.markers.view’"
+  },
+  {
+    "key": "cmd+f",
+    "command": "-settings.action.search",
+    "when": "inSettingsEditor"
+  },
+  {
+    "key": "cmd+f",
+    "command": "-actions.find"
+  },
+  {
+    "key": "cmd+f",
+    "command": "-repl.action.filter",
+    "when": "inDebugRepl && textInputFocus"
+  },
+  {
+    "key": "cmd+f",
+    "command": "-workbench.action.terminal.focusFind",
+    "when": "terminalFindFocused || terminalFocus"
+  },
+  {
+    "key": "cmd+f",
+    "command": "-editor.action.extensioneditor.showfind",
+    "when": "!editorFocus && activeEditor == ‘workbench.editor.extension’"
+  },
+  {
+    "key": "cmd+f",
+    "command": "-editor.action.webvieweditor.showFind",
+    "when": "!editorFocus && activeEditor == ‘WebviewEditor’"
+  },
+  {
+    "key": "cmd+f",
+    "command": "-notebook.find",
+    "when": "notebookEditorFocused"
+  },
+  {
+    "key": "cmd+f",
+    "command": "-problems.action.focusFilter",
+    "when": "focusedView == ‘workbench.panel.markers.view’"
+  },
+  {
+    "key": "cmd+f",
+    "command": "-settings.action.search",
+    "when": "inSettingsEditor"
+  },
+  /**************************/
+  /*** CMD+F RE-MAPPINGS: ***/
+  {
+    "key": "ctrl+s",
+    "command": "actions.find"
+  },
+  {
+    "key": "ctrl+s",
+    "command": "repl.action.filter",
+    "when": "inDebugRepl && textInputFocus"
+  },
+  {
+    "key": "ctrl+s",
+    "command": "workbench.action.terminal.focusFind",
+    "when": "terminalFindFocused || terminalFocus"
+  },
+  {
+    "key": "ctrl+s",
+    "command": "editor.action.extensioneditor.showfind",
+    "when": "!editorFocus && activeEditor == ‘workbench.editor.extension’"
+  },
+  {
+    "key": "ctrl+s",
+    "command": "editor.action.webvieweditor.showFind",
+    "when": "!editorFocus && activeEditor == ‘WebviewEditor’"
+  },
+  {
+    "key": "ctrl+s",
+    "command": "notebook.find",
+    "when": "notebookEditorFocused"
+  },
+  {
+    "key": "ctrl+s",
+    "command": "problems.action.focusFilter",
+    "when": "focusedView == ‘workbench.panel.markers.view’"
+  },
+  {
+    "key": "ctrl+s",
+    "command": "settings.action.search",
+    "when": "inSettingsEditor"
+  },
+  {
+    "key": "ctrl+s",
+    "command": "actions.find"
+  },
+  {
+    "key": "ctrl+s",
+    "command": "repl.action.filter",
+    "when": "inDebugRepl && textInputFocus"
+  },
+  {
+    "key": "ctrl+s",
+    "command": "workbench.action.terminal.focusFind",
+    "when": "terminalFindFocused || terminalFocus"
+  },
+  {
+    "key": "ctrl+s",
+    "command": "editor.action.extensioneditor.showfind",
+    "when": "!editorFocus && activeEditor == ‘workbench.editor.extension’"
+  },
+  {
+    "key": "ctrl+s",
+    "command": "editor.action.webvieweditor.showFind",
+    "when": "!editorFocus && activeEditor == ‘WebviewEditor’"
+  },
+  {
+    "key": "ctrl+s",
+    "command": "notebook.find",
+    "when": "notebookEditorFocused"
+  },
+  {
+    "key": "ctrl+s",
+    "command": "problems.action.focusFilter",
+    "when": "focusedView == ‘workbench.panel.markers.view’"
+  },
+  {
+    "key": "ctrl+s",
+    "command": "settings.action.search",
+    "when": "inSettingsEditor"
+  },
+  {
+    "key": "cmd+e",
+    "command": "-actions.findWithSelection"
+  },
+  {
+    "key": "cmd+k cmd+i",
+    "command": "-editor.debug.action.showDebugHover",
+    "when": "editorTextFocus && inDebugMode"
+  },
+  {
+    "key": "cmd+e cmd+d",
+    "command": "-gitlens.views.fileHistory:explorer.focus"
+  },
+  {
+    "key": "cmd+e cmd+o",
+    "command": "gitlens.openFileOnRemote"
+  },
+  {
+    "key": "cmd+e cmd+w",
+    "command": "workbench.action.addRootFolder"
+  },
+  // {
+  //   "key": "ctrl+enter",
+  //   "command": "commandId",
+  //   "when": "editorTextFocus"
+  // },
+  {
+    "key": "alt+cmd+i",
+    "command": "-workbench.action.toggleDevTools",
+    "when": "isDevelopment"
+  },
+  {
+    "key": "cmd+enter",
+    "command": "-editor.action.insertLineAfter",
+    "when": "editorTextFocus && !editorReadonly"
+  },
+  {
+    "key": "cmd+enter",
+    "command": "-notebook.cell.insertCodeCellBelow",
+    "when": "notebookCellListFocused && !inputFocus"
+  },
+  {
+    "key": "cmd+enter",
+    "command": "-search.action.openInEditor",
+    "when": "hasSearchResult && searchViewletFocus"
+  },
+  {
+    "key": "cmd+enter",
+    "command": "-breadcrumbs.revealFocused",
+    "when": "breadcrumbsActive && breadcrumbsVisible"
+  },
+  {
+    "key": "cmd+enter",
+    "command": "-breadcrumbs.revealFocusedFromTreeAside",
+    "when": "breadcrumbsActive && breadcrumbsVisible && listFocus && !inputFocus"
+  },
+  {
+    "key": "cmd+enter",
+    "command": "-editor.action.replaceAll",
+    "when": "editorFocus && findWidgetVisible && replaceInputFocussed"
+  },
+  {
+    "key": "cmd+enter",
+    "command": "-scm.acceptInput",
+    "when": "scmRepository"
+  },
+  {
+    "key": "cmd+enter",
+    "command": "-workbench.action.submitComment",
+    "when": "commentEditorFocused"
+  },
+  {
+    "key": "cmd+enter",
+    "command": "-debug.openBreakpointToSide",
+    "when": "breakpointsFocused"
+  },
+  // {
+  //   "key": "ctrl+enter",
+  //   "command": "-notebook.cell.execute",
+  //   "when": "notebookCellListFocused && notebookCellType == 'markdown' || notebookCellListFocused && notebookCellExecutionState == 'failed' || notebookCellExecutionState == 'idle' || notebookCellExecutionState == 'succeeded' && notebookKernelCount > 0"
+  // },
+  // {
+  //   "key": "ctrl+enter",
+  //   "command": "-explorer.openToSide",
+  //   "when": "explorerViewletFocus && explorerViewletVisible && !inputFocus"
+  // },
+  // {
+  //   "key": "ctrl+enter",
+  //   "command": "-search.action.openResultToSide",
+  //   "when": "fileMatchOrMatchFocus && searchViewletVisible"
+  // },
+  // {
+  //   "key": "ctrl+enter",
+  //   "command": "-problems.action.openToSide",
+  //   "when": "problemFocus"
+  // },
+  {
+    "key": "shift+alt+cmd+enter",
+    "command": "notebook.cell.execute",
+    "when": "notebookCellListFocused && notebookCellType == 'markdown' || notebookCellListFocused && notebookCellExecutionState == 'failed' || notebookCellExecutionState == 'idle' || notebookCellExecutionState == 'succeeded' && notebookKernelCount > 0"
+  },
+  {
+    "key": "ctrl+enter",
+    "command": "-openReferenceToSide",
+    "when": "listFocus && referenceSearchVisible && !inputFocus"
+  },
+
+  /**************************/
+  /**************************/
+  /**************************/
+  /**************************/
+  /**************************/
+  /**************************/
+  /**************************/
+  //////// VSpaceCode /////////
+  /**************************/
+  /**************************/
+  /**************************/
+  /**************************/
+  /**************************/
+  /**************************/
+  /**************************/
+  // Trigger vspacecode in empty editor group
+  {
+    "key": "space",
+    "command": "vspacecode.space",
+    "when": "activeEditorGroupEmpty && focusedView == '' && !whichkeyActive && !inputFocus"
+  },
+  // Trigger vspacecode when sidebar is in focus
+  {
+    "key": "space",
+    "command": "vspacecode.space",
+    "when": "sideBarFocus && !inputFocus && !whichkeyActive"
+  },
+  // Keybindings required for edamagit
+  // https://github.com/kahole/edamagit#vim-support-vscodevim
+  // Cannot be added to package.json because keybinding replacements
+  {
+    "key": "tab",
+    "command": "extension.vim_tab",
+    "when": "editorFocus && vim.active && !inDebugRepl && vim.mode != 'Insert' && editorLangId != 'magit'"
+  },
+  {
+    "key": "tab",
+    "command": "-extension.vim_tab",
+    "when": "editorFocus && vim.active && !inDebugRepl && vim.mode != 'Insert'"
+  },
+  {
+    "key": "x",
+    "command": "magit.discard-at-point",
+    "when": "editorTextFocus && editorLangId == 'magit' && vim.mode =~ /^(?!SearchInProgressMode|CommandlineInProgress).*$/"
+  },
+  {
+    "key": "k",
+    "command": "-magit.discard-at-point"
+  },
+  {
+    "key": "-",
+    "command": "magit.reverse-at-point",
+    "when": "editorTextFocus && editorLangId == 'magit' && vim.mode =~ /^(?!SearchInProgressMode|CommandlineInProgress).*$/"
+  },
+  {
+    "key": "v",
+    "command": "-magit.reverse-at-point"
+  },
+  {
+    "key": "shift+-",
+    "command": "magit.reverting",
+    "when": "editorTextFocus && editorLangId == 'magit' && vim.mode =~ /^(?!SearchInProgressMode|CommandlineInProgress).*$/"
+  },
+  {
+    "key": "shift+v",
+    "command": "-magit.reverting"
+  },
+  {
+    "key": "shift+o",
+    "command": "magit.resetting",
+    "when": "editorTextFocus && editorLangId == 'magit' && vim.mode =~ /^(?!SearchInProgressMode|CommandlineInProgress).*$/"
+  },
+  {
+    "key": "shift+x",
+    "command": "-magit.resetting"
+  },
+  {
+    "key": "x",
+    "command": "-magit.reset-mixed"
+  },
+  {
+    "key": "ctrl+u x",
+    "command": "-magit.reset-hard"
+  },
+  // Extra ref menu support for edamagit with the key "y"
+  // Cannot be added to package.json because keybinding replacements
+  {
+    "key": "y",
+    "command": "-magit.show-refs"
+  },
+  {
+    "key": "y",
+    "command": "vspacecode.showMagitRefMenu",
+    "when": "editorTextFocus && editorLangId == 'magit' && vim.mode == 'Normal'"
+  },
+  // Easy navigation in quick open/QuickPick
+  {
+    "key": "ctrl+j",
+    "command": "workbench.action.quickOpenSelectNext",
+    "when": "inQuickOpen"
+  },
+  {
+    "key": "ctrl+k",
+    "command": "workbench.action.quickOpenSelectPrevious",
+    "when": "inQuickOpen"
+  },
+  // Easy navigation in sugesstion/intellisense
+  // Cannot be added to package.json because of conflict with vim's default bindings
+  {
+    "key": "ctrl+j",
+    "command": "selectNextSuggestion",
+    "when": "suggestWidgetMultipleSuggestions && suggestWidgetVisible && textInputFocus"
+  },
+  {
+    "key": "ctrl+k",
+    "command": "selectPrevSuggestion",
+    "when": "suggestWidgetMultipleSuggestions && suggestWidgetVisible && textInputFocus"
+  },
+  {
+    "key": "ctrl+l",
+    "command": "acceptSelectedSuggestion",
+    "when": "suggestWidgetMultipleSuggestions && suggestWidgetVisible && textInputFocus"
+  },
+  // Easy navigation in parameter hint (i.e. traverse the hints when there's multiple overload for one method)
+  // Cannot be added to package.json because of conflict with vim's default bindings
+  {
+    "key": "ctrl+j",
+    "command": "showNextParameterHint",
+    "when": "editorFocus && parameterHintsMultipleSignatures && parameterHintsVisible"
+  },
+  {
+    "key": "ctrl+k",
+    "command": "showPrevParameterHint",
+    "when": "editorFocus && parameterHintsMultipleSignatures && parameterHintsVisible"
+  },
+  // Add ctrl+h/l to navigate in file browser
+  {
+    "key": "ctrl+h",
+    "command": "file-browser.stepOut",
+    "when": "inFileBrowser"
+  },
+  {
+    "key": "ctrl+l",
+    "command": "file-browser.stepIn",
+    "when": "inFileBrowser"
+  }
+]
+
