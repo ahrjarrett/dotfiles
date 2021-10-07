@@ -1,44 +1,137 @@
 {
-  "window.zoomLevel": 0.4,
-  "editor.tabSize": 2,
-  "editor.insertSpaces": true,
-  "editor.detectIndentation": false,
-  "editor.acceptSuggestionOnEnter": "off",
-  "editor.formatOnSave": true,
-  "editor.fontFamily": "Fira Code",
-  "editor.fontWeight": "500",
+  // ELM
+  "elm.compiler": "./node_modules/.bin/elm",
+  "elm.makeCommand": "./node_modules/.bin/elm-make",
+
+  // ORG MODE:
+  "org.todoKeywords": ["TODO", "DONE", "REFACTOR", "ADD-TEST"],
+
+  "editor.hover.enabled": false,
+  "workbench.list.keyboardNavigation": "simple",
+  "editor.maxTokenizationLineLength": 10000,
+  "editor.fontFamily": "Fira Code Retina",
+  // "editor.fontWeight": "400",
+  "editor.fontSize": 12,
   "editor.fontLigatures": true,
-  // go away annoying stuff
-  "workbench.editor.showIcons": false,
-  "workbench.iconTheme": "material-icon-theme",
-  // make split-screen gutter smaller
-  "editor.minimap.enabled": false,
-  "editor.hideCursorInOverviewRuler": true,
-  // git, search, etc.
-  "workbench.activityBar.visible": true,
-  "editor.glyphMargin": false,
-  "editor.folding": false,
-  "editor.scrollbar.horizontal": "hidden",
-  "editor.scrollbar.vertical": "hidden",
-  "workbench.startupEditor": "newUntitledFile",
-  "workbench.editor.tabCloseButton": "off",
-  "editor.fontSize": 13,
-  // when I open a file, keep it open
-  "workbench.editor.enablePreview": false,
-  "workbench.editor.enablePreviewFromQuickOpen": false,
-  "workbench.colorCustomizations": {
-    "editorCursor.foreground": "#fffabe"
+  "editor.detectIndentation": false,
+
+  "editor.tabCompletion": "on",
+  "editor.tabSize": 2,
+  "editor.renderLineHighlight": "line",
+  "editor.showFoldingControls": "always",
+  "editor.formatOnSave": true,
+  "editor.formatOnSaveMode": "file",
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "[typescript]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
   },
-  // show full path of current file in window
-  "window.title": "${activeEditorMedium}",
-  "colorize.languages": [
-    "javascript"
-    // ...
+  "[javascript]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[json]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[jsonc]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "files.exclude": {
+    "**/node_modules": true
+  },
+  // EXTENSIONS:
+  "bracketPairColorizer.forceIterationColorCycle": false,
+  "vim.handleKeys": { "<C-c>": false, "<C-g>": false },
+  "vim.useSystemClipboard": true,
+  "vim.overrideCopy": true,
+  "vim.highlightedyank.enable": true,
+  "vim.debug.silent": true,
+  // TESTING
+  "vim.startInInsertMode": false,
+  "vim.enableNeovim": true,
+  "vim.neovimPath": "/usr/local/bin/nvim",
+  "vim.easymotion": true,
+  "vim.easymotionDimBackground": true,
+  "vim.easymotionJumpToAnywhereRegex": "\\b[A-Za-z0-9]|[A-Za-z0-9]\\b|_.|#.|[a-z][A-Z]",
+  "vim.easymotionMarkerFontWeight": "bold",
+  "vim.incsearch": true,
+  "vim.hlsearch": true,
+  // CONSIDER LATER:
+  "vim.vimrc.enable": false,
+  "vim.startofline": true,
+  "vim.foldfix": true,
+  "vim.mouseSelectionGoesIntoVisualMode": true,
+  "vim.scroll": 16,
+  "vim.replaceWithRegister": false,
+  "editor.autoIndent": "full",
+  "editor.cursorBlinking": "solid",
+  "editor.cursorStyle": "line",
+  "editor.letterSpacing": 0.3,
+  "editor.lineHeight": 18,
+  "editor.minimap.enabled": false,
+  "editor.suggestSelection": "first",
+  "editor.wordWrap": "on",
+  "search.showLineNumbers": true,
+  "zenMode.centerLayout": false,
+  "vim.leader": "<space>",
+  "vim.normalModeKeyBindingsNonRecursive": [
+    {
+      "before": ["<space>", "f", "f"],
+      "after": [],
+      "commands": [{ "command": "workbench.action.quickOpen", "args": [] }]
+    },
+
+    {
+      "before": ["<space>", "f", "s"],
+      "after": [],
+      "commands": [{ "command": "workbench.action.saveFile", "args": [] }]
+    }
   ],
-  "colorize.ignore_search_variables_info": true
-  // "editor.renderWhitespace": "all",
-  // language-specific
-  // "reason.codelens.enabled": true,
-  // "typescript.validate.enable": false,
-  // "javascript.validate.enable": false,
+  "vim.insertModeKeyBindingsNonRecursive": [
+    {
+      "before": ["ctrl+o"],
+      "after": ["<esc>", "O"]
+    }
+  ],
+  "workbench.colorCustomizations": {
+    "editorCursor.foreground": "#EEAD0B",
+    "editorCursor.background": "#efeae9",
+    "tab.activeModifiedBorder": "#ff0000",
+    "tab.inactiveModifiedBorder": "#ff0000",
+    "tab.unfocusedActiveModifiedBorder": "#ff0000",
+    "tab.unfocusedInactiveModifiedBorder": "#ff0000",
+    "[Night Owl]": {
+      //"activityBar.background": "#000C1D",
+      "activityBar.background": "#000C1D",
+      "activityBar.border": "#102A44",
+      "sideBar.background": "#001122",
+      "sideBar.border": "#102A44",
+      "sideBar.foreground": "#8BADC1"
+    },
+    "[Night Owl (No Italics)]": {
+      "activityBar.background": "#000C1D",
+      "activityBar.border": "#102A44",
+      "sideBar.background": "#001122",
+      "sideBar.border": "#102A44",
+      "sideBar.foreground": "#8BADC1"
+    },
+    "[leuven-light]": {}
+  },
+  "breadcrumbs.enabled": true,
+  "files.watcherExclude": {
+    "**/.bloop": true,
+    "**/.metals": true,
+    "**/.ammonite": true
+  },
+  "metals.javaHome": "/Users/andrewjarrett/.jabba/jdk/adopt@1.11.0-7/Contents/Home",
+  "typescript.updateImportsOnFileMove.enabled": "always",
+  "explorer.confirmDragAndDrop": false,
+  "explorer.confirmDelete": false,
+  "javascript.updateImportsOnFileMove.enabled": "always",
+  "workbench.editor.showTabs": false,
+  "workbench.colorTheme": "Solarized Light",
+  "workbench.editor.enablePreview": false,
+  "editor.multiCursorModifier": "alt",
+  "editor.accessibilitySupport": "on",
+  "editor.find.cursorMoveOnType": false,
+  "window.zoomLevel": 1
 }
+
