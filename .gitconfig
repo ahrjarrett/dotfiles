@@ -1,12 +1,12 @@
 [user]
-	email = ajarrett@bestow.com
+	email = ahrjarrett@gmail.com
 	name = Andrew Jarrett
-	oauthtoken = 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
 [core]
 	excludesfile = $HOME/.gitignore_global
 [alias]
-	graph = log --graph --oneline
 	co = checkout
+	cherry = cherry-pick
+	graph = log --graph --oneline
 	lg = log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)(%an)%Creset' --abbrev-commit
 [color]
 	ui = true
