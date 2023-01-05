@@ -3,7 +3,7 @@
 <plist version="1.0">
 <dict>
 	<key>gridsize</key>
-	<integer>4</integer>
+	<integer>5</integer>
 	<key>hidelabels</key>
 	<false/>
 	<key>iconid</key>
@@ -16,16 +16,18 @@
 			<key>actionconfig</key>
 			<dict>
 				<key>path</key>
-				<string>/Applications/Safari.app</string>
+				<string>/Applications/Emacs.app</string>
+				<key>toggle</key>
+				<false/>
 			</dict>
 			<key>actionuid</key>
 			<string>remote.alfred.launchfile</string>
 			<key>buttoniconid</key>
-			<string>F235BB07-8C01-4993-A85B-40CFC4B67727</string>
+			<string>4C51D37E-A06E-44B9-9374-363E1C77239C</string>
 			<key>buttonlabel</key>
-			<string>Safari.app</string>
+			<string>Emacs</string>
 			<key>itemuid</key>
-			<string>BDDA1AA1-5B34-439F-A957-0BE3F561AFC0</string>
+			<string>1E74F3E5-D4A4-4FC7-8235-2DE59456BD6F</string>
 		</dict>
 		<dict>
 			<key>actionconfig</key>
@@ -76,16 +78,16 @@
 			<key>actionconfig</key>
 			<dict>
 				<key>path</key>
-				<string>/System/Applications/Contacts.app</string>
+				<string>/Applications/Safari.app</string>
 			</dict>
 			<key>actionuid</key>
 			<string>remote.alfred.launchfile</string>
 			<key>buttoniconid</key>
-			<string>5B02D02D-1A29-4A5D-B1E9-545CE5A55350</string>
+			<string>F235BB07-8C01-4993-A85B-40CFC4B67727</string>
 			<key>buttonlabel</key>
-			<string>Contacts.app</string>
+			<string>Safari.app</string>
 			<key>itemuid</key>
-			<string>5F9A081F-00D4-4506-B001-7CC039F7FB40</string>
+			<string>BDDA1AA1-5B34-439F-A957-0BE3F561AFC0</string>
 		</dict>
 		<dict>
 			<key>actionconfig</key>
@@ -259,16 +261,18 @@
 			<key>actionconfig</key>
 			<dict>
 				<key>path</key>
-				<string>/Applications/Safari.app</string>
+				<string>/Applications/Emacs.app</string>
+				<key>toggle</key>
+				<false/>
 			</dict>
 			<key>actionuid</key>
 			<string>remote.alfred.launchfile</string>
 			<key>buttoniconid</key>
-			<string>F235BB07-8C01-4993-A85B-40CFC4B67727</string>
+			<string>4C51D37E-A06E-44B9-9374-363E1C77239C</string>
 			<key>buttonlabel</key>
-			<string>Safari.app</string>
+			<string>Emacs</string>
 			<key>itemuid</key>
-			<string>BDDA1AA1-5B34-439F-A957-0BE3F561AFC0</string>
+			<string>1E74F3E5-D4A4-4FC7-8235-2DE59456BD6F</string>
 		</dict>
 		<dict>
 			<key>actionconfig</key>
@@ -319,16 +323,16 @@
 			<key>actionconfig</key>
 			<dict>
 				<key>path</key>
-				<string>/System/Applications/Contacts.app</string>
+				<string>/Applications/Safari.app</string>
 			</dict>
 			<key>actionuid</key>
 			<string>remote.alfred.launchfile</string>
 			<key>buttoniconid</key>
-			<string>5B02D02D-1A29-4A5D-B1E9-545CE5A55350</string>
+			<string>F235BB07-8C01-4993-A85B-40CFC4B67727</string>
 			<key>buttonlabel</key>
-			<string>Contacts.app</string>
+			<string>Safari.app</string>
 			<key>itemuid</key>
-			<string>5F9A081F-00D4-4506-B001-7CC039F7FB40</string>
+			<string>BDDA1AA1-5B34-439F-A957-0BE3F561AFC0</string>
 		</dict>
 		<dict>
 			<key>actionconfig</key>
