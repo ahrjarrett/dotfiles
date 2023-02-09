@@ -3,6 +3,8 @@
 	name = Andrew Jarrett
 [core]
 	excludesfile = $HOME/.gitignore_global
+[init]
+	defaultBranch = main
 [alias]
 	co = checkout
 	cherry = cherry-pick
@@ -10,3 +12,6 @@
 	lg = log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)(%an)%Creset' --abbrev-commit
 [color]
 	ui = true
+[rerere]
+	enabled = true
+

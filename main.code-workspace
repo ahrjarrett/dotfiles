@@ -1,0 +1,16 @@
+{
+  "folders": [
+    {
+      "name": "bondlink",
+      "path": "../../../src/bondlink"
+    },
+    {
+      "name": "monorepo",
+      "path": "../dev/monorepo"
+    },
+    {
+      "name": "sdk",
+      "path": "../dev/sdk"
+    }
+  ]
+}
